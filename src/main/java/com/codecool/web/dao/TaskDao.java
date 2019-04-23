@@ -1,4 +1,4 @@
 package com.codecool.web.dao;
 
-public class TaskDao {
+public interface TaskDao {
 }
