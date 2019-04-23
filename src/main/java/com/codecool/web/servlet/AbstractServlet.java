@@ -12,4 +12,8 @@ abstract class AbstractServlet extends HttpServlet {
         DataSource dataSource = (DataSource) sce.getAttribute("dataSource");
         return dataSource.getConnection();
     }
+
+    protected void handleError(Exception e) {
+
+    }
 }

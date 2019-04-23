@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a762b28a-7377-4c62-bb02-70dbbd70017a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/intellij-maven-jdbc-quickstart.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/dao/CouponDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/dao/ShopDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/dao/UserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/dao/database/AbstractDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/dao/database/DatabaseCouponDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/dao/database/DatabaseShopDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/dao/database/DatabaseUserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/filter/SessionFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/listener/WebappContextListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecool/web/listener/WebappContextListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/model/AbstractModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/model/Coupon.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/model/Shop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/service/CouponService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/service/LoginService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/service/ShopService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/service/exception/ServiceException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/service/simple/SimpleCouponService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/service/simple/SimpleLoginService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/service/simple/SimpleShopService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/AbstractServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/AbstractServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/CouponServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/CouponsServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/LoginServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/LogoutServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/ProfileServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/ShopServlet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/ShopsServlet.java" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/classes/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/web/listener/WebappContextListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="61">
+              <caret line="46" column="64" lean-forward="true" selection-start-line="46" selection-start-column="64" selection-end-line="46" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/AbstractServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/TestServlet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="44" column="9" lean-forward="true" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/codecool/web/listener/WebappContextListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/CouponServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/AbstractServlet.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/TestServlet.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/intellij-maven-jdbc-quickstart.iml" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/compiler.xml" />
+        <option value="$PROJECT_DIR$/.idea/dbnavigator.xml" />
+        <option value="$PROJECT_DIR$/.idea/encodings.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/codeStyles/Project.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_javax_servlet_api_4_0_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__javax_servlet_jstl_1_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_0_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_0_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_0_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_0_1.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_opentest4j_opentest4j_1_0_0.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_postgresql_postgresql_42_2_2.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_0_5_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_0_5_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_0_5_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_0_5_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_0_5_RELEASE.xml" />
+        <option value="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="y" value="25" />
+    <option name="width" value="960" />
+    <option name="height" value="1055" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="intellij-maven-jdbc-quickstart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedule-master-2000" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="intellij-maven-jdbc-quickstart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedule-master-2000" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="intellij-maven-jdbc-quickstart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedule-master-2000" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="intellij-maven-jdbc-quickstart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedule-master-2000" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="intellij-maven-jdbc-quickstart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedule-master-2000" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="intellij-maven-jdbc-quickstart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedule-master-2000" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="listener" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="intellij-maven-jdbc-quickstart" type="b2602c69:ProjectViewProjectNode" />
+              <item name="schedule-master-2000" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="servlet" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a762b28a-7377-4c62-bb02-70dbbd70017a" name="Default Changelist" comment="" />
+      <created>1556012493317</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1556012493317</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="25" width="1920" height="1055" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="Image Layers" />
+      <window_info id="DB Browser" />
+      <window_info id="UI Designer" />
+      <window_info id="Project Explorer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Capture Tool" />
+      <window_info id="Job Explorer" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2497332" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="DB Execution Console" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Console" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/AbstractServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/web/listener/WebappContextListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="46" column="64" selection-start-line="46" selection-start-column="64" selection-end-line="46" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/codecool/web/servlet/TestServlet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
