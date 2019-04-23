@@ -1,0 +1,7 @@
+function onScheduleClicked(){
+
+}
+
+function deleteTask(){
+
+}
