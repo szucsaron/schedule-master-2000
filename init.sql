@@ -53,14 +53,15 @@ INSERT INTO schedule (users_id, name) VALUES
 ;
 
 INSERT INTO task (schedule_id, name, date, hour_start, hour_end) VALUES
-(7, 'Implementing skeleton code', '2019-04-23', 9, 12),
-(7, 'Database init script', '2019-04-23', 12, 15),
-(1, 'Git tests', '2019-03-11', 9, 15),
-(1, 'Java module reconfiguration', '2019-03-12', 8, 18),
-(1, 'Parsing strings', '2019-03-12', 18, 19),
-(1, 'Implementing authorization', '2019-03-13', 9, 11),
-(1, 'Doctor''s appointment', '2019-03-13', 11, 12),
-(1, 'Refactoring', '2019-03-13', 12, 18);
+(7, 'Implementing skeleton code', '2019-04-23', 9, 12),  --1
+(7, 'Database init script', '2019-04-23', 12, 15),  --2
+(1, 'Git tests', '2019-03-11', 9, 15),  --3
+(1, 'Java module reconfiguration', '2019-03-12', 8, 18),  --4
+(1, 'Parsing strings', '2019-03-12', 18, 19),  --5
+(1, 'Implementing authorization', '2019-03-13', 9, 11),  --6
+(1, 'Doctor''s appointment', '2019-03-13', 11, 12),  --7
+(1, 'Refactoring', '2019-03-13', 12, 18)  --8
+;
 
 
 
