@@ -1,8 +1,7 @@
 package com.codecool.web.filter;
 
-import com.codecool.model.user.Mentor;
-import com.codecool.model.user.Student;
-import com.codecool.model.user.User;
+
+import com.codecool.web.model.User;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -34,7 +33,7 @@ public class RoleFilter implements Filter {
         HttpSession session = req.getSession(false);
         String[] requestedURIArray = req.getRequestURI().split("/");
         String requestedURI = requestedURIArray[requestedURIArray.length-1];
-
+        /*
         if (session != null) {
             User user = (User) session.getAttribute("user");
             if(user instanceof Student && studentURLs.contains(requestedURI)) {
@@ -45,6 +44,8 @@ public class RoleFilter implements Filter {
                 resp.sendRedirect("noauth.jsp");
             }
         }
+        */
+
     }
 
 }
