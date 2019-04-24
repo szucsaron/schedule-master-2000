@@ -84,6 +84,11 @@
                         <artifactId>junit-platform-surefire-provider</artifactId>
                         <version>${junit.platform.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.openjfx</groupId>
+                        <artifactId>javafx-controls</artifactId>
+                        <version>11.0.2</version>
+                    </dependency>
                 </dependencies>
             </plugin>
             <plugin>
@@ -93,7 +98,7 @@
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
                     <username>admin</username>
-                    <password>password</password>
+                    <password>admin</password>
                 </configuration>
             </plugin>
         </plugins>

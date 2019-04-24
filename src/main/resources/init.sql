@@ -42,7 +42,8 @@ INSERT INTO users (email, password, name, role) VALUES
 ('hectorbrown@codecool.com', '1234', 'Hector Brown jr.', 0),  --1
 ('janeklawovsky', '1234', 'Jane Klawovsky', 0),  --2
 ('horvath@codecool.hu', '1234', 'Horváth Ödön', 0),  --3
-('kucslubta@codecool.hu', '1234', 'Kucslubta Sándorné', 0)  --4
+('kucslubta@codecool.hu', '1234', 'Kucslubta Sándorné', 0),  --4
+('a', 'a', 'a', 0) --5
 ;
 
 INSERT INTO schedule (users_id, name) VALUES

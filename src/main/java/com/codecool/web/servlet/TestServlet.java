@@ -1,4 +1,4 @@
-package com.codecool.web.servlet;
+/*package com.codecool.web.servlet;
 
 
 
@@ -32,4 +32,4 @@ public final class TestServlet extends AbstractServlet {
             handleError(ex);
         }
     }
-}
+}*/
