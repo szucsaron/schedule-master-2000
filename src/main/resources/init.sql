@@ -33,7 +33,7 @@ CREATE TABLE schedule_task (
 	hour_end NUMERIC(2)
 );
 
--- CREATE INDEX task_date_index ON task(id);
+CREATE INDEX task_date_index ON schedule_task(date);
 
 
 --Filling tables with stock data
