@@ -1,4 +1,4 @@
-package com.codecool.web.service;
+/*package com.codecool.web.service;
 
 import java.sql.SQLEtaskception;
 import java.util.List;
@@ -43,4 +43,4 @@ public class ScheduleService {
 
 
 }
-}
+}*/

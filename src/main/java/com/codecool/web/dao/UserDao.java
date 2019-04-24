@@ -18,4 +18,6 @@ public interface UserDao{
     void updateUser(String name) throws SQLException;
 
     void deleteUser(String name) throws SQLException;
+
+     User findByEmail(String email) throws SQLException;
 }

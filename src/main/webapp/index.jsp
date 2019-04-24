@@ -1,11 +1,21 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Schedule Master 2000</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <c:url value="/style.css" var="styleUrl"/>
+    <c:url value="/index.js" var="indexScriptUrl"/>
     <c:url value="/login.js" var="loginScriptUrl"/>
+    <c:url value="/logout.js" var="logoutScriptUrl"/>
+    <c:url value="/welcome.js" var="welcomeScriptUrl"/>
+    <script src="${indexScriptUrl}"></script>
     <script src="${loginScriptUrl}"></script>
+    <script src="${welcomeScriptUrl}"></script>
+    <script src="${logoutScriptUrl}"></script>
+    <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
 <body>
     <div id="login-content" class="content">
@@ -20,11 +30,6 @@
         <h1>Profile</h1>
         <p>Email: <span id="user-email"></span></p>
         <p>Password: <span id="user-password"></span></p>
-        <h2>Links</h2>
-        <ul>
-            <li><a href="javascript:void(0);" onclick="onShopsClicked();">Shops</a></li>
-            <li><a href="javascript:void(0);" onclick="onCouponsClicked();">Coupons</a></li>
-        </ul>
     </div>
     <div id="back-to-profile-content" class="hidden content">
         <button onclick="onBackToProfileClicked();">Back to profile</button>

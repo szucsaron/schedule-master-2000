@@ -28,6 +28,31 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
     }
 
     @Override
+    public User findById(int id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public User add(String name, int percentage) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void add(int userId, int... scheduleIds) throws SQLException {
+
+    }
+
+    @Override
+    public void updateUser(String name) throws SQLException {
+
+    }
+
+    @Override
+    public void deleteUser(String name) throws SQLException {
+
+    }
+
+    @Override
     public User findByEmail(String email) throws SQLException {
         if (email == null || "".equals(email)) {
             throw new IllegalArgumentException("Email cannot be null or empty");
@@ -49,7 +74,7 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
         String email = resultSet.getString("email");
         String password = resultSet.getString("password");
         String name = resultSet.getString("name");
-        Role role = resultset.
+        Role role = resultSet.getInt("role") == 1 ? Role.ADMIN : Role.REGULAR;
         return new User(id, name, password, email, role);
     }
 
