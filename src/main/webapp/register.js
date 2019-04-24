@@ -1,0 +1,7 @@
+function onRegisterResponse() {
+
+}
+
+function onRegisterButtonClicked() {
+
+}

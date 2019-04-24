@@ -1,0 +1,8 @@
+function onTaskClicked(){
+
+}
+
+function onTaskAddClicked(){
+
+}
+
