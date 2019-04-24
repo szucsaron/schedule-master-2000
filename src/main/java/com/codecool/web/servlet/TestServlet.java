@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet("/test")
+@WebServlet("/login")
 public final class TestServlet extends AbstractServlet {
 
 
@@ -18,7 +18,7 @@ public final class TestServlet extends AbstractServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection connection = getConnection(req.getServletContext())) {
-
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
         } catch (SQLException ex) {
             handleError(ex);
         }
