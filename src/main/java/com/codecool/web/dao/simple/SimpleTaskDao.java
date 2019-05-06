@@ -1,10 +1,6 @@
 package com.codecool.web.dao.simple;
 
-<<<<<<< HEAD
-import com.codecool.web.dao.AbstractDao;
-=======
 import com.codecool.web.dao.TaskDao;
->>>>>>> 2b50c5119d2ff3df6600b1812e8d36ad1a841b06
 import com.codecool.web.model.Task;
 
 import java.sql.*;
