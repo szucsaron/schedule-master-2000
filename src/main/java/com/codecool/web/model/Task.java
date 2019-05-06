@@ -5,10 +5,12 @@ public class Task {
     private String title;
     private String content;
 
-    public Task(int id, String title) {
+    public Task(int id, String title, String content) {
         this.id = id;
         this.title = title;
+        this.content = content;
     }
+
 
     public int getId() {
         return id;
@@ -18,8 +20,11 @@ public class Task {
         return title;
     }
 
+    public String getContent() {
+        return content;
+    }
+
     public String toString() {
         return "Id: " + id + ", " + "title: " + title;
     }
-
 }

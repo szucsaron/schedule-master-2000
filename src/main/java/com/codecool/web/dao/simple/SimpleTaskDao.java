@@ -15,7 +15,7 @@ public class SimpleTaskDao extends AbstractDao {
     private Task fetchTask(ResultSet resultSet) throws SQLException{
         int id = resultSet.getInt("id");
         String name = resultSet.getString("name");
-        Task task = new Task(id, name);
+        Task task = new Task(id, name, "");
         return task;
     }
 
