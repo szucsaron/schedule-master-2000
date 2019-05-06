@@ -1,51 +1,63 @@
 package com.codecool.web.dao.simple;
 
 import com.codecool.web.dao.AbstractDao;
-import com.codecool.web.dao.TaskDao;
 import com.codecool.web.model.Task;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SimpleTaskDao extends AbstractDao implements TaskDao {
-
+public class SimpleTaskDao extends AbstractDao {
     public SimpleTaskDao(Connection connection) {
         super(connection);
     }
 
-    private Task fetchTask(ResultSet resultSet) throws SQLException {
-        return null;
+    private Task fetchTask(ResultSet resultSet) throws SQLException{
+        int id = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        Task task = new Task(id, name);
+        return task;
     }
 
-    @Override
     public List<Task> findAll() throws SQLException {
-        return null;
+        String sql = "SELECT * FROM task";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.execute();
+            List<Task> tasks = new ArrayList<>();
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
+
+                tasks.add(fetchTask(rs));
+            }
+            return tasks;
+        }
     }
 
-    @Override
-    public Task findById(int id) throws SQLException {
-        return null;
+    public List<Task> findByScheduleId(int scheduleId) throws SQLException{
+        String sql = "SELECT * FROM task LEFT JOIN schedule_task ON task.id = task_id WHERE schedule_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, scheduleId);
+            statement.execute();
+            List<Task> tasks = new ArrayList<>();
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
+                tasks.add(fetchTask(rs));
+            }
+            return tasks;
+        }
     }
 
-    @Override
-    public Task add(String name, int percentage) throws SQLException {
-        return null;
-    }
+    public Task findById(int taskId) throws SQLException {
+        String sql = "SELECT * FROM task WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
+            if (rs.next()) {
 
-    @Override
-    public void add(int taskId, int... scheduleIds) throws SQLException {
-
-    }
-
-    @Override
-    public void updateTask(String name) throws SQLException {
-
-    }
-
-    @Override
-    public void deleteTask(String name) throws SQLException {
-
+                return fetchTask(rs);
+            } else {
+                return null;
+            }
+        }
     }
 }
