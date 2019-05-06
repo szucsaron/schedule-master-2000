@@ -16,4 +16,8 @@ public class Task {
     public String getName() {
         return name;
     }
+
+    public String toString() {
+        return "Id: " + id + " " + "name: " + name;
+    }
 }
