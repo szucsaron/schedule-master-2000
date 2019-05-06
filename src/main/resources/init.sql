@@ -36,7 +36,7 @@ CREATE TABLE schedule_task (
 );
 
 
--- Trigger functions
+/*-- Trigger functions
 
 CREATE INDEX task_date_index ON schedule_task(date);
 
@@ -54,7 +54,7 @@ AS $schedule_task_check$
 $schedule_task_check$ LANGUAGE plpgsql;
 
 CREATE TRIGGER schedule_task_check BEFORE INSERT OR UPDATE ON schedule_task
-	FOR EACH ROW EXECUTE PROCEDURE schedule_task_check();
+	FOR EACH ROW EXECUTE PROCEDURE schedule_task_check();*/
 
 
 --Filling tables with stock data
