@@ -9,13 +9,13 @@ public interface TaskDao {
 
     List<Task> findAll() throws SQLException;
 
+    List<Task> findByScheduleId(int scheduleId) throws SQLException;
+
     Task findById(int id) throws SQLException;
 
-    Task add(String name, int percentage) throws SQLException;
+    Task add(int id, int scheduleId, String title, String content) throws SQLException;
 
-    void add(int taskId, int... scheduleIds) throws SQLException;
+    void update(int id, int scheduleId, String title, String content) throws SQLException;
 
-    void updateTask(String name) throws SQLException;
-
-    void deleteTask(String name) throws SQLException;
+    void delete(String name) throws SQLException;
 }

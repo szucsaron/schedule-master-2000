@@ -23,7 +23,6 @@ CREATE TABLE schedule (
 
 CREATE TABLE task (
 	id SERIAL PRIMARY KEY,
-	schedule_id INT REFERENCES schedule(id),
 	name VARCHAR(200)
 );
 
@@ -41,17 +40,20 @@ CREATE TABLE schedule_task (
 CREATE INDEX task_date_index ON schedule_task(date);
 
 CREATE FUNCTION schedule_task_check() RETURNS trigger 
-AS $schedule_task_check$
+AS '
 	BEGIN
 		IF NEW.hour_start >= 23 OR NEW.hour_start < 0 THEN
-			RAISE EXCEPTION 'hour_start must be between 0 and 23';
+			RAISE EXCEPTION ''hour_start must be between 0 and 23'';
 		END IF;
-		IF NEW.hour_end >= 23 OR NEW.hour_end < 0 THEN
-			RAISE EXCEPTION 'hour_end must be between 0 and 23';
+		IF NEW.hour_end >= 24 OR NEW.hour_end < 1 THEN
+			RAISE EXCEPTION ''hour_end must be between 1 and 24'';
+		END IF;
+		IF NEW.hour_end <= NEW.hour_start THEN
+			RAISE EXCEPTION ''hour_end be greater than hour_start'';
 		END IF;
 		RETURN NEW;
-	END;
-$schedule_task_check$ LANGUAGE plpgsql;
+	END; '
+LANGUAGE plpgsql;
 
 CREATE TRIGGER schedule_task_check BEFORE INSERT OR UPDATE ON schedule_task
 	FOR EACH ROW EXECUTE PROCEDURE schedule_task_check();*/
@@ -71,7 +73,7 @@ INSERT INTO schedule (users_id, name) VALUES
 (1, 'Experimentation week'),  --1
 (1, 'Shakespeare art project'),  --2
 (2, 'SCRUM Refactoring Tournament'),  --3
-(2, 'Summer holiday'),  --4
+(2, 'Summer holidays'),  --4
 (2, 'Refurbishing living room'),  --5
 (3, 'Philosophy workshop'),  --6
 (4, 'Schedule Master week #1'),  --7
@@ -79,20 +81,21 @@ INSERT INTO schedule (users_id, name) VALUES
 (4, 'Schedule Master week #3')  --9
 ;
 
-INSERT INTO task (schedule_id, name) VALUES
-(7, 'Implementing skeleton code'),  --1
-(7, 'Database init script'),  --2
-(1, 'Git tests'),  --3
-(1, 'Java module reconfiguration'),  --4
-(1, 'Parsing strings'),  --5
-(1, 'Implementing authorization'),  --6
-(1, 'Doctor''s appointment'),  --7
-(1, 'Refactoring')  --8
+INSERT INTO task (name) VALUES
+('Implementing skeleton code'),  --1
+('Database init script'),  --2
+('Git tests'),  --3
+('Java module reconfiguration'),  --4
+('Parsing strings'),  --5
+('Implementing authorization'),  --6
+('Doctor''s appointment'),  --7
+('Refactoring')  --8
 ;
 
 INSERT INTO schedule_task(schedule_id, task_id, date, hour_start, hour_end) VALUES
 (7, 1, '2019-04-23', 9, 12),
 (7, 2, '2019-04-23', 12, 15),
+(7, 7, '2019-04-23', 12, 13),
 (1, 3, '2019-03-11', 9, 15),
 (1, 4, '2019-03-12', 8, 18),
 (1, 5, '2019-03-12', 18, 19),
@@ -100,3 +103,6 @@ INSERT INTO schedule_task(schedule_id, task_id, date, hour_start, hour_end) VALU
 (1, 7, '2019-03-13', 11, 12),
 (1, 8, '2019-03-13', 12, 18)
 ;
+
+
+
