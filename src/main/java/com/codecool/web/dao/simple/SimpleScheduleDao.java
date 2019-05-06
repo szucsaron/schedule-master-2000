@@ -21,12 +21,12 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         int scheduleId = resultSet.getInt("id");
         int userId = resultSet.getInt("users_id");
         String name = resultSet.getString("name");
-        return new Schedule(scheduleId,userId, name);
+        return new Schedule(scheduleId, userId, name);
     }
 
     @Override
     public List<Schedule> findAll() throws SQLException {
-        String sql = "SELECT users_id, name FROM Schedule";
+        String sql = "SELECT id, users_id, name FROM Schedule";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
             List<Schedule> schedules = new ArrayList<>();
