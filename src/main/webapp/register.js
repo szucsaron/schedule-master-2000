@@ -2,7 +2,7 @@ function onRegisterResponse() {
 
 }
 
-function onRegisterButtonClicked() {
+function onRegistrationButtonClicked() {
         const loginFormEl = document.forms['register-form'];
 
         const emailInputEl = loginFormEl.querySelector('input[name="email"]');

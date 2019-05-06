@@ -115,6 +115,9 @@ function onLoad() {
     const registerButtonEl = document.getElementById('register-button');
     registerButtonEl.addEventListener('click', onRegisterButtonClicked);
 
+    const registrationButtonEl = document.getElementById('registration-button');
+    registrationButtonEl.addEventListener('click', onRegistrationButtonClicked);
+
     const logoutButtonEl = document.getElementById('logout-button');
     logoutButtonEl.addEventListener('click', onLogoutButtonClicked);
 
