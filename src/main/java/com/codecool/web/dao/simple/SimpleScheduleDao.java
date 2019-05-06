@@ -1,13 +1,9 @@
 package com.codecool.web.dao.simple;
 
-import com.codecool.web.dao.AbstractDao;
 import com.codecool.web.dao.ScheduleDao;
 import com.codecool.web.model.Schedule;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +39,15 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
 
     @Override
     public Schedule add(int userId, String name) throws SQLException {
-        return null;
+        String sql = "INSERT INTO schedule (users_id, name) VALUES(?, ?);";
+
+                try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    statement.setInt(1, userId);
+                    statement.setString(2, name);
+                    statement.executeUpdate();
+                    int scheduleId = fetchGeneratedId(statement);
+                    return new Schedule(scheduleId, userId, name);
+                }
     }
 
     @Override
