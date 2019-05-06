@@ -7,6 +7,8 @@ import com.codecool.web.model.Schedule;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
@@ -21,7 +23,15 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
 
     @Override
     public List<Schedule> findAll() throws SQLException {
-        return null;
+        String sql = "SELECT users_id, name FROM Schedule";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql)) {
+            List<Schedule> schedules = new ArrayList<>();
+            while (resultSet.next()) {
+                schedules.add(fetchSchedule(resultSet));
+            }
+            return schedules;
+        }
     }
 
     @Override
