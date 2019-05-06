@@ -37,7 +37,7 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
     }
 
     @Override
-    public void add(String name, String password, String email, Role role) throws SQLException {
+    public User add(String name, String password, String email, Role role) throws SQLException {
         if (name == null || "".equals(name)) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
@@ -51,14 +51,14 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
         connection.setAutoCommit(false);
         String sql = "INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
-            statement.setString(1, email);
+            statement.setString(1, name);
             statement.setString(2, password);
-            statement.setString(3, name);
+            statement.setString(3, email);
             statement.setInt(4, role.getValue());
             executeInsert(statement);
             int id = fetchGeneratedId(statement);
             connection.commit();
-            return new Coupon(id, name, percentage);
+            return new User(id, name, password, email, role);
         } catch (SQLException ex) {
             connection.rollback();
             throw ex;

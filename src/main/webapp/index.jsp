@@ -11,10 +11,12 @@
     <c:url value="/login.js" var="loginScriptUrl"/>
     <c:url value="/logout.js" var="logoutScriptUrl"/>
     <c:url value="/welcome.js" var="welcomeScriptUrl"/>
+    <c:url value="/register.js" var="registerScriptUrl"/>
     <script src="${indexScriptUrl}"></script>
     <script src="${loginScriptUrl}"></script>
     <script src="${welcomeScriptUrl}"></script>
     <script src="${logoutScriptUrl}"></script>
+    <script src="${registerScriptUrl}"></script>
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
 <body>
