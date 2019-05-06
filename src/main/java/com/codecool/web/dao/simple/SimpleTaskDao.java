@@ -60,4 +60,9 @@ public class SimpleTaskDao extends AbstractDao {
             }
         }
     }
+
+    public void add(int id, int scheduleId, String title, String content) throws SQLException {
+        String sql = "";
+    }
+
 }
