@@ -23,7 +23,8 @@ CREATE TABLE schedule (
 
 CREATE TABLE task (
 	id SERIAL PRIMARY KEY,
-	name VARCHAR(200)
+	title VARCHAR(200),
+	content TEXT
 );
 
 CREATE TABLE schedule_task (
@@ -81,15 +82,15 @@ INSERT INTO schedule (users_id, name) VALUES
 (4, 'Schedule Master week #3')  --9
 ;
 
-INSERT INTO task (name) VALUES
-('Implementing skeleton code'),  --1
-('Database init script'),  --2
-('Git tests'),  --3
-('Java module reconfiguration'),  --4
-('Parsing strings'),  --5
-('Implementing authorization'),  --6
-('Doctor''s appointment'),  --7
-('Refactoring')  --8
+INSERT INTO task (title, content) VALUES
+('Implementing skeleton code', 'Implementation of base skeleton code'),  --1
+('Database init script', 'Creating an init script for db operations'),  --2
+('Git tests', 'Testing git and resolving possible errors'),  --3
+('Java module reconfiguration', 'Reconfiguring java module for web use'),  --4
+('Parsing strings', 'Parsing file based content into sql strings'),  --5
+('Implementing authorization', 'User priviliges and access creating'),  --6
+('Doctor''s appointment', 'Regular checkup'),  --7
+('Refactoring', 'Keeping old code up to date with new standards')  --8
 ;
 
 INSERT INTO schedule_task(schedule_id, task_id, date, hour_start, hour_end) VALUES
