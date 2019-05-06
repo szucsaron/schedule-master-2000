@@ -19,9 +19,11 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         String name = resultSet.getString("name");
         return new Schedule(scheduleId, userId, name);
     }
+
     @Override
     public List<Schedule> findAll() throws SQLException {
         String sql = "SELECT id, users_id, name FROM Schedule";
+
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
             List<Schedule> schedules = new ArrayList<>();
@@ -41,13 +43,13 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
     public Schedule add(int userId, String name) throws SQLException {
         String sql = "INSERT INTO schedule (users_id, name) VALUES(?, ?);";
 
-                try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                    statement.setInt(1, userId);
-                    statement.setString(2, name);
-                    statement.executeUpdate();
-                    int scheduleId = fetchGeneratedId(statement);
-                    return new Schedule(scheduleId, userId, name);
-                }
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setInt(1, userId);
+            statement.setString(2, name);
+            statement.executeUpdate();
+            int scheduleId = fetchGeneratedId(statement);
+            return new Schedule(scheduleId, userId, name);
+        }
     }
 
     @Override
@@ -62,6 +64,7 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
 
     @Override
     public void deleteSchedule(String name) throws SQLException {
+
 
     }
 }
