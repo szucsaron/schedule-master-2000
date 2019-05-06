@@ -92,7 +92,6 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
     public void addToSchedule(int taskId, int scheduleId) throws SQLException {
         String sql = "UPDATE task SET title = ?, content = ? WHERE id = ?;";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-
             statement.executeUpdate();
         }
     }
