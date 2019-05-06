@@ -58,13 +58,20 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
     }
 
     @Override
-    public void updateSchedule(String name) throws SQLException {
+    public void updateSchedule(int userId, int scheduleId, String newName) throws SQLException {
+        String sql = "UPDATE Schedule SET name = ?  WHERE users_id = ? AND id = ?;";
 
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, newName);
+            statement.setInt(2, scheduleId);
+            statement.setInt(3, scheduleId);
+            statement.executeUpdate();
+        }
     }
 
     @Override
     public void deleteSchedule(int userId, int scheduleId) throws SQLException {
-        String sql = "DELETE FROM schedule WHERE users_id = ? AND id = ?;";
+        String sql = "DELETE FROM Schedule WHERE users_id = ? AND id = ?;";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, userId);
