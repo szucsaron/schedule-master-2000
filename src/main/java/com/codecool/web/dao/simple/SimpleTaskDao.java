@@ -64,8 +64,18 @@ public class SimpleTaskDao extends AbstractDao {
         }
     }
 
-    public void add(int id, int scheduleId, String title, String content) throws SQLException {
-        String sql = "";
+    public int add(String title, String content) throws SQLException {
+        boolean autoCommit = connection.getAutoCommit();
+        String sql = "INSERT INTO task (title, content) VALUES (?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            connection.setAutoCommit(false);
+            statement.setString(1, title);
+            statement.setString(2, content);
+            statement.executeUpdate();
+            return fetchGeneratedId(statement);
+        } finally {
+            connection.setAutoCommit(autoCommit);
+        }
     }
 
 }
