@@ -49,6 +49,7 @@ public class SimpleTaskDao extends AbstractDao {
     public Task findById(int taskId) throws SQLException {
         String sql = "SELECT * FROM task WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, taskId);
             statement.execute();
             ResultSet rs = statement.getResultSet();
             if (rs.next()) {

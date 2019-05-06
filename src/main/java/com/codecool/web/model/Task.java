@@ -18,6 +18,6 @@ public class Task {
     }
 
     public String toString() {
-        return "Id: " + id + " " + "name: " + name;
+        return "Id: " + id + ", " + "name: " + name;
     }
 }
