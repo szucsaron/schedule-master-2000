@@ -1,6 +1,6 @@
 package com.codecool.web.dao.simple;
 
-import com.codecool.web.dao.TaskDao;
+
 import com.codecool.web.model.Task;
 
 import java.sql.*;
@@ -50,6 +50,7 @@ public class SimpleTaskDao extends AbstractDao {
     public Task findById(int taskId) throws SQLException {
         String sql = "SELECT * FROM task WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, taskId);
             statement.execute();
             ResultSet rs = statement.getResultSet();
             if (rs.next()) {
@@ -60,4 +61,9 @@ public class SimpleTaskDao extends AbstractDao {
             }
         }
     }
+
+    public void add(int id, int scheduleId, String title, String content) throws SQLException {
+        String sql = "";
+    }
+
 }
