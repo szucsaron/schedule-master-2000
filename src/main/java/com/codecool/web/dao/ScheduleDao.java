@@ -9,7 +9,7 @@ public interface ScheduleDao {
 
     List<Schedule> findAll() throws SQLException;
 
-    Schedule findById(int id) throws SQLException;
+    Schedule findById(int userId, int scheduleId) throws SQLException;
 
     Schedule add(int userId, String name) throws SQLException;
 
