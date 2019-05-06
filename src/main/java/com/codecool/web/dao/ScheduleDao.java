@@ -15,7 +15,7 @@ public interface ScheduleDao {
 
     void add(int scheduleId, int... scheduleIds) throws SQLException;
 
-    void updateSchedule(String name) throws SQLException;
+    void updateSchedule(int userId, int scheduleId, String newName) throws SQLException;
 
     void deleteSchedule(int userId, int scheduleId) throws SQLException;
 }
