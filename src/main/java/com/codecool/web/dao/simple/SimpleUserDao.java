@@ -1,6 +1,5 @@
 package com.codecool.web.dao.simple;
 
-import com.codecool.web.dao.AbstractDao;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.Role;
 import com.codecool.web.model.User;
@@ -38,8 +37,34 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
     }
 
     @Override
-    public void add(int userId, int... scheduleIds) throws SQLException {
-
+    public void add(String name, String password, String email, Role role) throws SQLException {
+        if (name == null || "".equals(name)) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
+        if (password == null || "".equals(password)) {
+            throw new IllegalArgumentException("Password cannot be null or empty");
+        }
+        if (email == null || "".equals(email)) {
+            throw new IllegalArgumentException("Email cannot be null or empty");
+        }
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
+        String sql = "INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+            statement.setString(1, email);
+            statement.setString(2, password);
+            statement.setString(3, name);
+            statement.setInt(4, role.getValue());
+            executeInsert(statement);
+            int id = fetchGeneratedId(statement);
+            connection.commit();
+            return new Coupon(id, name, percentage);
+        } catch (SQLException ex) {
+            connection.rollback();
+            throw ex;
+        } finally {
+            connection.setAutoCommit(autoCommit);
+        }
     }
 
     @Override
