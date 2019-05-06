@@ -1,5 +1,7 @@
 -- Creating table structure
 
+DROP TRIGGER IF EXISTS schedule_task_check ON schedule_task;
+DROP FUNCTION IF EXISTS schedule_task_check;
 DROP TABLE IF EXISTS schedule_task;
 DROP TABLE IF EXISTS task;
 DROP TABLE IF EXISTS schedule;
@@ -33,7 +35,26 @@ CREATE TABLE schedule_task (
 	hour_end NUMERIC(2)
 );
 
+
+-- Trigger functions
+
 CREATE INDEX task_date_index ON schedule_task(date);
+
+CREATE FUNCTION schedule_task_check() RETURNS trigger 
+AS $schedule_task_check$
+	BEGIN
+		IF NEW.hour_start >= 23 OR NEW.hour_start < 0 THEN
+			RAISE EXCEPTION 'hour_start must be between 0 and 23';
+		END IF;
+		IF NEW.hour_end >= 23 OR NEW.hour_end < 0 THEN
+			RAISE EXCEPTION 'hour_end must be between 0 and 23';
+		END IF;
+		RETURN NEW;
+	END;
+$schedule_task_check$ LANGUAGE plpgsql;
+
+CREATE TRIGGER schedule_task_check BEFORE INSERT OR UPDATE ON schedule_task
+	FOR EACH ROW EXECUTE PROCEDURE schedule_task_check();
 
 
 --Filling tables with stock data
@@ -79,5 +100,3 @@ INSERT INTO schedule_task(schedule_id, task_id, date, hour_start, hour_end) VALU
 (1, 7, '2019-03-13', 11, 12),
 (1, 8, '2019-03-13', 12, 18)
 ;
-
-
