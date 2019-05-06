@@ -1,5 +1,9 @@
 function onHourClicked(){
-
+    // Displays taskId. Now for debug only. 
+    const coords = getFieldCoords(this);
+    const col = coords[0];
+    const row = coords[1];
+    alert("taskId " + this.getAttribute("taskId"));
 }
 
 function showTasks(){
@@ -18,8 +22,17 @@ function removeTask(){
 
 }
 
-function showTable(){
+function showTable(schedule){
+    let tEl = document.getElementById("scheduleTable");
+    if (tEl != null) {
+        tEl.remove();
+    }
+    header = ["Date 1", "Date 2", "Date 3", "Date 4", "Date 5", "Date 6", "Date 7"];
+    tEl = createTable("scheduleTable", 24, header, onHourClicked);
+    document.getElementById("schedule").appendChild(tEl);
 
+    clearTable(tEl);
+    printScheduleToTable(tEl, schedule);
 }
 
 function printScheduleToTable(tableEl, schedule) {

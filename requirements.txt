@@ -1,0 +1,5 @@
+- https support
+- db inegrity
+	- cascade delete
+	- hashed password
+- testing with multiple clients

@@ -1,13 +1,20 @@
 package com.codecool.web.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Schedule {
 
-    public void addTast(Task task) {
+    private int id;
+    private int userId;
+    private String name;
+
+    public Schedule(int id, int userId, String name) {
+        this.id = id;
+        this.userId = userId;
+        this.name = name;
+    }
+
+    /*public void addTast(Task task) {
     }
 
     public void getTasks() {
-    }
+    }*/
 }
