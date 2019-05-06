@@ -1,5 +1,6 @@
 package com.codecool.web.dao.simple;
 
+
 import com.codecool.web.model.Task;
 
 import java.sql.*;
