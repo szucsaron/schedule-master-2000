@@ -13,9 +13,9 @@ public interface TaskDao {
 
     Task findById(int id) throws SQLException;
 
-    void add(int id, int scheduleId, String title, String content) throws SQLException;
+    int add(String title, String content) throws SQLException;
 
-    void update(int id, int scheduleId, String title, String content) throws SQLException;
+    void update(int id, String title, String content) throws SQLException;
 
-    void delete(String name) throws SQLException;
+    void addToSchedule(int taskId, int scheduleId) throws SQLException;
 }

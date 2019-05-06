@@ -32,7 +32,8 @@ CREATE TABLE schedule_task (
 	task_id INT REFERENCES task(id),
 	date DATE,
 	hour_start NUMERIC(2),
-	hour_end NUMERIC(2)
+	hour_end NUMERIC(2),
+	PRIMARY KEY (schedule_id, task_id)
 );
 
 
@@ -55,6 +56,8 @@ AS '
 		RETURN NEW;
 	END; '
 LANGUAGE plpgsql;
+
+
 
 CREATE TRIGGER schedule_task_check BEFORE INSERT OR UPDATE ON schedule_task
 	FOR EACH ROW EXECUTE PROCEDURE schedule_task_check();
