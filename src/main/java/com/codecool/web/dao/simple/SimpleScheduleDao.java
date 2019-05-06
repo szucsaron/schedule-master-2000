@@ -23,7 +23,6 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         String name = resultSet.getString("name");
         return new Schedule(scheduleId, userId, name);
     }
-
     @Override
     public List<Schedule> findAll() throws SQLException {
         String sql = "SELECT id, users_id, name FROM Schedule";
@@ -43,7 +42,7 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
     }
 
     @Override
-    public Schedule add(String name, int percentage) throws SQLException {
+    public Schedule add(int userId, String name) throws SQLException {
         return null;
     }
 
