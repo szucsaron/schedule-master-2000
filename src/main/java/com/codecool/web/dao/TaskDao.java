@@ -13,7 +13,7 @@ public interface TaskDao {
 
     Task findById(int id) throws SQLException;
 
-    Task add(int id, int scheduleId, String title, String content) throws SQLException;
+    void add(int id, int scheduleId, String title, String content) throws SQLException;
 
     void update(int id, int scheduleId, String title, String content) throws SQLException;
 

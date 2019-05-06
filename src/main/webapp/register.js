@@ -1,5 +1,14 @@
 function onRegisterResponse() {
+        if (this.status === OK) {
+                onRegSuccess();
+        } else {
+                alert(this.responseText);
+        }
+}
 
+function onRegSuccess() {
+        clearMessages();
+        showContents(['login-content']);
 }
 
 function onRegistrationButtonClicked() {
