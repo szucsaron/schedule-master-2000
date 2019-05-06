@@ -18,7 +18,10 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
     }
 
     private Schedule fetchSchedule(ResultSet resultSet) throws SQLException {
-        return null;
+        int scheduleId = resultSet.getInt("id");
+        int userId = resultSet.getInt("users_id");
+        String name = resultSet.getString("name");
+        return new Schedule(scheduleId,userId, name);
     }
 
     @Override
