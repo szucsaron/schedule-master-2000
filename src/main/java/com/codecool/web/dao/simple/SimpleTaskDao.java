@@ -3,8 +3,10 @@ package com.codecool.web.dao.simple;
 
 import com.codecool.web.dao.TaskDao;
 import com.codecool.web.model.Task;
+import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,9 +91,14 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
         }
     }
 
-    public void addToSchedule(int taskId, int scheduleId) throws SQLException {
-        String sql = "UPDATE task SET title = ?, content = ? WHERE id = ?;";
+    public void addToSchedule(int scheduleId, int taskId, LocalDate date, int hourStart, int hourEnd) throws SQLException {
+        String sql = "INSERT INTO schedule_task(schedule_id, task_id, date, hour_start, hour_end) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, scheduleId);
+            statement.setInt(2, taskId);
+            statement.setObject(3, date);
+            statement.setInt(4, hourStart);
+            statement.setInt(5, hourEnd);
             statement.executeUpdate();
         }
     }

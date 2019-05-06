@@ -2,7 +2,9 @@ package com.codecool.web.dao;
 
 import com.codecool.web.model.Task;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface TaskDao {
@@ -17,5 +19,6 @@ public interface TaskDao {
 
     void update(int id, String title, String content) throws SQLException;
 
-    void addToSchedule(int taskId, int scheduleId) throws SQLException;
-}
+    void addToSchedule(int scheduleId, int taskId, LocalDate date, int hourStart, int hourEnd) throws SQLException;
+
+    }
