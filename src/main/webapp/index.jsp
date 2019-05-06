@@ -21,9 +21,24 @@
     <div id="login-content" class="content">
         <h1>Login</h1>
         <form id="login-form" onsubmit="return false;">
-            <input type="text" name="email">
-            <input type="password" name="password">
+            <input type="text" name="email" placeholder="Email">
+            <input type="password" name="password" placeholder="Password">
             <button id="login-button">Login</button>
+            <button id="register-button">Register</button>
+        </form>
+    </div>
+    <div id="register-content" class="hidden content">
+        <h1>Register</h1>
+        <form id="register-form" onsubmit="return false;">
+            <input type="text" name="email" placeholder="Email">
+            <br>
+            <input type="password" name="password" placeholder="Password">
+            <br>
+            <input type="password" name="repassword" placeholder="Re-enter password">
+            <br>
+            <input type="text" name="name" placeholder="Name">
+            <br>
+            <button id="registration-button">Register</button>
         </form>
     </div>
     <div id="profile-content" class="hidden content">

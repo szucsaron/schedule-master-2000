@@ -5,6 +5,7 @@ const NOT_FOUND = 404;
 const INTERNAL_SERVER_ERROR = 500;
 
 let loginContentDivEl;
+let registerContentDivEl;
 let profileContentDivEl;
 let couponContentDivEl;
 let couponsContentDivEl;
@@ -99,6 +100,7 @@ function setUnauthorized() {
 
 function onLoad() {
     loginContentDivEl = document.getElementById('login-content');
+    registerContentDivEl = document.getElementById('register-content');
     profileContentDivEl = document.getElementById('profile-content');
     couponContentDivEl = document.getElementById('coupon-content');
     couponsContentDivEl = document.getElementById('coupons-content');
@@ -109,6 +111,9 @@ function onLoad() {
 
     const loginButtonEl = document.getElementById('login-button');
     loginButtonEl.addEventListener('click', onLoginButtonClicked);
+
+    const registerButtonEl = document.getElementById('register-button');
+    registerButtonEl.addEventListener('click', onRegisterButtonClicked);
 
     const logoutButtonEl = document.getElementById('logout-button');
     logoutButtonEl.addEventListener('click', onLogoutButtonClicked);

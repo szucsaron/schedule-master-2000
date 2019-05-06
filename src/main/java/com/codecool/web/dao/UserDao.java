@@ -1,5 +1,6 @@
 package com.codecool.web.dao;
 
+import com.codecool.web.model.Role;
 import com.codecool.web.model.User;
 
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public interface UserDao{
 
     User add(String name, int percentage) throws SQLException;
 
-    void add(int userId, int... scheduleIds) throws SQLException;
+    void add(String name, String password, String email, Role role) throws SQLException;
 
     void updateUser(String name) throws SQLException;
 

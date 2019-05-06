@@ -27,3 +27,8 @@ function onLoginButtonClicked() {
     xhr.open('POST', 'login');
     xhr.send(params);
 }
+
+function onRegisterButtonClicked() {
+    showContents(['register-content']);
+}
+
