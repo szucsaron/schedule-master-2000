@@ -1,6 +1,8 @@
 package com.codecool.web.servlet;
 
+import com.codecool.web.dao.ScheduleTaskDao;
 import com.codecool.web.dao.TaskDao;
+import com.codecool.web.dao.simple.SimpleScheduleTaskDao;
 import com.codecool.web.dao.simple.SimpleTaskDao;
 import com.codecool.web.model.ScheduleTask;
 import com.codecool.web.service.TaskService;
@@ -25,13 +27,9 @@ public class TasksServlet extends AbstractServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try (Connection connection = getConnection(req.getServletContext())) {
-            TaskDao taskDao = new SimpleTaskDao(connection);
-            TaskService taskService = new TaskService(taskDao);
-            List<ScheduleTask> scheduleTasks = new ArrayList<>();
-            scheduleTasks.add(new ScheduleTask(1, 1, "Lunch", "Going to eat food", LocalDate.parse("2019-05-11"), 12, 13));
-            scheduleTasks.add(new ScheduleTask(2, 1, "Doctor's Appointment", "Sore throat", LocalDate.parse("2019-05-10"), 11, 12));
-            scheduleTasks.add(new ScheduleTask(3, 1, "Coding", "Meta-refactoring", LocalDate.parse("2019-05-10"), 12, 17));
-            scheduleTasks.add(new ScheduleTask(4, 1, "Doing the washing up", "Dirty dishes. They must perish.", LocalDate.parse("2019-05-10"), 17, 19));
+            ScheduleTaskDao taskDao = new SimpleScheduleTaskDao(connection);
+            List<ScheduleTask> scheduleTasks = taskDao.findAll(5);
+
             sendMessage(resp, SC_OK, scheduleTasks);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
