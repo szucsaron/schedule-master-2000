@@ -1,7 +1,9 @@
 package com.codecool.web.service.simple;
 
+import com.codecool.web.dao.ScheduleTaskDao;
 import com.codecool.web.dao.TaskDao;
 import com.codecool.web.model.Schedule;
+import com.codecool.web.model.ScheduleTask;
 import com.codecool.web.model.Task;
 import com.codecool.web.service.TaskService;
 import com.codecool.web.service.exception.ServiceException;
@@ -14,9 +16,11 @@ import java.util.List;
 public class SimpleTaskService implements TaskService {
 
     private TaskDao taskDao;
+    private ScheduleTaskDao scheduleTaskDao;
 
-    public SimpleTaskService(TaskDao taskDao) {
+    public SimpleTaskService(TaskDao taskDao, ScheduleTaskDao scheduleTaskDao) {
         this.taskDao = taskDao;
+        this.scheduleTaskDao = scheduleTaskDao;
     }
 
     public List<Task> findAll() throws SQLException, ServiceException {
@@ -51,5 +55,7 @@ public class SimpleTaskService implements TaskService {
         }
     }
 
+    public void addNewToSchedule(String scheduleId, String title, String content, String date, String hourStart, String hourEnd) {
 
+    }
 }

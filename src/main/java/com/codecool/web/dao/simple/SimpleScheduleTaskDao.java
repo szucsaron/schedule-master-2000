@@ -65,5 +65,22 @@ public class SimpleScheduleTaskDao extends AbstractDao implements ScheduleTaskDa
             statement.executeUpdate();
         }
     }
+
+    public void removeTaskFromSchedule(int scheduleId, int taskId) throws SQLException{
+        String sql = "DELETE FROM schedule_task WHERE task_id = ? AND schedule_id = ?;";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, taskId);
+            statement.setInt(2, scheduleId);
+            statement.executeUpdate();
+        }
+    }
+
+    public void removeTaskFromAllSchedules(int scheduleId) throws SQLException{
+        String sql = "DELETE FROM schedule_task WHERE schedule_id = ?;";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, scheduleId);
+            statement.executeUpdate();
+        }
+    }
 }
 
