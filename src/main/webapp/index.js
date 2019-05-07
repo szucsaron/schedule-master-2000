@@ -9,8 +9,8 @@ let registerContentDivEl;
 let profileContentDivEl;
 let taskContentDivEl;
 let tasksContentDivEl;
-let shopContentDivEl;
-let shopsContentDivEl;
+let scheduleContentDivEl;
+let schedulesContentDivEl;
 let backToProfileContentDivEl;
 let logoutContentDivEl;
 
@@ -104,8 +104,8 @@ function onLoad() {
     profileContentDivEl = document.getElementById('profile-content');
     taskContentDivEl = document.getElementById('task-content');
     tasksContentDivEl = document.getElementById('tasks-content');
-    shopContentDivEl = document.getElementById('shop-content');
-    shopsContentDivEl = document.getElementById('shops-content');
+    scheduleContentDivEl = document.getElementById('schedule-content');
+    schedulesContentDivEl = document.getElementById('schedules-content');
     backToProfileContentDivEl = document.getElementById('back-to-profile-content');
     logoutContentDivEl = document.getElementById('logout-content');
 

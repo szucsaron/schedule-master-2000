@@ -83,4 +83,3 @@ function onTaskAddClicked() {
     xhr.send(params);
 }
 
-

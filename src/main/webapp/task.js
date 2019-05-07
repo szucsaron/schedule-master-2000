@@ -19,7 +19,6 @@ function appendTask(task) {
 
     const dateTdEl = document.createElement('td');
     dateTdEl.textContent = task.date.dayOfMonth + "." + task.date.monthValue + "." + task.date.year;
-    console.log(task.date);
 
     const trEl = document.createElement('tr');
     // trEl.appendChild(idTdEl);

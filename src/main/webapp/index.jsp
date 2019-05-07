@@ -14,8 +14,12 @@
     <c:url value="/register.js" var="registerScriptUrl"/>
     <c:url value="/task.js" var="taskScriptUrl"/>
     <c:url value="/tasks.js" var="tasksScriptUrl"/>
+    <c:url value="/schedule.js" var="scheduleScriptUrl"/>
+    <c:url value="/schedules.js" var="schedulesScriptUrl"/>
     <script src="${taskScriptUrl}"></script>
     <script src="${tasksScriptUrl}"></script>
+    <script src="${scheduleScriptUrl}"></script>
+    <script src="${schedulesScriptUrl}"></script>
     <script src="${indexScriptUrl}"></script>
     <script src="${loginScriptUrl}"></script>
     <script src="${welcomeScriptUrl}"></script>
@@ -51,6 +55,8 @@
         <h1>Profile</h1>
         <p>Email: <span id="user-email"></span></p>
         <p>Password: <span id="user-password"></span></p>
+        <li><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></li>
+        <li><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></li>
     </div>
     <div id="back-to-profile-content" class="hidden content">
         <button onclick="onBackToProfileClicked();">Back to profile</button>
@@ -77,6 +83,28 @@
             <input type="text" name="name">
             <input type="text" name="content">
             <button onclick="onTaskAddClicked();">Add</button>
+        </form>
+    </div>
+    <div id="schedules-content" class="hidden content">
+        <h1>Your schedules</h1>
+        <table id="schedules">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Starting date</th>
+                <th>Finishing date</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </table>
+        <h2>Add new schedule</h2>
+        <form id="schedule-form" onsubmit="return false;">
+            <input type="text" name="name">
+            <input type="datetime-local" name="starting">
+            <input type="datetime-local" name="finishing">
+            <button onclick="onScheduleAddClicked();">Add</button>
         </form>
     </div>
 </body>
