@@ -20,6 +20,7 @@ public interface TaskDao {
 
     void update(int id, String title, String content) throws SQLException;
 
-    void addToSchedule(int scheduleId, int taskId, LocalDate date, int hourStart, int hourEnd) throws SQLException;
+
+
 
 }

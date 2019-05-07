@@ -1,7 +1,6 @@
 package com.codecool.web.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class ScheduleTask extends Task {
     private LocalDate date;
@@ -35,7 +34,7 @@ public class ScheduleTask extends Task {
     @Override
     public String toString() {
         String taskStr = super.toString();
-        taskStr += String.format(" scheduleId: %d, date: %s, hourStart: %d, hourEnd %d", scheduleId, date.toString(), hourStart, hourEnd);
+        taskStr += String.format(", scheduleId: %d, date: %s, hourStart: %d, hourEnd %d", scheduleId, date.toString(), hourStart, hourEnd);
         return taskStr;
     }
 }
