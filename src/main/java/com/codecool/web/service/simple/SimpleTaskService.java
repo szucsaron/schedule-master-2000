@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-public class SimpleTaskService implements TaskService {
+public class SimpleTaskService extends AbstractService implements TaskService {
 
     private TaskDao taskDao;
     private ScheduleTaskDao scheduleTaskDao;
@@ -55,7 +55,22 @@ public class SimpleTaskService implements TaskService {
         }
     }
 
-    public void addNewToSchedule(String scheduleId, String title, String content, String date, String hourStart, String hourEnd) {
+    public void addNewToSchedule(String scheduleId, String title, String content, String date, String hourStart, String hourEnd) throws ServiceException, SQLException{
+        int scheduleIdVal = fetchInt(scheduleId, "scheduleId");
+        int hourStartVal = fetchInt(hourStart, "hourStart");
+        int hourSEndVal = fetchInt(hourEnd, "hourEnd");
+        LocalDate dateVal = fetchDate(date, "date");
+        int taskIdVal = taskDao.add(title, content);
+        scheduleTaskDao.addTaskToSchedule(scheduleIdVal, taskIdVal, dateVal, hourStartVal, hourSEndVal);
 
+    }
+
+    public void addExistingToSchedule(String scheduleId, String taskId, String date, String hourStart, String hourEnd) throws ServiceException, SQLException {
+        int scheduleIdVal = fetchInt(scheduleId, "scheduleId");
+        int taskIdVal = fetchInt(taskId, "taskId");
+        int hourStartVal = fetchInt(hourStart, "hourStart");
+        int hourSEndVal = fetchInt(hourEnd, "hourEnd");
+        LocalDate dateVal = fetchDate(date, "date");
+        scheduleTaskDao.addTaskToSchedule(scheduleIdVal, taskIdVal, dateVal, hourStartVal, hourSEndVal);
     }
 }
