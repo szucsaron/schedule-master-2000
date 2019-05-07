@@ -7,6 +7,7 @@ import com.codecool.web.service.exception.ServiceException;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class TaskService {
@@ -75,7 +76,11 @@ public class TaskService {
         } catch (NumberFormatException e) {
             throw new ServiceException("hourEndVal must be an integer");
         }
-        dateVal = LocalDate.parse(date);
+        try {
+            dateVal = LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new ServiceException("Date must follow the correct format: yyyy-mm-dd");
+        }
         taskDao.addToSchedule(scheduleIdVal, taskIdVal, dateVal, hourStartVal, hourEndVal);
     }
 }
