@@ -36,11 +36,11 @@ function onTaskLoad(taskDto) {
     taskId = taskDto.task.id;
 
     const taskIdSpanEl = document.getElementById('task-id');
-    const taskNameSpanEl = document.getElementById('task-name');
+    const taskTitleSpanEl = document.getElementById('task-title');
     const taskContentSpanEl = document.getElementById('task-content');
 
     taskIdSpanEl.textContent = taskDto.task.id;
-    taskNameSpanEl.textContent = taskDto.task.name;
+    taskTitleSpanEl.textContent = taskDto.task.title;
     taskContentSpanEl.textContent = taskDto.task.content;
 }
 
@@ -48,6 +48,7 @@ function onTasksResponse() {
     if (this.status === OK) {
         showContents(['tasks-content', 'back-to-profile-content', 'logout-content']);
         onTasksLoad(JSON.parse(this.responseText));
+        console.log(this.responseText);
     } else {
         onOtherResponse(tasksContentDivEl, this);
     }
@@ -65,14 +66,14 @@ function onTaskAddResponse() {
 function onTaskAddClicked() {
     const taskFormEl = document.forms['task-form'];
 
-    const nameInputEl = taskFormEl.querySelector('input[name="name"]');
+    const titleInputEl = taskFormEl.querySelector('input[name="title"]');
     const contentInputEl = taskFormEl.querySelector('input[name="content"]');
 
-    const name = nameInputEl.value;
+    const title = titleInputEl.value;
     const content = contentInputEl.value;
 
     const params = new URLSearchParams();
-    params.append('name', name);
+    params.append('title', title);
     params.append('content', content);
 
     const xhr = new XMLHttpRequest();
