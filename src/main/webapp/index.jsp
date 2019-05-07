@@ -12,6 +12,10 @@
     <c:url value="/logout.js" var="logoutScriptUrl"/>
     <c:url value="/welcome.js" var="welcomeScriptUrl"/>
     <c:url value="/register.js" var="registerScriptUrl"/>
+    <c:url value="/task.js" var="taskScriptUrl"/>
+    <c:url value="/tasks.js" var="tasksScriptUrl"/>
+    <script src="${taskScriptUrl}"></script>
+    <script src="${tasksScriptUrl}"></script>
     <script src="${indexScriptUrl}"></script>
     <script src="${loginScriptUrl}"></script>
     <script src="${welcomeScriptUrl}"></script>
@@ -53,6 +57,27 @@
     </div>
     <div id="logout-content" class="hidden content">
         <button id="logout-button">Logout</button>
+    </div>
+    <div id="tasks-content" class="hidden content">
+        <h1>Your tasks</h1>
+        <table id="tasks">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </table>
+        <h2>Add new task</h2>
+        <form id="task-form" onsubmit="return false;">
+            <input type="text" name="name">
+            <input type="text" name="content">
+            <button onclick="onTaskAddClicked();">Add</button>
+        </form>
     </div>
 </body>
 </html>

@@ -7,4 +7,10 @@ function onProfileLoad(user) {
 
     userEmailSpandEl.textContent = user.email;
     userPasswordSpanEl.textContent = user.password;
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onTasksResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'protected/tasks');
+    xhr.send();
 }
