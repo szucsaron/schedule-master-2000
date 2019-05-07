@@ -18,6 +18,8 @@ CREATE TABLE users (
 CREATE TABLE schedule (
 	id SERIAL PRIMARY KEY,
 	users_id INT REFERENCES users(id),
+	date DATE,
+	max_days NUMERIC(1),
 	name VARCHAR(200)
 );
 
@@ -30,7 +32,7 @@ CREATE TABLE task (
 CREATE TABLE schedule_task (
 	schedule_id INT REFERENCES schedule(id) ON DELETE CASCADE,
 	task_id INT REFERENCES task(id),
-	date DATE,
+	day NUMERIC(1),
 	hour_start NUMERIC(2),
 	hour_end NUMERIC(2),
 	PRIMARY KEY (schedule_id, task_id)
@@ -39,7 +41,7 @@ CREATE TABLE schedule_task (
 
 -- Trigger functions
 
-CREATE INDEX task_date_index ON schedule_task(date);
+CREATE INDEX schedule_date_index ON schedule(date);
 
 CREATE FUNCTION schedule_task_check() RETURNS trigger 
 AS '
@@ -52,6 +54,9 @@ AS '
 		END IF;
 		IF NEW.hour_end <= NEW.hour_start THEN
 			RAISE EXCEPTION ''hour_end be greater than hour_start'';
+		END IF;
+		IF NEW.day > (SELECT max_days FROM schedule WHERE NEW.schedule_id = schedule.id) THEN
+			RAISE EXCEPTION ''Task day can''be greater than schedule max days''';
 		END IF;
 		RETURN NEW;
 	END; '
@@ -73,16 +78,16 @@ INSERT INTO users (email, password, name, role) VALUES
 ('a', 'a', 'a', 0) --5
 ;
 
-INSERT INTO schedule (users_id, name) VALUES
-(1, 'Experimentation week'),  --1
-(1, 'Shakespeare art project'),  --2
-(2, 'SCRUM Refactoring Tournament'),  --3
-(2, 'Summer holidays'),  --4
-(2, 'Refurbishing living room'),  --5
-(3, 'Philosophy workshop'),  --6
-(4, 'Schedule Master week #1'),  --7
-(4, 'Schedule Master week #2'),  --8
-(4, 'Schedule Master week #3')  --9
+INSERT INTO schedule (users_id, name, date, max_days) VALUES
+(1, 'Experimentation week', '2019-04-23', 7),  --1
+(1, 'Shakespeare art project', '2019-04-30', 7),  --2
+(2, 'SCRUM Refactoring Tournament', '2019-04-23', 6),  --3
+(2, 'Summer holidays', '2019-04-30', 5),  --4
+(2, 'Refurbishing living room', '2019-05-10', 7),  --5
+(3, 'Philosophy workshop', '2019-04-23', 7),  --6
+(4, 'Schedule Master week #1', '2019-04-21', 5),  --7
+(4, 'Schedule Master week #2', '2019-05-02', 6),  --8
+(4, 'Schedule Master week #3', '2019-06-12', 5)  --9
 ;
 
 INSERT INTO task (title, content) VALUES
@@ -96,16 +101,16 @@ INSERT INTO task (title, content) VALUES
 ('Refactoring', 'Keeping old code up to date with new standards')  --8
 ;
 
-INSERT INTO schedule_task(schedule_id, task_id, date, hour_start, hour_end) VALUES
-(7, 1, '2019-04-23', 9, 12),
-(7, 2, '2019-04-23', 12, 15),
-(7, 7, '2019-04-23', 12, 13),
-(1, 3, '2019-03-11', 9, 15),
-(1, 4, '2019-03-12', 8, 18),
-(1, 5, '2019-03-12', 18, 19),
-(1, 6, '2019-03-13', 9, 11),
-(1, 7, '2019-03-13', 11, 12),
-(1, 8, '2019-03-13', 12, 18)
+INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUES
+(7, 1, 5, 9, 12),
+(7, 2, 2, 12, 15),
+(7, 7, 3, 12, 13),
+(1, 3, 2, 9, 15),
+(1, 4, 4, 8, 18),
+(1, 5, 3, 18, 19),
+(1, 6, 2, 9, 11),
+(1, 7, 3, 11, 12),
+(1, 8, 1, 12, 18)
 ;
 
 
