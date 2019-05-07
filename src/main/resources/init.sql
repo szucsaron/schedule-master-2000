@@ -56,7 +56,7 @@ AS '
 			RAISE EXCEPTION ''hour_end be greater than hour_start'';
 		END IF;
 		IF NEW.day > (SELECT max_days FROM schedule WHERE NEW.schedule_id = schedule.id) THEN
-			RAISE EXCEPTION ''Task day can''be greater than schedule max days''';
+			RAISE EXCEPTION ''Task day can''''t be greater than schedule max days'';
 		END IF;
 		RETURN NEW;
 	END; '
