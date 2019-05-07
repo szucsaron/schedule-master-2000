@@ -18,7 +18,7 @@ public class SimpleScheduleTaskDao extends AbstractDao implements ScheduleTaskDa
     private ScheduleTask fetchScheduleTask(ResultSet resultSet) throws SQLException {
         int taskId = resultSet.getInt("task_id");
         int hourStart = resultSet.getInt("hour_start");
-        int hourEnd = resultSet.getInt("hour_start");
+        int hourEnd = resultSet.getInt("hour_end");
         int scheduleId = resultSet.getInt("schedule_id");
         Date date = resultSet.getDate("date");
         LocalDate dateVal = date.toLocalDate();
@@ -32,12 +32,12 @@ public class SimpleScheduleTaskDao extends AbstractDao implements ScheduleTaskDa
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, limit);
             statement.execute();
-            List<Task> tasks = new ArrayList<>();
+            List<ScheduleTask> tasks = new ArrayList<>();
             ResultSet rs = statement.getResultSet();
             while (rs.next()) {
-
+                tasks.add(fetchScheduleTask(rs));
             }
-            return null;
+            return tasks;
         }
     }
 }
