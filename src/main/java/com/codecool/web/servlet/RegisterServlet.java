@@ -3,8 +3,6 @@ package com.codecool.web.servlet;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.dao.simple.SimpleUserDao;
 import com.codecool.web.model.Role;
-import com.codecool.web.model.User;
-import com.codecool.web.service.LoginService;
 import com.codecool.web.service.UserService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleUserService;

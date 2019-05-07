@@ -1,4 +1,4 @@
 package com.codecool.web.service;
 
-public class RegisterService {
+public interface RegisterService {
 }
