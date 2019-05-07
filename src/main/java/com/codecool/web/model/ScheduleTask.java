@@ -31,4 +31,11 @@ public class ScheduleTask extends Task {
     public int getHourEnd() {
         return hourEnd;
     }
+
+    @Override
+    public String toString() {
+        String taskStr = super.toString();
+        taskStr += String.format(" scheduleId: %d, date: %s, hourStart: %d, hourEnd %d", scheduleId, date.toString(), hourStart, hourEnd);
+        return taskStr;
+    }
 }
