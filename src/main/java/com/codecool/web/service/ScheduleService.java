@@ -1,46 +1,22 @@
-/*package com.codecool.web.service;
+package com.codecool.web.service;
 
-import java.sql.SQLEtaskception;
+import com.codecool.web.model.Schedule;
+
+import java.sql.SQLException;
 import java.util.List;
 
-public class ScheduleService {
+public interface ScheduleService {
 
-    public List<Schedule> getSchedules() throws SQLEtaskception {
-        return scheduleDao.findAll();
-    }
+    List<Schedule> findAll() throws SQLException;
 
-    @Override
-    public Schedule getSchedule(String id) throws SQLEtaskception, ServiceEtaskception {
+    List<Schedule> findByUser(String userId) throws SQLException;
 
-    }
+    Schedule findById(String scheduleId, String userId) throws SQLException;
 
-    @Override
-    public Schedule addSchedule(String name, String percentage) throws SQLEtaskception, ServiceEtaskception {
+    void add(String userId, String name) throws SQLException;
 
-    }
+    void update(String scheduleId, String userId, String name) throws SQLException;
 
-    public void updateSchedule(String name) throws SQLEtaskception, ServiceEtaskception {
-
-    }
-
-    public void deleteSchedule(String name) throws SQLEtaskception, ServiceEtaskception {
-
-    }
-
-    @Override
-    public void addScheduleToTasks(String scheduleId, String... taskIds) throws SQLEtaskception, ServiceEtaskception {
-
-    }
-
-    @Override
-    public List<Task> getScheduleTasks(String scheduleId) throws SQLEtaskception, ServiceEtaskception {
-
-    }
-
-    private int[] parseTaskIds(String[] taskIds) throws ServiceEtaskception {
-
-    }
-
+    void delete(String scheduleId, String userId) throws SQLException;
 
 }
-}*/
