@@ -44,8 +44,23 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
             ResultSet resultSet = statement.executeQuery(sql);
             resultSet.next();
             return fetchSchedule(resultSet);
-            }
         }
+    }
+
+    @Override
+    public List<Schedule> findByUser(int userId) throws SQLException {
+        String sql = "SELECT id, users_id, name FROM Schedule WHERE users_id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery(sql);
+            List<Schedule> schedules = new ArrayList<>();
+            while (resultSet.next()) {
+                schedules.add(fetchSchedule(resultSet));
+            }
+            return schedules;
+        }
+    }
 
     @Override
     public Schedule add(int userId, String name) throws SQLException {
@@ -61,12 +76,7 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
     }
 
     @Override
-    public void add(int scheduleId, int... scheduleIds) throws SQLException {
-
-    }
-
-    @Override
-    public void updateSchedule(int userId, int scheduleId, String newName) throws SQLException {
+    public void update(int userId, int scheduleId, String newName) throws SQLException {
         String sql = "UPDATE Schedule SET name = ?  WHERE users_id = ? AND id = ?;";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -78,7 +88,7 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
     }
 
     @Override
-    public void deleteSchedule(int userId, int scheduleId) throws SQLException {
+    public void delete(int userId, int scheduleId) throws SQLException {
         String sql = "DELETE FROM Schedule WHERE users_id = ? AND id = ?;";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {

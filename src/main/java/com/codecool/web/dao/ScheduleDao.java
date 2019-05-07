@@ -9,13 +9,15 @@ public interface ScheduleDao {
 
     List<Schedule> findAll() throws SQLException;
 
+    List<Schedule> findByUser(int userId) throws SQLException;
+
     Schedule findById(int userId, int scheduleId) throws SQLException;
 
     Schedule add(int userId, String name) throws SQLException;
 
-    void add(int scheduleId, int... scheduleIds) throws SQLException;
+    void update(int userId, int scheduleId, String newName) throws SQLException;
 
-    void updateSchedule(int userId, int scheduleId, String newName) throws SQLException;
+    void delete(int userId, int scheduleId) throws SQLException;
 
-    void deleteSchedule(int userId, int scheduleId) throws SQLException;
+
 }

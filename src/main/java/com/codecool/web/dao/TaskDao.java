@@ -13,6 +13,7 @@ public interface TaskDao {
 
     List<Task> findByScheduleId(int scheduleId) throws SQLException;
 
+
     Task findById(int id) throws SQLException;
 
     int add(String title, String content) throws SQLException;
@@ -21,4 +22,4 @@ public interface TaskDao {
 
     void addToSchedule(int scheduleId, int taskId, LocalDate date, int hourStart, int hourEnd) throws SQLException;
 
-    }
+}
