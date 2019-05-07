@@ -25,6 +25,6 @@ public class Task {
     }
 
     public String toString() {
-        return "Id: " + id + ", " + "title: " + title;
+        return String.format("id: %d, title: %s, content: %s", id, title, content);
     }
 }
