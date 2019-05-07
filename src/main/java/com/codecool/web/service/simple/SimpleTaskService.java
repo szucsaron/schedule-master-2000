@@ -73,4 +73,8 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         LocalDate dateVal = fetchDate(date, "date");
         scheduleTaskDao.addTaskToSchedule(scheduleIdVal, taskIdVal, dateVal, hourStartVal, hourSEndVal);
     }
+
+    public void modifyBySchedule(String scheduleId, String taskId, String date, String hourStart, String hourEnd) {
+
+    }
 }
