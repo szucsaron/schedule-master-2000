@@ -21,7 +21,7 @@ import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 
-@WebServlet("/task")
+@WebServlet("/tasks")
 public class TasksServlet extends AbstractServlet {
 
     @Override
