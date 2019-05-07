@@ -29,7 +29,7 @@ abstract class AbstractServlet extends HttpServlet {
         om.writeValue(resp.getOutputStream(), object);
     }
 
-    void handleSqlError(HttpServletResponse resp, SQLException ex) throws IOException {
+    void handleSqlError(HttpServletResponse resp, Exception ex) throws IOException {
         sendMessage(resp, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
         ex.printStackTrace();
     }
