@@ -33,12 +33,6 @@ public class TasksServlet extends AbstractServlet {
             scheduleTasks.add(new ScheduleTask(3, 1, "Coding", "Meta-refactoring", LocalDate.parse("2019-05-10"), 12, 17));
             scheduleTasks.add(new ScheduleTask(4, 1, "Doing the washing up", "Dirty dishes. They must perish.", LocalDate.parse("2019-05-10"), 17, 19));
             sendMessage(resp, SC_OK, scheduleTasks);
-
-
-
-
-            req.getRequestDispatcher("test.jsp").forward(req, resp);
-
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
         }
