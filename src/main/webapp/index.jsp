@@ -16,6 +16,8 @@
     <c:url value="/tasks.js" var="tasksScriptUrl"/>
     <c:url value="/schedule.js" var="scheduleScriptUrl"/>
     <c:url value="/schedules.js" var="schedulesScriptUrl"/>
+    <c:url value="/date_adder.js" var="dateAdderScriptUrl"/>
+    <script src="${dateAdderScriptUrl}"></script>
     <script src="${taskScriptUrl}"></script>
     <script src="${tasksScriptUrl}"></script>
     <script src="${scheduleScriptUrl}"></script>
@@ -77,7 +79,6 @@
             <tbody>
             </tbody>
         </table>
-        </table>
         <h2>Add new task</h2>
         <form id="task-form" onsubmit="return false;">
             <input type="text" name="name">
@@ -109,7 +110,6 @@
             </thead>
             <tbody>
             </tbody>
-        </table>
         </table>
         <h2>Add new schedule</h2>
         <form id="schedule-form" onsubmit="return false;">

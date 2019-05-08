@@ -74,11 +74,11 @@ CREATE TRIGGER schedule_task_check BEFORE INSERT OR UPDATE ON schedule_task
 --Filling tables with stock data
 
 INSERT INTO users (email, password, name, role) VALUES
+('a', 'a', 'a', 0), --5
 ('hectorbrown@codecool.com', '1234', 'Hector Brown jr.', 0),  --1
 ('janeklawovsky', '1234', 'Jane Klawovsky', 0),  --2
 ('horvath@codecool.hu', '1234', 'Horváth Ödön', 0),  --3
-('kucslubta@codecool.hu', '1234', 'Kucslubta Sándorné', 0),  --4
-('a', 'a', 'a', 0) --5
+('kucslubta@codecool.hu', '1234', 'Kucslubta Sándorné', 0)  --4
 ;
 
 INSERT INTO schedule (users_id, name, date, max_days) VALUES
