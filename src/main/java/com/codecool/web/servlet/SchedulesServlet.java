@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
@@ -33,7 +34,6 @@ public class SchedulesServlet extends AbstractServlet {
 
             User loggedInUser = (User) req.getSession().getAttribute("user");
             String userId = String.valueOf(loggedInUser.getId());
-            scheduleService.add(userId, "schedule name here");
 
             List<Schedule> schedules = scheduleService.findAll();
 
@@ -54,8 +54,8 @@ public class SchedulesServlet extends AbstractServlet {
 
             User loggedInUser = (User) req.getSession().getAttribute("user");
             String userId = String.valueOf(loggedInUser.getId());
-            scheduleService.add(userId, "schedule name here");
 
+            scheduleService.add(userId, "schedule name here", LocalDate.now(),7);
             sendMessage(resp, SC_OK, "new schedule created");
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
