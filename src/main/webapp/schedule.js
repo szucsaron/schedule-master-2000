@@ -80,11 +80,11 @@ function appendSchedule(schedule) {
     const contentTdEl = document.createElement('td');
     contentTdEl.textContent = schedule.content;
 
-   /* const startingTdEl = document.createElement('td');
-    startingTdEl.textContent = schedule.starting.dayOfMonth + "." + schedule.starting.monthValue + "." + schedule.starting.year;
+    const startingTdEl = document.createElement('td');
+    startingTdEl.textContent = schedule.startingDate.dayOfMonth + "." + schedule.startingDate.monthValue + "." + scheduleDate.starting.year;
 
     const finishingTdEl = document.createElement('td');
-    finishingTdEl.textContent = schedule.finishing.dayOfMonth + "." + schedule.finishing.monthValue + "." + schedule.finishing.year;*/
+    finishingTdEl.textContent = schedule.finishing.dayOfMonth + "." + schedule.finishing.monthValue + "." + schedule.finishing.year;
 
     const trEl = document.createElement('tr');
     // trEl.appendChild(idTdEl);

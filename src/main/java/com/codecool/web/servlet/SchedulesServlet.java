@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
@@ -24,17 +25,16 @@ public class SchedulesServlet extends AbstractServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // List ALL Schedules
-        // TODO : list only by userId
+        // Find Schedule by userId
 
         try (Connection connection = getConnection(req.getServletContext())) {
             ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
             ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
 
-            /*User loggedInUser = (User) req.getSession().getAttribute("user");
-            String userId = String.valueOf(loggedInUser.getId());*/
+            User loggedInUser = (User) req.getSession().getAttribute("user");
+            String userId = String.valueOf(loggedInUser.getId());
 
-            List<Schedule> schedules = scheduleService.findAll();
+            List<Schedule> schedules = scheduleService.findByUser(userId);
 
             sendMessage(resp, SC_OK, schedules);
         } catch (SQLException ex) {
@@ -53,8 +53,8 @@ public class SchedulesServlet extends AbstractServlet {
 
             User loggedInUser = (User) req.getSession().getAttribute("user");
             String userId = String.valueOf(loggedInUser.getId());
-            scheduleService.add(userId, "schedule name here");
 
+            scheduleService.add(userId, "schedule name here", LocalDate.now(),7);
             sendMessage(resp, SC_OK, "new schedule created");
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
