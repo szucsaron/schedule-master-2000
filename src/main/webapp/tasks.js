@@ -26,7 +26,7 @@ function onTaskClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onTaskResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'protected/task?' + params.toString());
+    xhr.open('GET', 'task?' + params.toString());
     xhr.send();
 }
 

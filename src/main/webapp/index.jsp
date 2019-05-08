@@ -85,6 +85,19 @@
             <button onclick="onTaskAddClicked();">Add</button>
         </form>
     </div>
+    <div id="task-content" class="hidden content">
+        <h1>Task</h1>
+        <p>ID: <span id="task-id"></span></p>
+        <p>Title: <span id="task-title"></span></p>
+        <p>Content: <span id="task-text"></span></p>
+        <p>Shops: <span id="task-schedules"></span></p>
+        <h2>Add to shops</h2>
+        <form id="task-schedules-form" onsubmit="return false">
+            <select name="schedules" multiple>
+            </select>
+            <button onclick="onTaskSchedulesAddClicked();">Add</button>
+        </form>
+    </div>
     <div id="schedules-content" class="hidden content">
         <h1>Your schedules</h1>
         <table id="schedules">

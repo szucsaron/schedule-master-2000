@@ -1,8 +1,11 @@
 package com.codecool.web.servlet;
 
 import com.codecool.web.dao.ScheduleTaskDao;
+import com.codecool.web.dao.TaskDao;
 import com.codecool.web.dao.simple.SimpleScheduleTaskDao;
+import com.codecool.web.dao.simple.SimpleTaskDao;
 import com.codecool.web.model.ScheduleTask;
+import com.codecool.web.model.Task;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,10 +24,12 @@ public class TaskServlet extends AbstractServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try (Connection connection = getConnection(req.getServletContext())) {
-            ScheduleTaskDao taskDao = new SimpleScheduleTaskDao(connection);
-            List<ScheduleTask> scheduleTasks = taskDao.findByScheduleId(5);
+            TaskDao taskDao = new SimpleTaskDao(connection);
 
-            sendMessage(resp, SC_OK, scheduleTasks);
+            String id = req.getParameter("id");
+            Task task = taskDao.findById(Integer.parseInt(id));
+
+            sendMessage(resp, SC_OK, task);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
         }
