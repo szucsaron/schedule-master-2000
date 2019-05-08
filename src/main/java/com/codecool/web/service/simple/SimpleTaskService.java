@@ -1,6 +1,5 @@
 package com.codecool.web.service.simple;
 
-import com.codecool.web.dao.ScheduleTaskDao;
 import com.codecool.web.dao.TaskDao;
 import com.codecool.web.dto.TaskDto;
 import com.codecool.web.model.Task;
