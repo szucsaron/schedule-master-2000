@@ -87,11 +87,10 @@
     </div>
     <div id="task-content" class="hidden content">
         <h1>Task</h1>
-        <p>ID: <span id="task-id"></span></p>
         <p>Title: <span id="task-title"></span></p>
         <p>Content: <span id="task-text"></span></p>
-        <p>Shops: <span id="task-schedules"></span></p>
-        <h2>Add to shops</h2>
+        <p>Schedules: <span id="task-schedules"></span></p>
+        <h2>Add to schedules</h2>
         <form id="task-schedules-form" onsubmit="return false">
             <select name="schedules" multiple>
             </select>

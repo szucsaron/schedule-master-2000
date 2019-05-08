@@ -9,6 +9,8 @@ public interface TaskDao {
 
     List<Task> findAll() throws SQLException;
 
+    Task findById(int id) throws SQLException;
+
     List<TaskDto> findDtosByScheduleId(int scheduleId) throws SQLException;
 
     TaskDto findDtoById(int scheduleId, int taskId) throws SQLException;
@@ -20,4 +22,6 @@ public interface TaskDao {
     void updateLink(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException;
 
     void attachTaskToSchedule(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException;
+
+    List<String> findDtoByTaskId(int taskId) throws SQLException;
 }

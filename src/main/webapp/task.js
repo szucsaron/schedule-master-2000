@@ -31,7 +31,7 @@ function appendTask(task) {
 function onTaskResponse() {
     if (this.status === OK) {
         clearMessages();
-        showContents(['tasks-content', 'back-to-profile-content', 'logout-content']);
+        showContents(['task-content', 'back-to-profile-content', 'logout-content']);
         onTaskLoad(JSON.parse(this.responseText));
     } else {
         onOtherResponse(tasksContentDivEl, this);

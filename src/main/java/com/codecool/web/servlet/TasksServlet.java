@@ -1,10 +1,7 @@
 package com.codecool.web.servlet;
 
-import com.codecool.web.dao.ScheduleTaskDao;
 import com.codecool.web.dao.TaskDao;
-import com.codecool.web.dao.simple.SimpleScheduleTaskDao;
 import com.codecool.web.dao.simple.SimpleTaskDao;
-import com.codecool.web.model.ScheduleTask;
 import com.codecool.web.model.Task;
 
 import javax.servlet.ServletException;

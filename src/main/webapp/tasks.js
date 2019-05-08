@@ -31,24 +31,28 @@ function onTaskClicked() {
 }
 
 
+function onTaskLoad(schedules) {
+    //taskId = schedules[0];
+    //tasksTableBodyEl = tasksTableEl.querySelector('tbody');
 
-function onTaskLoad(taskDto) {
-    taskId = taskDto.task.id;
-
-    const taskIdSpanEl = document.getElementById('task-id');
+    //const taskIdSpanEl = document.getElementById('task-id');
     const taskTitleSpanEl = document.getElementById('task-title');
-    const taskContentSpanEl = document.getElementById('task-content');
+    const taskContentSpanEl = document.getElementById('task-text');
+    const taskSchedulesSpanEl = document.getElementById('task-schedules');
+    removeAllChildren(taskSchedulesSpanEl);
 
-    taskIdSpanEl.textContent = taskDto.task.id;
-    taskTitleSpanEl.textContent = taskDto.task.title;
-    taskContentSpanEl.textContent = taskDto.task.content;
+    // taskIdSpanEl.textContent = schedules[0];
+    taskTitleSpanEl.textContent = schedules[0];
+    taskContentSpanEl.textContent = schedules[1];
+    for(let i = 2; i < schedules.length; i++) {
+        taskSchedulesSpanEl.textContent += schedules[i] + " ";
+    }
 }
 
 function onTasksResponse() {
     if (this.status === OK) {
         showContents(['tasks-content', 'back-to-profile-content', 'logout-content']);
         onTasksLoad(JSON.parse(this.responseText));
-        console.log(this.responseText);
     } else {
         onOtherResponse(tasksContentDivEl, this);
     }

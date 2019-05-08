@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface TaskService {
+    Task findById(String id) throws SQLException, ServiceException;
+
     List<TaskDto> findDtosByScheduleId(String scheduleId) throws SQLException, ServiceException;
 
     TaskDto findDtoById(String scheduleId, String id) throws SQLException, ServiceException;
@@ -23,4 +25,6 @@ public interface TaskService {
     void update(String id, String title, String content) throws SQLException, ServiceException;
 
     void updateLink(String id, String scheduleId, String day, String hourStart, String hourEnd) throws SQLException, ServiceException;
+
+     List<String> findDtoByTaskId(int taskId) throws SQLException;
 }

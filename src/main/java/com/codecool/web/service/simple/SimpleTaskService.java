@@ -1,6 +1,5 @@
 package com.codecool.web.service.simple;
 
-import com.codecool.web.dao.ScheduleTaskDao;
 import com.codecool.web.dao.TaskDao;
 import com.codecool.web.dto.TaskDto;
 import com.codecool.web.model.Task;
@@ -16,6 +15,11 @@ public class SimpleTaskService extends AbstractService implements TaskService {
 
     public SimpleTaskService(TaskDao taskDao) {
         this.taskDao = taskDao;
+    }
+
+    public Task findById(String id) throws ServiceException, SQLException{
+        int idVal = fetchInt(id, "id");
+        return taskDao.findById(idVal);
     }
 
     public List<Task> findAll() throws SQLException, ServiceException {
@@ -60,5 +64,9 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         int hourEndVal = fetchInt(hourEnd, "hourEnd");
         taskDao.attachTaskToSchedule(scheduleIdVal, taskIdVal, dayVal, hourStartVal, hourEndVal);
 
+    }
+
+    public List<String> findDtoByTaskId(int taskId) throws SQLException {
+        return taskDao.findDtoByTaskId(taskId);
     }
 }
