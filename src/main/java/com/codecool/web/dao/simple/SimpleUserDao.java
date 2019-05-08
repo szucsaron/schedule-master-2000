@@ -51,9 +51,9 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
         connection.setAutoCommit(false);
         String sql = "INSERT INTO users (email, password, name, role) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
-            statement.setString(1, name);
+            statement.setString(1, email);
             statement.setString(2, password);
-            statement.setString(3, email);
+            statement.setString(3, name);
             statement.setInt(4, role.getValue());
             executeInsert(statement);
             int id = fetchGeneratedId(statement);
