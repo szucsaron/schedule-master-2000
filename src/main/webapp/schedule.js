@@ -42,11 +42,13 @@ function appendSchedule(schedule) {
     const startingTdEl = document.createElement('td');
     startingTdEl.textContent = schedule.startingDate.dayOfMonth + "." + schedule.startingDate.monthValue + "." + schedule.startingDate.year;
 
-    const scheduleFinish = schedule.startingDate.addDays(schedule.durationInDays);
+    let newDate = new Date(convertDate(schedule.startingDate));
+    console.log(schedule);
+    const scheduleFinish = newDate.addDays(schedule.durationInDays);
+    // alert(scheduleFinish.toString())
 
     const finishingTdEl = document.createElement('td');
-    finishingTdEl.textContent = scheduleFinish.dayOfMonth + "." + scheduleFinish.monthValue + "." + scheduleFinish.year;
-
+    finishingTdEl.textContent = scheduleFinish.getDate() + "." + (scheduleFinish.getMonth() + 1) + "." + scheduleFinish.getFullYear();
     const trEl = document.createElement('tr');
     // trEl.appendChild(idTdEl);
     trEl.appendChild(nameTdEl);
