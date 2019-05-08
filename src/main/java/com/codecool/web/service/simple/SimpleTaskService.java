@@ -65,4 +65,8 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         taskDao.attachTaskToSchedule(scheduleIdVal, taskIdVal, dayVal, hourStartVal, hourEndVal);
 
     }
+
+    public List<String> findDtoByTaskId(int taskId) throws SQLException {
+        return taskDao.findDtoByTaskId(taskId);
+    }
 }

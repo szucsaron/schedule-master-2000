@@ -16,6 +16,8 @@
     <c:url value="/tasks.js" var="tasksScriptUrl"/>
     <c:url value="/schedule.js" var="scheduleScriptUrl"/>
     <c:url value="/schedules.js" var="schedulesScriptUrl"/>
+    <c:url value="/date_adder.js" var="dateAdderScriptUrl"/>
+    <script src="${dateAdderScriptUrl}"></script>
     <script src="${taskScriptUrl}"></script>
     <script src="${tasksScriptUrl}"></script>
     <script src="${scheduleScriptUrl}"></script>
@@ -77,12 +79,23 @@
             <tbody>
             </tbody>
         </table>
-        </table>
         <h2>Add new task</h2>
         <form id="task-form" onsubmit="return false;">
             <input type="text" name="name">
             <input type="text" name="content">
             <button onclick="onTaskAddClicked();">Add</button>
+        </form>
+    </div>
+    <div id="task-content" class="hidden content">
+        <h1>Task</h1>
+        <p>Title: <span id="task-title"></span></p>
+        <p>Content: <span id="task-text"></span></p>
+        <p>Schedules: <span id="task-schedules"></span></p>
+        <h2>Add to schedules</h2>
+        <form id="task-schedules-form" onsubmit="return false">
+            <select name="schedules" multiple>
+            </select>
+            <button onclick="onTaskSchedulesAddClicked();">Add</button>
         </form>
     </div>
     <div id="schedules-content" class="hidden content">
@@ -97,7 +110,6 @@
             </thead>
             <tbody>
             </tbody>
-        </table>
         </table>
         <h2>Add new schedule</h2>
         <form id="schedule-form" onsubmit="return false;">

@@ -75,6 +75,22 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
         }
     }
 
+    public List<String> findDtoByTaskId(int taskId) throws SQLException {
+        List<String> schedules = new ArrayList<>();
+        String sql = "SELECT schedule.name FROM schedule " +
+                "JOIN schedule_task ON schedule.id = schedule_id " +
+                "WHERE task_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, taskId);
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
+                schedules.add(rs.getString("name"));
+            }
+        }
+        return schedules;
+    }
+
     public int add(String title, String content) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         String sql = "INSERT INTO task (title, content) VALUES (?, ?)";
@@ -111,7 +127,8 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
         }
     }
 
-    public void attachTaskToSchedule(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException {
+    public void attachTaskToSchedule(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws
+            SQLException {
         String sql = "INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, scheduleId);

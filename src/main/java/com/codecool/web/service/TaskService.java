@@ -24,5 +24,8 @@ public interface TaskService {
 
     void update(String id, String title, String content) throws SQLException, ServiceException;
 
+
+     List<String> findDtoByTaskId(int taskId) throws SQLException;
+
     void updateLink(String scheduleId, String taskId, String day, String hourStart, String hourEnd) throws SQLException, ServiceException;
 }

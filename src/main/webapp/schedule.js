@@ -39,17 +39,19 @@ function appendSchedule(schedule) {
     const contentTdEl = document.createElement('td');
     contentTdEl.textContent = schedule.content;
 
-   /* const startingTdEl = document.createElement('td');
-    startingTdEl.textContent = schedule.starting.dayOfMonth + "." + schedule.starting.monthValue + "." + schedule.starting.year;
+    const startingTdEl = document.createElement('td');
+    startingTdEl.textContent = schedule.startingDate.dayOfMonth + "." + schedule.startingDate.monthValue + "." + schedule.startingDate.year;
+
+    const scheduleFinish = schedule.startingDate.addDays(schedule.durationInDays);
 
     const finishingTdEl = document.createElement('td');
-    finishingTdEl.textContent = schedule.finishing.dayOfMonth + "." + schedule.finishing.monthValue + "." + schedule.finishing.year;*/
+    finishingTdEl.textContent = scheduleFinish.dayOfMonth + "." + scheduleFinish.monthValue + "." + scheduleFinish.year;
 
     const trEl = document.createElement('tr');
     // trEl.appendChild(idTdEl);
     trEl.appendChild(nameTdEl);
-    /*trEl.appendChild(startingTdEl);
-    trEl.appendChild(finishingTdEl);*/
+    trEl.appendChild(startingTdEl);
+    trEl.appendChild(finishingTdEl);
     schedulesTableBodyEl.appendChild(trEl);
 }
 

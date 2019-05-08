@@ -22,4 +22,6 @@ public interface TaskDao {
     void updateLink(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException;
 
     void attachTaskToSchedule(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException;
+
+    List<String> findDtoByTaskId(int taskId) throws SQLException;
 }
