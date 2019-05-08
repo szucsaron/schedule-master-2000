@@ -1,10 +1,14 @@
+
+
 package com.codecool.web.dao.simple;
 
 import com.codecool.web.dao.ScheduleDao;
 import com.codecool.web.model.Schedule;
+import org.springframework.cglib.core.Local;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
@@ -17,7 +21,10 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         int scheduleId = resultSet.getInt("id");
         int userId = resultSet.getInt("users_id");
         String name = resultSet.getString("name");
-        return new Schedule(scheduleId, userId, name);
+        return new Schedule(scheduleId,userId,name);
+        /*Date startingDate = resultSet.getDate("date");
+        int days = resultSet.getInt("days");
+        return new Schedule(scheduleId, userId, name,startingDate,userId);*/
     }
 
     @Override
