@@ -36,4 +36,8 @@ public class TaskDto {
     public int getHourEnd() {
         return hourEnd;
     }
+
+    public String toString() {
+        return task.toString() + String.format(", scheduleId: %d, day: %d, hourStart: %d, hourEnd: %d", scheduleId, day, hourStart, hourEnd);
+    }
 }

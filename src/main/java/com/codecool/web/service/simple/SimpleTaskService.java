@@ -47,7 +47,7 @@ public class SimpleTaskService extends AbstractService implements TaskService {
     }
 
 
-    public void updateLink(String taskId, String scheduleId, String day, String hourStart, String hourEnd) throws ServiceException, SQLException {
+    public void updateLink(String scheduleId, String taskId, String day, String hourStart, String hourEnd) throws ServiceException, SQLException {
         int scheduleIdVal = fetchInt(scheduleId, "scheduleId");
         int taskIdVal = fetchInt(taskId, "taskId");
         int hourStartVal = fetchInt(hourStart, "hourStart");
