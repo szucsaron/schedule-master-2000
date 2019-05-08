@@ -7,10 +7,10 @@ const INTERNAL_SERVER_ERROR = 500;
 let loginContentDivEl;
 let registerContentDivEl;
 let profileContentDivEl;
-let couponContentDivEl;
-let couponsContentDivEl;
-let shopContentDivEl;
-let shopsContentDivEl;
+let taskContentDivEl;
+let tasksContentDivEl;
+let scheduleContentDivEl;
+let schedulesContentDivEl;
 let backToProfileContentDivEl;
 let logoutContentDivEl;
 
@@ -102,10 +102,10 @@ function onLoad() {
     loginContentDivEl = document.getElementById('login-content');
     registerContentDivEl = document.getElementById('register-content');
     profileContentDivEl = document.getElementById('profile-content');
-    couponContentDivEl = document.getElementById('coupon-content');
-    couponsContentDivEl = document.getElementById('coupons-content');
-    shopContentDivEl = document.getElementById('shop-content');
-    shopsContentDivEl = document.getElementById('shops-content');
+    taskContentDivEl = document.getElementById('task-content');
+    tasksContentDivEl = document.getElementById('tasks-content');
+    scheduleContentDivEl = document.getElementById('schedule-content');
+    schedulesContentDivEl = document.getElementById('schedules-content');
     backToProfileContentDivEl = document.getElementById('back-to-profile-content');
     logoutContentDivEl = document.getElementById('logout-content');
 

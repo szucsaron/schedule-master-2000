@@ -18,7 +18,7 @@ public interface TaskService {
     int add(String title, String content) throws SQLException;
 
     void attachTaskToSchedule(String scheduleId, String taskId, String day, String hourStart, String hourEnd)
-            throws ServiceException, ServiceException;
+            throws SQLException, ServiceException;
 
     void update(String id, String title, String content) throws SQLException, ServiceException;
 

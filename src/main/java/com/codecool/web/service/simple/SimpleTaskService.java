@@ -52,8 +52,7 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         taskDao.updateLink(scheduleIdVal, taskIdVal, dayVal, hourStartVal, hourSEndVal);
     }
 
-    public void attachTaskToSchedule(String scheduleId, String taskId, String day, String hourStart, String hourEnd)
-            throws ServiceException, ServiceException {
+    public void attachTaskToSchedule(String scheduleId, String taskId, String day, String hourStart, String hourEnd) throws SQLException, ServiceException {
         int scheduleIdVal = fetchInt(scheduleId, "scheduleId");
         int taskIdVal = fetchInt(taskId, "taskId");
         int dayVal = fetchInt(day, "day");
