@@ -118,7 +118,7 @@ function _printScheduleToTable(tableEl, tasks) {
         // alert(tableEl.getElementsByTagName("tr")[0]);
         for (let h = hourStart - 1; h < hourEnd - 1; h++) {
             const tdEl = getTableField(tableEl, day - 1, h);
-            _assignTaskToField(tdEl, tasks[i], i)
+            _assignTaskToField(tdEl, tasks[i].task, i)
         }
     }
 }
