@@ -53,10 +53,13 @@ AS '
 			RAISE EXCEPTION ''hour_end must be between 1 and 24'';
 		END IF;
 		IF NEW.hour_end <= NEW.hour_start THEN
-			RAISE EXCEPTION ''hour_end be greater than hour_start'';
+			RAISE EXCEPTION ''hour_end must be greater than hour_start'';
 		END IF;
 		IF NEW.day > (SELECT max_days FROM schedule WHERE NEW.schedule_id = schedule.id) THEN
 			RAISE EXCEPTION ''Task day can''''t be greater than schedule max days'';
+		END IF;
+		IF (SELECT count(*) FROM schedule_task WHERE schedule_id = 1 AND day = 2 AND hour_start <= NEW.hour_end AND hour_end > NEW.hour_start) > 0 THEN
+			RAISE EXCEPTION ''Overlapping hours!'';
 		END IF;
 		RETURN NEW;
 	END; '
@@ -104,13 +107,13 @@ INSERT INTO task (title, content) VALUES
 INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUES
 (7, 1, 5, 9, 12),
 (7, 2, 2, 12, 15),
-(7, 7, 3, 12, 13),
-(1, 3, 2, 9, 15),
-(1, 4, 4, 8, 18),
-(1, 5, 3, 18, 19),
-(1, 6, 2, 9, 11),
-(1, 7, 3, 11, 12),
-(1, 8, 1, 12, 18)
+(7, 7, 3, 15, 16),
+(1, 3, 2, 9, 10),
+(1, 4, 4, 10, 12),
+(1, 5, 3, 12, 14),
+(1, 6, 2, 14, 16),
+(1, 7, 3, 16, 18),
+(1, 8, 1, 18, 19)
 ;
 
 
