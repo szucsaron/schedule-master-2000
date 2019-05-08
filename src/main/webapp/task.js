@@ -17,14 +17,14 @@ function appendTask(task) {
     const contentTdEl = document.createElement('td');
     contentTdEl.textContent = task.content;
 
-    const dateTdEl = document.createElement('td');
-    dateTdEl.textContent = task.date.dayOfMonth + "." + task.date.monthValue + "." + task.date.year;
+    /*const dateTdEl = document.createElement('td');
+    dateTdEl.textContent = task.date.dayOfMonth + "." + task.date.monthValue + "." + task.date.year;*/
 
     const trEl = document.createElement('tr');
     // trEl.appendChild(idTdEl);
     trEl.appendChild(titleTdEl);
     trEl.appendChild(contentTdEl);
-    trEl.appendChild(dateTdEl);
+    //trEl.appendChild(dateTdEl);
     tasksTableBodyEl.appendChild(trEl);
 }
 
