@@ -123,7 +123,6 @@ function _printScheduleToTable(tableEl, tasks) {
 }
 
 function _assignTaskToField(tdEl, task, index) {
-    console.log(tdEl)
     tdEl.textContent = task.title;
     tdEl.setAttribute("taskIndex", index);
 }
