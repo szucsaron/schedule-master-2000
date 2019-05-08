@@ -3,6 +3,7 @@ package com.codecool.web.service;
 import com.codecool.web.model.Schedule;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ScheduleService {
@@ -13,7 +14,7 @@ public interface ScheduleService {
 
     Schedule findById(String scheduleId, String userId) throws SQLException;
 
-    void add(String userId, String name) throws SQLException;
+    void add(String userId, String name, LocalDate date, int days) throws SQLException;
 
     void update(String scheduleId, String userId, String name) throws SQLException;
 

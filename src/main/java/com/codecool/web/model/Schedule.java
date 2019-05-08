@@ -10,15 +10,6 @@ public class Schedule {
     private LocalDate startingDate;
     private int durationInDays;
 
-
-    // TODO : Remove old constructor (testing only)
-    public Schedule(int id, int userId, String name) {
-        this.id = id;
-        this.userId = userId;
-        this.name = name;
-
-    }
-
     public Schedule(int id, int userId, String name, LocalDate startingDate, int durationInDays) {
         this.id = id;
         this.userId = userId;
@@ -26,12 +17,6 @@ public class Schedule {
         this.startingDate = startingDate;
         this.durationInDays = durationInDays;
     }
-
-    /*public void addTast(Task task) {
-    }
-
-    public void getTasks() {
-    }*/
 
     public int getId() {
         return id;

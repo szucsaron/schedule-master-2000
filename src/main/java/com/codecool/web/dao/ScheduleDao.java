@@ -3,6 +3,7 @@ package com.codecool.web.dao;
 import com.codecool.web.model.Schedule;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ScheduleDao {
@@ -13,7 +14,7 @@ public interface ScheduleDao {
 
     Schedule findById(int userId, int scheduleId) throws SQLException;
 
-    Schedule add(int userId, String name) throws SQLException;
+    Schedule add(int userId, String name, LocalDate date, int days) throws SQLException;
 
     void update(int userId, int scheduleId, String newName) throws SQLException;
 
