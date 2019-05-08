@@ -5,7 +5,6 @@ import com.codecool.web.dao.ScheduleTaskDao;
 import com.codecool.web.model.ScheduleTask;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +18,10 @@ public class SimpleScheduleTaskDao extends AbstractDao implements ScheduleTaskDa
         int hourStart = resultSet.getInt("hour_start");
         int hourEnd = resultSet.getInt("hour_end");
         int scheduleId = resultSet.getInt("schedule_id");
-        Date date = resultSet.getDate("date");
-        LocalDate dateVal = date.toLocalDate();
+        int day = resultSet.getInt("day");
         String title = resultSet.getString("title");
         String content = resultSet.getString("content");
-        return new ScheduleTask(taskId, scheduleId, title, content, dateVal, hourStart, hourEnd);
+        return new ScheduleTask(taskId, scheduleId, title, content, day, hourStart, hourEnd);
     }
 
     public List<ScheduleTask> findAll(int limit) throws SQLException {
@@ -54,24 +52,24 @@ public class SimpleScheduleTaskDao extends AbstractDao implements ScheduleTaskDa
         }
     }
 
-    public void addTaskToSchedule(int scheduleId, int taskId, LocalDate date, int hourStart, int hourEnd) throws SQLException {
-        String sql = "INSERT INTO schedule_task(schedule_id, task_id, date, hour_start, hour_end) VALUES (?, ?, ?, ?, ?)";
+    public void updateLink(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException {
+        String sql = "INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, scheduleId);
             statement.setInt(2, taskId);
-            statement.setObject(3, date);
+            statement.setObject(3, day);
             statement.setInt(4, hourStart);
             statement.setInt(5, hourEnd);
             statement.executeUpdate();
         }
     }
 
-    public void modifyBySchedule(int scheduleId, int taskId, LocalDate date, int hourStart, int hourEnd) throws SQLException {
-        String sql = "INSERT INTO schedule_task(schedule_id, task_id, date, hour_start, hour_end) VALUES (?, ?, ?, ?, ?)";
+    public void modifyBySchedule(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException {
+        String sql = "INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, scheduleId);
             statement.setInt(2, taskId);
-            statement.setObject(3, date);
+            statement.setObject(3, day);
             statement.setInt(4, hourStart);
             statement.setInt(5, hourEnd);
             statement.executeUpdate();

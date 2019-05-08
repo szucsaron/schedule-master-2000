@@ -11,7 +11,7 @@ public interface ScheduleTaskDao {
 
     List<ScheduleTask> findByScheduleId(int scheduleId) throws SQLException;
 
-    void addTaskToSchedule(int scheduleId, int taskId, LocalDate date, int hourStart, int hourEnd) throws SQLException;
+    void updateLink(int scheduleId, int taskId, int date, int hourStart, int hourEnd) throws SQLException;
 
     void removeTaskFromSchedule(int scheduleId, int taskId) throws SQLException;
 

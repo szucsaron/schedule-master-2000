@@ -1,26 +1,23 @@
 package com.codecool.web.dao;
 
+import com.codecool.web.dto.TaskDto;
 import com.codecool.web.model.Task;
-
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 public interface TaskDao {
 
     List<Task> findAll() throws SQLException;
 
-    List<Task> findByScheduleId(int scheduleId) throws SQLException;
+    List<TaskDto> findDtosByScheduleId(int scheduleId) throws SQLException;
 
-
-    Task findById(int id) throws SQLException;
+    TaskDto findDtoById(int scheduleId, int taskId) throws SQLException;
 
     int add(String title, String content) throws SQLException;
 
     void update(int id, String title, String content) throws SQLException;
 
+    void updateLink(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException;
 
-
-
+    void attachTaskToSchedule(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException;
 }
