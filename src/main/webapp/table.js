@@ -69,12 +69,13 @@ let _gScheduleTableTasks;
 
 function createScheduleTable(tableDomId, schedule, tasks, callback){
     /*
-    Create and return a schedule table element that displays tasks in schedule.
+    Creates and returns a schedule table element that displays tasks associated with a schedule.
     Params: tableDomId: id of the table element to be created
             schedule: a schedule model object
             tasks: a list of task dto objects
-            callback: a callback function executed when a table field is being clicked.
-                It is returned with a result object containing the following fields:
+            callback: a callback function executed when a table field is being clicked on.
+                It must contain a result variable, which will be provided as an object
+                with the following fields:
                     task: a task object (null if field is empty)
                     clickedDay
                     clickedHour
@@ -123,7 +124,6 @@ function _printScheduleToTable(tableEl, tasks) {
 }
 
 function _assignTaskToField(tdEl, task, index) {
-    console.log(tdEl)
     tdEl.textContent = task.title;
     tdEl.setAttribute("taskIndex", index);
 }
