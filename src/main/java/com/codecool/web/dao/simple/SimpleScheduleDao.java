@@ -4,11 +4,10 @@ package com.codecool.web.dao.simple;
 
 import com.codecool.web.dao.ScheduleDao;
 import com.codecool.web.model.Schedule;
-import org.springframework.cglib.core.Local;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
@@ -21,10 +20,10 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         int scheduleId = resultSet.getInt("id");
         int userId = resultSet.getInt("users_id");
         String name = resultSet.getString("name");
-        return new Schedule(scheduleId,userId,name);
-        /*Date startingDate = resultSet.getDate("date");
-        int days = resultSet.getInt("days");
-        return new Schedule(scheduleId, userId, name,startingDate,userId);*/
+        Date date = resultSet.getDate("date");
+        LocalDate localDate = date.toLocalDate();
+        int days = resultSet.getInt("max_days");
+        return new Schedule(scheduleId, userId, name, localDate, days);
     }
 
     @Override
@@ -70,15 +69,17 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
     }
 
     @Override
-    public Schedule add(int userId, String name) throws SQLException {
-        String sql = "INSERT INTO schedule (users_id, name) VALUES(?, ?);";
+    public Schedule add(int userId, String name, LocalDate date, int days) throws SQLException {
+        String sql = "INSERT INTO schedule (users_id, name, date, max_days) VALUES(?, ?, ?, ?);";
 
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, userId);
             statement.setString(2, name);
+            statement.setObject(3, date);
+            statement.setInt(4, days);
             statement.executeUpdate();
             int scheduleId = fetchGeneratedId(statement);
-            return new Schedule(scheduleId, userId, name);
+            return new Schedule(scheduleId, userId, name, date, days);
         }
     }
 

@@ -6,6 +6,7 @@ import com.codecool.web.model.Schedule;
 import com.codecool.web.service.ScheduleService;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class SimpleScheduleService implements ScheduleService {
@@ -33,8 +34,8 @@ public class SimpleScheduleService implements ScheduleService {
     }
 
     @Override
-    public void add(String userId, String name) throws SQLException {
-        scheduleDao.add(Integer.parseInt(userId), name);
+    public void add(String userId, String name, LocalDate date, int days) throws SQLException {
+        scheduleDao.add(Integer.parseInt(userId), name, date, days);
     }
 
     @Override
