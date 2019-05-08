@@ -17,4 +17,24 @@ public class Schedule {
         this.startingDate = startingDate;
         this.durationInDays = durationInDays;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getStartingDate() {
+        return startingDate;
+    }
+
+    public int getDurationInDays() {
+        return durationInDays;
+    }
 }
