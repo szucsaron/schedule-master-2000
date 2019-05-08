@@ -25,8 +25,7 @@ public class SchedulesServlet extends AbstractServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // List ALL Schedules
-        // TODO : list only by userId
+        // Find Schedule by userId
 
         try (Connection connection = getConnection(req.getServletContext())) {
             ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
@@ -35,7 +34,7 @@ public class SchedulesServlet extends AbstractServlet {
             User loggedInUser = (User) req.getSession().getAttribute("user");
             String userId = String.valueOf(loggedInUser.getId());
 
-            List<Schedule> schedules = scheduleService.findAll();
+            List<Schedule> schedules = scheduleService.findByUser(userId);
 
             sendMessage(resp, SC_OK, schedules);
         } catch (SQLException ex) {
