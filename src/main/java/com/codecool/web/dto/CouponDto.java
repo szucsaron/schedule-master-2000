@@ -8,7 +8,7 @@ import java.util.List;
 public final class CouponDto {
 
     private final Coupon coupon;
-    private final List<Shop> couponShops;
+    private final List*//**//*<Shop> couponShops;
     private final List<Shop> allShops;
 
     public CouponDto(Coupon coupon, List<Shop> couponShops, List<Shop> allShops) {
