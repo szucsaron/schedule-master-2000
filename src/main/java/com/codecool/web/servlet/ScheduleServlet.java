@@ -4,6 +4,7 @@ import com.codecool.web.dao.ScheduleDao;
 import com.codecool.web.dao.TaskDao;
 import com.codecool.web.dao.simple.SimpleScheduleDao;
 import com.codecool.web.dao.simple.SimpleTaskDao;
+import com.codecool.web.dto.ScheduleTaskDto;
 import com.codecool.web.dto.TaskDto;
 import com.codecool.web.model.Schedule;
 import com.codecool.web.model.User;
@@ -17,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
@@ -29,11 +29,21 @@ public class ScheduleServlet extends AbstractServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Find Schedule by userId
         try (Connection connection = getConnection(req.getServletContext())) {
+            String scheduleId = req.getParameter("schedule");
+
+            User loggedInUser = (User) req.getSession().getAttribute("user");
+            String userId = String.valueOf(loggedInUser.getId());
+
+            ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
+            ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
             TaskDao taskDao = new SimpleTaskDao(connection);
-            List<TaskDto> tasks = taskDao.findDtosByScheduleId(1);
 
+            Schedule schedule = scheduleService.findById(scheduleId, userId);
+            List<TaskDto> tasks = taskDao.findDtosByScheduleId(Integer.parseInt(scheduleId));
 
-            sendMessage(resp, SC_OK, "fasz");
+            ScheduleTaskDto scheduleTaskDto = new ScheduleTaskDto(schedule, tasks);
+
+            sendMessage(resp, SC_OK, scheduleTaskDto);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
         }
