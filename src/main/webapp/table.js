@@ -81,7 +81,6 @@ function createScheduleTable(tableDomId, schedule, tasks, callback){
                     clickedHour
     */
 
-
     _gScheduleTableCallback = callback;
     _gScheduleTableTasks = tasks;
     let tEl = document.getElementById("scheduleTable");
