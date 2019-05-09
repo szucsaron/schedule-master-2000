@@ -27,6 +27,9 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         return taskDao.findByUserId(idVal);
     }
 
+    public List<Task> findByUserId(int userId) throws SQLException {
+        return taskDao.findByUserId(userId);
+    }
 
     public List<Task> findAll() throws SQLException, ServiceException {
         return taskDao.findAll();

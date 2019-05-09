@@ -67,11 +67,19 @@ function onTableBoxClicked(res) {
 }
 
 function displayTaskPopup() {
-    const tasks = gScheduleTable.tasks;
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onUserTasksReceived);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'user_tasks');
+    xhr.send();
+}
+
+function onUserTasksReceived() {
+    const tasks = JSON.parse(this.responseText);
     var toDisplay = document.getElementById("pass");
     removeAllChildren(toDisplay);
     for (let i = 0; i < tasks.length; i++) {
-        const task = tasks[i].task;
+        const task = tasks[i];
         const taskButton = document.createElement("button");
         taskButton.textContent = task.title;
         taskButton.setAttribute("taskId", task.id);
@@ -105,6 +113,21 @@ function onTableFieldDropped(res) {
     xhr.send(params);
 }
 
-function onTasksModified(res) {
-    console.log(res);
+function onTasksModified() {
+    const scheduleId = gScheduleTable.schedule.id;
+    
+    const params = new URLSearchParams();
+    params.append('id', scheduleId);
+    
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onScheduleRefresh);
+    xhr.addEventListener('error', onNetworkError);
+    alert("sdasd " + params.toString());
+    xhr.open('GET', 'schedule?' + params.toString());
+    xhr.send();
+
+}
+
+function onScheduleRefresh() {
+    showSchedule(JSON.parse(this.responseText));
 }

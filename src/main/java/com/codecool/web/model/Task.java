@@ -2,11 +2,13 @@ package com.codecool.web.model;
 
 public class Task {
     private int id;
+    private int userId;
     private String title;
     private String content;
 
-    public Task(int id, String title, String content) {
+    public Task(int id, int userId, String title, String content) {
         this.id = id;
+        this.userId = userId;
         this.title = title;
         this.content = content;
     }

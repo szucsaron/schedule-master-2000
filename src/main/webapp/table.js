@@ -102,6 +102,7 @@ function updateScheduleTable(tableEl, tasks) {
     Clears and updates schedule table with the given task imputs
     Params: tableEl: dom element of the table
             tasks: a list of task dto objects
+    WORK IN PROGRESS
     */
 
     clearTable(tableEl);
@@ -114,10 +115,6 @@ function _printScheduleToTable(tableEl, tasks) {
         const day = tasks[i].day;
         const hourStart = tasks[i].hourStart;
         const hourEnd = tasks[i].hourEnd;
-
-        
-        // alert(tableEl.getElementsByTagName("tr")[0]);
-        // alert(tableEl.getElementsByTagName("tr")[0]);
         for (let h = hourStart - 1; h < hourEnd - 1; h++) {
             const tdEl = getTableField(tableEl, day - 1, h);
             _assignTaskToField(tdEl, tasks[i].task, i)

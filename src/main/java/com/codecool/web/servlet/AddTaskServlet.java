@@ -64,7 +64,8 @@ public class AddTaskServlet extends AbstractServlet {
             taskService.attachTaskToSchedule(scheduleId, taskId, day, hourStart, hourEnd);
 
             ScheduleServlet scheduleServlet = new ScheduleServlet();
-            scheduleServlet.doGet(req, resp);
+            List<TaskDto> refreshedTasks = taskService.findDtosByScheduleId(scheduleId);
+            sendMessage(resp,  SC_OK, refreshedTasks);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
         } catch (ServiceException e) {

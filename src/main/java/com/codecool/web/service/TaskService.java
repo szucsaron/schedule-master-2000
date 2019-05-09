@@ -2,7 +2,6 @@ package com.codecool.web.service;
 
 import com.codecool.web.dao.TaskDao;
 import com.codecool.web.dto.TaskDto;
-import com.codecool.web.model.ScheduleTask;
 import com.codecool.web.model.Task;
 import com.codecool.web.service.exception.ServiceException;
 import org.springframework.jdbc.support.xml.SqlXmlFeatureNotImplementedException;
@@ -14,6 +13,8 @@ public interface TaskService {
     Task findById(String id) throws SQLException, ServiceException;
 
     List<Task> findByUserId(String userId) throws SQLException, ServiceException;
+
+    List<Task> findByUserId(int userId) throws SQLException;
 
     List<TaskDto> findDtosByScheduleId(String scheduleId) throws SQLException, ServiceException;
 

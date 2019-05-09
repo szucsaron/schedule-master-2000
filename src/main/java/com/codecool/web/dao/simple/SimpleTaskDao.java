@@ -43,10 +43,7 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
     }
 
     public List<Task> findByUserId(int userId) throws SQLException {
-        String sql = "SELECT * FROM task\n" +
-                "JOIN schedule_task ON task.id = schedule_task.task_id\n" +
-                "JOIN schedule ON schedule_task.schedule_id = schedule.id\n" +
-                "WHERE users_id = ?";
+        String sql = "SELECT * FROM task WHERE user_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, userId);
             statement.execute();
@@ -178,8 +175,8 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
         int id = resultSet.getInt("id");
         String title = resultSet.getString("title");
         String content = resultSet.getString("content");
-
-        return new Task(id, title, content);
+        int userId = resultSet.getInt("user_id");
+        return new Task(id, userId, title, content);
     }
 
     private TaskDto fetchDto(ResultSet resultSet) throws SQLException {
