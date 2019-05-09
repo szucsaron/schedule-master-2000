@@ -22,6 +22,12 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         return taskDao.findById(idVal);
     }
 
+    public List<Task> findByUserId(String userId) throws SQLException, ServiceException {
+        int idVal = fetchInt(userId, "userId");
+        return taskDao.findByUserId(idVal);
+    }
+
+
     public List<Task> findAll() throws SQLException, ServiceException {
         return taskDao.findAll();
     }

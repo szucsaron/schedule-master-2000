@@ -1,5 +1,7 @@
 let gScheduleTable;
 let gSelectedTaskId;
+let gDragStartHour
+let gDragStartDay
 let scheduleId;
 
 
@@ -84,10 +86,25 @@ function onTaskSelectClicked() {
 }
 
 function onTableFieldDragged(res) {
-    console.log(res);
+    gDragStartDay = res.clickedDay;
+    gDragStartHour = res.clickedHour;
 }
 
 function onTableFieldDropped(res) {
-    alert("fasz")
+    const params = new URLSearchParams();
+    params.append('scheduleId', gScheduleTable.schedule.id);
+    params.append('taskId', gSelectedTaskId);
+    params.append('day', gDragStartDay);
+    params.append('hourStart', gDragStartHour);
+    params.append('hourEnd', res.clickedHour);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onTasksModified);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('POST', 'addTask?');
+    xhr.send(params);
+}
+
+function onTasksModified(res) {
     console.log(res);
 }

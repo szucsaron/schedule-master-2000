@@ -58,7 +58,7 @@ AS '
 		IF NEW.day > (SELECT max_days FROM schedule WHERE NEW.schedule_id = schedule.id) THEN
 			RAISE EXCEPTION ''Task day can''''t be greater than schedule max days'';
 		END IF;
-		IF (SELECT count(*) FROM schedule_task WHERE schedule_id = 1 AND day = 2 AND hour_start <= NEW.hour_end AND hour_end > NEW.hour_start) > 0 THEN
+		IF (SELECT count(*) FROM schedule_task WHERE schedule_id = NEW.schedule_id AND day = NEW.day AND hour_start <= NEW.hour_end AND hour_end > NEW.hour_start) > 0 THEN
 			RAISE EXCEPTION ''Overlapping hours!'';
 		END IF;
 		RETURN NEW;

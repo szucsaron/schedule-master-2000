@@ -57,9 +57,9 @@ public class AddTaskServlet extends AbstractServlet {
             TaskService taskService = new SimpleTaskService(taskDao);
             String scheduleId = req.getParameter("scheduleId");
             String taskId = req.getParameter("taskId");
-            String day = req.getParameter("col");
-            String hourStart = req.getParameter("row");
-            String hourEnd = req.getParameter("row");
+            String day = req.getParameter("day");
+            String hourStart = req.getParameter("hourStart");
+            String hourEnd = req.getParameter("hourEnd");
 
             taskService.attachTaskToSchedule(scheduleId, taskId, day, hourStart, hourEnd);
 

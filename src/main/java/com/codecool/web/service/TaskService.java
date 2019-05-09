@@ -13,6 +13,8 @@ import java.util.List;
 public interface TaskService {
     Task findById(String id) throws SQLException, ServiceException;
 
+    List<Task> findByUserId(String userId) throws SQLException, ServiceException;
+
     List<TaskDto> findDtosByScheduleId(String scheduleId) throws SQLException, ServiceException;
 
     TaskDto findDtoById(String scheduleId, String id) throws SQLException, ServiceException;
