@@ -42,14 +42,17 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
 
     @Override
     public Schedule findById(int userId, int scheduleId) throws SQLException {
-        String sql = "SELECT id, users_id, name FROM Schedule WHERE users_id = ? AND id = ?";
+        String sql = "SELECT id, users_id, date, max_days, name FROM Schedule WHERE users_id = ? AND id = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, userId);
             statement.setInt(2, scheduleId);
-            ResultSet resultSet = statement.executeQuery(sql);
-            resultSet.next();
-            return fetchSchedule(resultSet);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()) {
+                return fetchSchedule(resultSet);
+            } else {
+                return null;
+            }
         }
     }
 

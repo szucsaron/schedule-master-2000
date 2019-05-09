@@ -143,3 +143,15 @@ function _onHourClicked(){
     result.clickedHour = coords[1] + 1;
     _gScheduleTableCallback(result);
 }
+
+function onTableBoxClicked() {
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', displayTaskPopup);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'tasks');
+    xhr.send();
+}
+
+function displayTaskPopup() {
+
+}

@@ -29,7 +29,7 @@ public class ScheduleServlet extends AbstractServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Find Schedule by userId
         try (Connection connection = getConnection(req.getServletContext())) {
-            String scheduleId = req.getParameter("schedule");
+            String scheduleId = req.getParameter("id");
 
             User loggedInUser = (User) req.getSession().getAttribute("user");
             String userId = String.valueOf(loggedInUser.getId());
