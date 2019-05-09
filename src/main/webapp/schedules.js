@@ -26,27 +26,26 @@ function onScheduleClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onScheduleResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'protected/schedule?' + params.toString());
+    xhr.open('GET', 'schedule?' + params.toString());
     xhr.send();
 }
 
 
+function testFunction(result) {
+    console.log(result);
+}
 
-function onScheduleLoad(scheduleDto) {
-    scheduleId = scheduleDto.schedule.id;
-
-    const scheduleIdSpanEl = document.getElementById('schedule-id');
-    const scheduleNameSpanEl = document.getElementById('schedule-name');
-
-    scheduleIdSpanEl.textContent = scheduleDto.schedule.id;
-    scheduleNameSpanEl.textContent = scheduleDto.schedule.name;
+function onScheduleLoad(scheduleTaskDto) {
+    const scheduleContent = document.getElementById("schedule-content");
+    removeAllChildren(scheduleContent);
+    const tableContent = createScheduleTable("The table that reigns supreme over all other tables in the known tableverse", scheduleTaskDto.schedule, scheduleTaskDto.taskDto, testFunction);
+    scheduleContent.appendChild(tableContent);
 }
 
 function onSchedulesResponse() {
     if (this.status === OK) {
         showContents(['schedules-content', 'back-to-profile-content', 'logout-content']);
         onSchedulesLoad(JSON.parse(this.responseText));
-        console.log(this.responseText);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }

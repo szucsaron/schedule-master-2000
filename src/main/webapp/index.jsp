@@ -17,6 +17,8 @@
     <c:url value="/schedule.js" var="scheduleScriptUrl"/>
     <c:url value="/schedules.js" var="schedulesScriptUrl"/>
     <c:url value="/date_adder.js" var="dateAdderScriptUrl"/>
+    <c:url value="/table.js" var="tableScriptUrl"/>
+    <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
     <script src="${taskScriptUrl}"></script>
     <script src="${tasksScriptUrl}"></script>
@@ -118,6 +120,8 @@
             <input type="datetime-local" name="finishing">
             <button onclick="onScheduleAddClicked();">Add</button>
         </form>
+    </div>
+    <div id="schedule-content" class="hidden content">
     </div>
 </body>
 </html>

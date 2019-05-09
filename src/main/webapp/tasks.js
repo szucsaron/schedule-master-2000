@@ -43,7 +43,7 @@ function onTaskLoad(schedules) {
 
     // taskIdSpanEl.textContent = schedules[0];
     taskTitleSpanEl.textContent = schedules[0];
-    taskContentSpanEl.textContent = schedules[1];
+    taskContentSpanEl.innerHTML = schedules[1];
     for(let i = 2; i < schedules.length; i++) {
         taskSchedulesSpanEl.textContent += schedules[i] + " ";
     }

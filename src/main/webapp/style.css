@@ -16,3 +16,7 @@
     background-image: url('clock.gif');
 }*/
 
+td {
+    border-style: solid;
+}
+
