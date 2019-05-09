@@ -75,6 +75,14 @@ public class SimpleTaskService extends AbstractService implements TaskService {
 
     }
 
+    public void detachTaskFromSchedule(String scheduleId, String taskId) throws SQLException, ServiceException {
+        int scheduleIdVal = fetchInt(scheduleId, "scheduleId");
+        int taskIdVal = fetchInt(taskId, "taskId");
+        taskDao.detachTaskFromSchedule(scheduleIdVal, taskIdVal);
+
+    }
+
+
     public List<String> findDtoByTaskId(int taskId) throws SQLException {
         return taskDao.findDtoByTaskId(taskId);
     }

@@ -170,6 +170,15 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
         }
     }
 
+    public void detachTaskFromSchedule(int scheduleId, int taskId) throws SQLException {
+        String sql = "DELETE FROM schedule_task WHERE schedule_id = ? AND task_id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, scheduleId);
+            statement.setInt(2, taskId);
+            statement.executeUpdate();
+        }
+    }
+
 
     private Task fetchTask(ResultSet resultSet) throws SQLException {
         int id = resultSet.getInt("id");
