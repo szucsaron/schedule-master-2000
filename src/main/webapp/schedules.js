@@ -1,5 +1,6 @@
 let schedulesTableEl;
 let schedulesTableBodyEl;
+let gScheduleId;
 
 function appendSchedules(schedules) {
     removeAllChildren(schedulesTableBodyEl);
@@ -38,6 +39,7 @@ function testFunction(result) {
 function onScheduleLoad(scheduleTaskDto) {
     const scheduleContent = document.getElementById("schedule-content");
     removeAllChildren(scheduleContent);
+    gScheduleId = scheduleTaskDto.schedule.id;
     const tableContent = createScheduleTable("The table that reigns supreme over all other tables in the known tableverse", scheduleTaskDto.schedule, scheduleTaskDto.taskDto, testFunction);
     scheduleContent.appendChild(tableContent);
 }

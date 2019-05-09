@@ -123,5 +123,6 @@
     </div>
     <div id="schedule-content" class="hidden content">
     </div>
+    <div id="pass" class="content"></div>
 </body>
 </html>

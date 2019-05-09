@@ -14,6 +14,7 @@ public interface ScheduleDao {
 
     Schedule findById(int userId, int scheduleId) throws SQLException;
 
+
     Schedule add(int userId, String name, LocalDate date, int days) throws SQLException;
 
     void update(int userId, int scheduleId, String newName) throws SQLException;
