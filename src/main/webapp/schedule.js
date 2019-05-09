@@ -118,14 +118,12 @@ function onTasksModified() {
     
     const params = new URLSearchParams();
     params.append('id', scheduleId);
-    
+
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onScheduleRefresh);
     xhr.addEventListener('error', onNetworkError);
-    alert("sdasd " + params.toString());
     xhr.open('GET', 'schedule?' + params.toString());
     xhr.send();
-
 }
 
 function onScheduleRefresh() {
