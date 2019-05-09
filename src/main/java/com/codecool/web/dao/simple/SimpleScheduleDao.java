@@ -56,6 +56,7 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         }
     }
 
+
     @Override
     public List<Schedule> findByUser(int userId) throws SQLException {
         String sql = "SELECT id, users_id, date, max_days, name FROM Schedule WHERE users_id = ?";

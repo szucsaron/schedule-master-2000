@@ -61,7 +61,7 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         int taskIdVal = fetchInt(taskId, "taskId");
         int dayVal = fetchInt(day, "day");
         int hourStartVal = fetchInt(hourStart, "hourStart");
-        int hourEndVal = fetchInt(hourEnd, "hourEnd");
+        int hourEndVal = fetchInt(hourEnd, "hourEnd") + 1;
         taskDao.attachTaskToSchedule(scheduleIdVal, taskIdVal, dayVal, hourStartVal, hourEndVal);
 
     }

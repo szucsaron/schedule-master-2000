@@ -13,6 +13,8 @@ public interface TaskDao {
 
     List<TaskDto> findDtosByScheduleId(int scheduleId) throws SQLException;
 
+    List<Task> findUnscheduledDtosByScheduleId(int scheduleId) throws SQLException;
+
     TaskDto findDtoById(int scheduleId, int taskId) throws SQLException;
 
     int add(String title, String content) throws SQLException;

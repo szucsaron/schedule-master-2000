@@ -58,6 +58,22 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
         }
     }
 
+    public List<Task> findUnscheduledDtosByScheduleId(int scheduleId) throws SQLException {
+        String sql = "SELECT task.*, schedule_task.schedule_id, day, hour_start, hour_end FROM task " +
+                "JOIN schedule_task ON task.id = task_id " +
+                "WHERE schedule_id != ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, scheduleId);
+            statement.execute();
+            List<Task> tasks = new ArrayList<>();
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
+                tasks.add(fetchTask(rs));
+            }
+            return tasks;
+        }
+    }
+
     public TaskDto findDtoById(int scheduleId, int taskId) throws SQLException {
         String sql = "SELECT task.*, schedule_task.schedule_id, day, hour_start, hour_end FROM task " +
                 "JOIN schedule_task ON task.id = task_id " +

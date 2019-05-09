@@ -22,9 +22,9 @@ public class TasksServlet extends AbstractServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try (Connection connection = getConnection(req.getServletContext())) {
             TaskDao taskDao = new SimpleTaskDao(connection);
-            List<Task> scheduleTasks = taskDao.findAll();
+            List<Task> tasks = taskDao.findAll();
 
-            sendMessage(resp, SC_OK, scheduleTasks);
+            sendMessage(resp, SC_OK, tasks);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
         }

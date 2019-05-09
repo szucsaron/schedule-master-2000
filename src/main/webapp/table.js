@@ -1,6 +1,6 @@
-<<<<<<< HEAD
-=======
 // Basic table functions
+let gRow;
+let gCol;
 
 function createTable(id, rowNum, header, onClickFunction) {
     const tEl = document.createElement("table");
@@ -19,6 +19,7 @@ function createTable(id, rowNum, header, onClickFunction) {
             tdEl.setAttribute("id", id + "|" + col + "|" + row);
             trEl.appendChild(tdEl);
             tdEl.addEventListener("click", onClickFunction);
+            tdEl.addEventListener('click', onTableBoxClicked);
         }
         tEl.appendChild(trEl);
     }
@@ -147,14 +148,58 @@ function _onHourClicked(){
 }
 
 function onTableBoxClicked() {
+    gRow = this.getAttribute("row");
+    gCol = this.getAttribute("col");
+
+    const params = new URLSearchParams();
+    params.append('scheduleId', gScheduleId);
+
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', displayTaskPopup);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'tasks');
+    xhr.open('GET', 'addTask?' + params.toString());
     xhr.send();
 }
 
 function displayTaskPopup() {
-
+    const tasks = JSON.parse(this.responseText);
+    var toDisplay = document.getElementById("pass");
+    removeAllChildren(toDisplay);
+    for (let i = 0; i < tasks.length; i++) {
+        const task = tasks[i];
+        const taskButton = document.createElement("button");
+        taskButton.textContent = task.title;
+        taskButton.setAttribute("taskId", task.id);
+        taskButton.addEventListener('click', addTaskToDate);
+        toDisplay.appendChild(taskButton);
+    }
+    //openWin();
 }
->>>>>>> 8f6c582a1eb2003cb46a2a5b60afd279f6a35881
+
+/*function openWin() {
+    var divText = document.getElementById("pass").outerHTML;
+    var myWindow = window.open('', '', 'width=200,height=100');
+    var doc = myWindow.document;
+    doc.open();
+    doc.write(divText);
+    doc.close();
+}*/
+
+function addListeners() {
+    tdEl.addEventListener('click', onTableBoxClicked);
+}
+
+
+function addTaskToDate() {
+    const params = new URLSearchParams();
+    params.append('scheduleId', gScheduleId);
+    params.append("taskId", this.getAttribute("taskId"));
+    params.append("row", gRow);
+    params.append("col", gCol);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onScheduleClicked);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('POST', 'addTask?' + params.toString());
+    xhr.send();
+}
