@@ -17,7 +17,7 @@
     <c:url value="/schedule.js" var="scheduleScriptUrl"/>
     <c:url value="/schedules.js" var="schedulesScriptUrl"/>
     <c:url value="/date_adder.js" var="dateAdderScriptUrl"/>
-    <c:url value="/table.js" var="tableScriptUrl"/>
+    <c:url value="/new_table.js" var="tableScriptUrl"/>
     <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
     <script src="${taskScriptUrl}"></script>

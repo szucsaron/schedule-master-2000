@@ -38,7 +38,7 @@ public class ScheduleServlet extends AbstractServlet {
             ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
             TaskDao taskDao = new SimpleTaskDao(connection);
 
-            Schedule schedule = scheduleService.findById(scheduleId, userId);
+            Schedule schedule = scheduleService.findById(userId, scheduleId);
             List<TaskDto> tasks = taskDao.findDtosByScheduleId(Integer.parseInt(scheduleId));
 
             ScheduleTaskDto scheduleTaskDto = new ScheduleTaskDto(schedule, tasks);

@@ -1,4 +1,20 @@
+let gScheduleTable;
+let gSelectedTaskId;
+let scheduleId;
 
+
+function showSchedule(scheduleTaskDto) {
+    const scheduleContentEl = document.getElementById("schedule-content");
+    removeAllChildren(scheduleContentEl);
+    gScheduleId = scheduleTaskDto.schedule.id;
+    gScheduleTable = new ScheduleTable("scheduleTable", scheduleTaskDto.schedule, scheduleTaskDto.taskDto)
+    gScheduleTable.onFieldDragged = onTableFieldDragged;
+    gScheduleTable.onFieldDropped = onTableFieldDropped;
+
+    const tableContent = gScheduleTable.generateDom();
+    scheduleContentEl.appendChild(tableContent);
+    displayTaskPopup()
+}
 
 function showTasks(){
 
@@ -20,51 +36,58 @@ function removeTask(){
 
 //experimental code
 
-let scheduleId;
 
 
-function appendSchedule(schedule) {
-    /*const idTdEl = document.createElement('td');
-    idTdEl.textContent = schedule.id;*/
+function addTaskToDate() {
+    const params = new URLSearchParams();
+    params.append('scheduleId', gScheduleId);
+    params.append("taskId", this.getAttribute("taskId"));
+    params.append("row", gRow);
+    params.append("col", gCol);
 
-    const aEl = document.createElement('a');
-    aEl.textContent = schedule.name;
-    aEl.href = 'javascript:void(0);';
-    aEl.dataset.scheduleId = schedule.id;
-    aEl.addEventListener('click', onScheduleClicked);
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onScheduleClicked);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('POST', 'addTask?' + params.toString());
+    xhr.send();
+}
+// old
+function onTableBoxClicked(res) {
+    const taskDto = res.task;
+    const params = new URLSearchParams();
+    params.append('scheduleId', gScheduleTable.schedule.id);
 
-    const nameTdEl = document.createElement('td');
-    nameTdEl.appendChild(aEl);
-
-    const contentTdEl = document.createElement('td');
-    contentTdEl.textContent = schedule.content;
-
-    const startingTdEl = document.createElement('td');
-    startingTdEl.textContent = schedule.startingDate.dayOfMonth + "." + schedule.startingDate.monthValue + "." + schedule.startingDate.year;
-
-    let newDate = new Date(convertDate(schedule.startingDate));
-    console.log(schedule);
-    const scheduleFinish = newDate.addDays(schedule.durationInDays);
-    // alert(scheduleFinish.toString())
-
-    const finishingTdEl = document.createElement('td');
-    finishingTdEl.textContent = scheduleFinish.getDate() + "." + (scheduleFinish.getMonth() + 1) + "." + scheduleFinish.getFullYear();
-    const trEl = document.createElement('tr');
-    // trEl.appendChild(idTdEl);
-    trEl.appendChild(nameTdEl);
-    trEl.appendChild(startingTdEl);
-    trEl.appendChild(finishingTdEl);
-    schedulesTableBodyEl.appendChild(trEl);
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', displayTaskPopup);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'addTask?' + params.toString());
+    xhr.send();
 }
 
-function onScheduleResponse() {
-    if (this.status === OK) {
-        clearMessages();
-        showContents(['pass', 'schedule-content', 'back-to-profile-content', 'logout-content']);
-        onScheduleLoad(JSON.parse(this.responseText));
-    } else {
-        onOtherResponse(schedulesContentDivEl, this);
+function displayTaskPopup() {
+    const tasks = gScheduleTable.tasks;
+    var toDisplay = document.getElementById("pass");
+    removeAllChildren(toDisplay);
+    for (let i = 0; i < tasks.length; i++) {
+        const task = tasks[i].task;
+        const taskButton = document.createElement("button");
+        taskButton.textContent = task.title;
+        taskButton.setAttribute("taskId", task.id);
+        taskButton.addEventListener('click', onTaskSelectClicked);
+        toDisplay.appendChild(taskButton);
     }
+    //openWin();
+}
 
+function onTaskSelectClicked() {
+    gSelectedTaskId = this.getAttribute("taskId");
+}
 
+function onTableFieldDragged(res) {
+    console.log(res);
+}
+
+function onTableFieldDropped(res) {
+    alert("fasz")
+    console.log(res);
 }

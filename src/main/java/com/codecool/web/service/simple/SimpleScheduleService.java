@@ -29,8 +29,8 @@ public class SimpleScheduleService implements ScheduleService {
     }
 
     @Override
-    public Schedule findById(String scheduleId, String userId) throws SQLException {
-        return scheduleDao.findById(Integer.parseInt(scheduleId), Integer.parseInt(userId));
+    public Schedule findById(String userId, String scheduleId) throws SQLException {
+        return scheduleDao.findById(Integer.parseInt(userId), Integer.parseInt(scheduleId));
     }
 
     @Override

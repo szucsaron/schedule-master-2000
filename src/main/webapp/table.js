@@ -147,34 +147,7 @@ function _onHourClicked(){
     _gScheduleTableCallback(result);
 }
 
-function onTableBoxClicked() {
-    gRow = this.getAttribute("row");
-    gCol = this.getAttribute("col");
 
-    const params = new URLSearchParams();
-    params.append('scheduleId', gScheduleId);
-
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', displayTaskPopup);
-    xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'addTask?' + params.toString());
-    xhr.send();
-}
-
-function displayTaskPopup() {
-    const tasks = JSON.parse(this.responseText);
-    var toDisplay = document.getElementById("pass");
-    removeAllChildren(toDisplay);
-    for (let i = 0; i < tasks.length; i++) {
-        const task = tasks[i];
-        const taskButton = document.createElement("button");
-        taskButton.textContent = task.title;
-        taskButton.setAttribute("taskId", task.id);
-        taskButton.addEventListener('click', addTaskToDate);
-        toDisplay.appendChild(taskButton);
-    }
-    //openWin();
-}
 
 /*function openWin() {
     var divText = document.getElementById("pass").outerHTML;
@@ -185,21 +158,3 @@ function displayTaskPopup() {
     doc.close();
 }*/
 
-function addListeners() {
-    tdEl.addEventListener('click', onTableBoxClicked);
-}
-
-
-function addTaskToDate() {
-    const params = new URLSearchParams();
-    params.append('scheduleId', gScheduleId);
-    params.append("taskId", this.getAttribute("taskId"));
-    params.append("row", gRow);
-    params.append("col", gCol);
-
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onScheduleClicked);
-    xhr.addEventListener('error', onNetworkError);
-    xhr.open('POST', 'addTask?' + params.toString());
-    xhr.send();
-}
