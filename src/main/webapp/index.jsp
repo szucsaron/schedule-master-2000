@@ -91,10 +91,11 @@
         <h1>Task</h1>
         <form id="taskForm">
             <h2>Title</h2>
+            <input type="hidden" name="id" value="" id="hidden-id">
             <input type="text" name="title" id="task-title">
             <br>
             <h2>Content</h2>
-            <input type="text" name="content" id="task-text">
+            <textarea rows="10" cols="30" type="text" name="content" id="task-text"></textarea>
             <p>Schedules: <span id="task-schedules"></span></p>
             <button id="update">Update</button>
         </form>

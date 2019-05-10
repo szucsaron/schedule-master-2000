@@ -40,8 +40,9 @@ public class TaskServlet extends AbstractServlet {
 
             Task task = taskService.findById(id);
             List<String> results = taskService.findDtoByTaskId(Integer.parseInt(id));
-            results.add(0, task.getTitle());
-            results.add(1, task.getContent());
+            results.add(0, id);
+            results.add(1, task.getTitle());
+            results.add(2, task.getContent());
 
 
             sendMessage(resp, HttpServletResponse.SC_OK, results);
