@@ -42,8 +42,8 @@ function onTaskLoad(schedules) {
     removeAllChildren(taskSchedulesSpanEl);
 
     // taskIdSpanEl.textContent = schedules[0];
-    taskTitleSpanEl.textContent = schedules[0];
-    taskContentSpanEl.innerHTML = schedules[1];
+    taskTitleSpanEl.value = schedules[0];
+    taskContentSpanEl.value = schedules[1];
     for(let i = 2; i < schedules.length; i++) {
         taskSchedulesSpanEl.textContent += schedules[i] + " ";
     }
