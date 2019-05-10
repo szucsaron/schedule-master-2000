@@ -38,17 +38,18 @@ function showTask(taskId) {
 function onTaskLoad(schedules) {
     //taskId = schedules[0];
     //tasksTableBodyEl = tasksTableEl.querySelector('tbody');
-
     //const taskIdSpanEl = document.getElementById('task-id');
     const taskTitleSpanEl = document.getElementById('task-title');
     const taskContentSpanEl = document.getElementById('task-text');
     const taskSchedulesSpanEl = document.getElementById('task-schedules');
+    const taskIdSpanEl = document.getElementById('hidden-id');
+
     removeAllChildren(taskSchedulesSpanEl);
 
-    // taskIdSpanEl.textContent = schedules[0];
-    taskTitleSpanEl.value = schedules[0];
-    taskContentSpanEl.value = schedules[1];
-    for(let i = 2; i < schedules.length; i++) {
+    taskIdSpanEl.value = schedules[0];
+    taskTitleSpanEl.value = schedules[1];
+    taskContentSpanEl.value = schedules[2];
+    for(let i = 3; i < schedules.length; i++) {
         taskSchedulesSpanEl.textContent += schedules[i] + " ";
     }
 }
