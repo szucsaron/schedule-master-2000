@@ -8,7 +8,7 @@ function createTable(id, rowNum, header, onClickFunction, onDragFunction, onDrop
     for (let row = 0; row < rowNum; row++) {
         const trEl = document.createElement("tr");
         const td1El = document.createElement("td");
-        td1El.innerHTML = row + 1;
+        td1El.innerHTML = row + " - " + (row + 1);
         trEl.appendChild(td1El);
         for (let col = 0; col < header.length; col++) {
             const tdEl = document.createElement("td");
