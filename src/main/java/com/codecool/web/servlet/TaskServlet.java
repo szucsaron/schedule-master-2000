@@ -4,6 +4,7 @@ import com.codecool.web.dao.ScheduleDao;
 import com.codecool.web.dao.TaskDao;
 import com.codecool.web.dao.simple.SimpleScheduleDao;
 import com.codecool.web.dao.simple.SimpleTaskDao;
+import com.codecool.web.dto.TaskDto;
 import com.codecool.web.model.Task;
 import com.codecool.web.service.ScheduleService;
 import com.codecool.web.service.TaskService;
@@ -44,6 +45,26 @@ public class TaskServlet extends AbstractServlet {
 
 
             sendMessage(resp, HttpServletResponse.SC_OK, results);
+        } catch (ServiceException ex) {
+            sendMessage(resp, HttpServletResponse.SC_OK, ex.getMessage());
+        } catch (SQLException ex) {
+            handleSqlError(resp, ex);
+        }
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try (Connection connection = getConnection(req.getServletContext())) {
+            TaskDao taskDao = new SimpleTaskDao(connection);
+            TaskService taskService = new SimpleTaskService(taskDao);
+
+            String taskId = req.getParameter("id");
+            String title = req.getParameter("title");
+            String content = req.getParameter("content");
+
+            taskService.update(taskId, title, content);
+
+            sendMessage(resp, HttpServletResponse.SC_OK, "Task (id = " + taskId +") updated.");
         } catch (ServiceException ex) {
             sendMessage(resp, HttpServletResponse.SC_OK, ex.getMessage());
         } catch (SQLException ex) {
