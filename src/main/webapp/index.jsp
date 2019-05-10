@@ -121,14 +121,13 @@
             <button onclick="onScheduleAddClicked();">Add</button>
         </form>
     </div>
-    <div id="schedule-content" class="hidden content">
-    </div>
-    <div id="pass" class="content"></div>
+    <div id="schedule-content" class="hidden content"></div>
     <div id="bin" class="hidden content">
         <img src="bin.png">
     </div>
     <div id="toolbox" class="hidden content">
         <img src="toolbox2.png">
     </div>
+    <div id="pass" class="content"></div>
 </body>
 </html>
