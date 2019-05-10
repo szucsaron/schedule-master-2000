@@ -75,7 +75,6 @@
             <tr>
                 <th>Title</th>
                 <th>Content</th>
-                <th>Date</th>
             </tr>
             </thead>
             <tbody>
@@ -90,9 +89,15 @@
     </div>
     <div id="task-content" class="hidden content">
         <h1>Task</h1>
-        <p>Title: <span id="task-title"></span></p>
-        <p>Content: <span id="task-text"></span></p>
-        <p>Schedules: <span id="task-schedules"></span></p>
+        <form id="taskForm">
+            <h2>Title</h2>
+            <input type="text" name="title" id="task-title">
+            <br>
+            <h2>Content</h2>
+            <input type="text" name="content" id="task-text">
+            <p>Schedules: <span id="task-schedules"></span></p>
+            <button id="update">Update</button>
+        </form>
         <h2>Add to schedules</h2>
         <form id="task-schedules-form" onsubmit="return false">
             <select name="schedules" multiple>

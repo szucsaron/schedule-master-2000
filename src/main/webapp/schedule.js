@@ -81,10 +81,12 @@ function onUserTasksReceived() {
     const tasks = JSON.parse(this.responseText);
     var toDisplay = document.getElementById("pass");
     removeAllChildren(toDisplay);
+    toDisplay.appendChild(document.createElement('br'));
     for (let i = 0; i < tasks.length; i++) {
         const task = tasks[i];
         const taskButton = document.createElement("button");
         taskButton.innerHTML = task.title;
+        taskButton.className = "taskButton";
         taskButton.setAttribute("taskId", task.id);
         taskButton.addEventListener('click', onTaskSelectClicked);
         toDisplay.appendChild(taskButton);
