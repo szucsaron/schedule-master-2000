@@ -31,6 +31,9 @@ td {
     padding-left: 75%;
 }
 
+#scheduleTable{
+    float:left;
+}
 #toolbox {
     padding-left: 75%;
 }
