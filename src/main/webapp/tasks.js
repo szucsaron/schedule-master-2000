@@ -19,7 +19,10 @@ function onTasksLoad(tasks) {
 
 function onTaskClicked() {
     const taskId = this.dataset.taskId;
+    showTask(taskId);
+}
 
+function showTask(taskId) {
     const params = new URLSearchParams();
     params.append('id', taskId);
 

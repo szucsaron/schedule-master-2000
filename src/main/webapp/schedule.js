@@ -8,13 +8,16 @@ let scheduleId;
 function showSchedule(scheduleTaskDto) {
     const scheduleContentEl = document.getElementById("schedule-content");
     removeAllChildren(scheduleContentEl);
+
     gScheduleId = scheduleTaskDto.schedule.id;
     gScheduleTable = new ScheduleTable("scheduleTable", scheduleTaskDto.schedule, scheduleTaskDto.taskDto)
     gScheduleTable.onFieldDragged = onTableFieldDragged;
     gScheduleTable.onFieldDropped = onTableFieldDropped;
-
     const tableContent = gScheduleTable.generateDom();
     scheduleContentEl.appendChild(tableContent);
+
+    document.getElementById('bin').addEventListener('mouseup', onBinMouseUp);
+    document.getElementById('toolbox').addEventListener('mouseup', onEditMouseUp);
     displayTaskPopup()
 }
 
@@ -89,7 +92,6 @@ function onUserTasksReceived() {
         toDisplay.appendChild(taskButton);
         toDisplay.appendChild(document.createElement('br'));
     }
-    //openWin();
 }
 
 function onTaskSelectClicked() {
@@ -97,23 +99,37 @@ function onTaskSelectClicked() {
 }
 
 function onTableFieldDragged(res) {
+    if (res.task == null) {
+        initModifyTask(res);
+    } else {
+        initDetachTask(res);
+    }
+}
+
+function initModifyTask(res) {
     gDragStartDay = res.clickedDay;
     gDragStartHour = res.clickedHour;
 }
 
-function onTableFieldDropped(res) {
-    const params = new URLSearchParams();
-    params.append('scheduleId', gScheduleTable.schedule.id);
-    params.append('taskId', gSelectedTaskId);
-    params.append('day', gDragStartDay);
-    params.append('hourStart', gDragStartHour);
-    params.append('hourEnd', res.clickedHour);
+function initDetachTask(res) {
+    gSelectedTaskId = res.task.task.id;
+}
 
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onTasksModified);
-    xhr.addEventListener('error', onNetworkError);
-    xhr.open('POST', 'addTask?');
-    xhr.send(params);
+function onTableFieldDropped(res) {
+    if (res.task == null) {
+        const params = new URLSearchParams();
+        params.append('scheduleId', gScheduleTable.schedule.id);
+        params.append('taskId', gSelectedTaskId);
+        params.append('day', gDragStartDay);
+        params.append('hourStart', gDragStartHour);
+        params.append('hourEnd', res.clickedHour);
+    
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', onTasksModified);
+        xhr.addEventListener('error', onNetworkError);
+        xhr.open('POST', 'addTask?');
+        xhr.send(params);
+    }
 }
 
 function onTasksModified() {
@@ -131,4 +147,20 @@ function onTasksModified() {
 
 function onScheduleRefresh() {
     showSchedule(JSON.parse(this.responseText));
+}
+
+function onBinMouseUp() {
+    const params = new URLSearchParams();
+    params.append('scheduleId', gScheduleTable.schedule.id);
+    params.append('taskId', gSelectedTaskId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onTasksModified);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('POST', 'detachTask?');
+    xhr.send(params);
+}
+
+function onEditMouseUp() {
+    showTask(gSelectedTaskId);
 }

@@ -89,7 +89,7 @@
     </div>
     <div id="task-content" class="hidden content">
         <h1>Task</h1>
-        <form id="taskForm">
+        <form id="taskForm" method="put" action="task">
             <h2>Title</h2>
             <input type="hidden" name="id" value="" id="hidden-id">
             <input type="text" name="title" id="task-title">
@@ -104,6 +104,7 @@
             <select name="schedules" multiple>
             </select>
             <button onclick="onTaskSchedulesAddClicked();">Add</button>
+            <button id="task-back-to-schedule" onclick="onTaskBackToScheduleClicked();">Back to Schedule</button>
         </form>
     </div>
     <div id="schedules-content" class="hidden content">
