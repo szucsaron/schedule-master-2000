@@ -17,6 +17,7 @@ function showSchedule(scheduleTaskDto) {
     scheduleContentEl.appendChild(tableContent);
 
     document.getElementById('bin').addEventListener('mouseup', onBinMouseUp);
+    document.getElementById('toolbox').addEventListener('mouseup', onEditMouseUp);
     displayTaskPopup()
 }
 
@@ -156,4 +157,8 @@ function onBinMouseUp() {
     xhr.addEventListener('error', onNetworkError);
     xhr.open('POST', 'detachTask?');
     xhr.send(params);
+}
+
+function onEditMouseUp() {
+    showTask(gSelectedTaskId);
 }

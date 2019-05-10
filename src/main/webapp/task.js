@@ -38,3 +38,7 @@ function onTaskResponse() {
     }
 }
 
+function onTaskBackToScheduleClicked() {
+    showContents(['bin', 'toolbox', 'pass', 'schedule-content', 'back-to-profile-content', 'logout-content']);
+}
+

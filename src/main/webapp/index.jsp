@@ -98,6 +98,7 @@
             <select name="schedules" multiple>
             </select>
             <button onclick="onTaskSchedulesAddClicked();">Add</button>
+            <button id="task-back-to-schedule" onclick="onTaskBackToScheduleClicked();">Back to Schedule</button>
         </form>
     </div>
     <div id="schedules-content" class="hidden content">

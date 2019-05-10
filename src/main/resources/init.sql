@@ -95,7 +95,7 @@ INSERT INTO schedule (users_id, name, date, max_days) VALUES
 ;
 
 INSERT INTO task (user_id, title, content) VALUES
-(2, 'Radiator building', 'Refurbishing my living room radiator'), --1
+(1, 'Radiator building', 'Refurbishing my living room radiator'), --1
 (2, 'Implementing skeleton code', 'Implementation of base skeleton code'),  --2
 (1, 'Database init script', 'Creating an init script for db operations'),  --3
 (1, 'Git tests', 'Testing git and resolving possible errors'),  --4
