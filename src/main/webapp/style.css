@@ -36,6 +36,14 @@ td {
 }
 
 img {
-    max-width:50%;
-    max-height:50%;
+    max-width: 50%;
+    max-height: 50%;
+}
+
+.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }

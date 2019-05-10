@@ -13,7 +13,7 @@ function createTable(id, rowNum, header, onClickFunction, onDragFunction, onDrop
         for (let col = 0; col < header.length; col++) {
             const tdEl = document.createElement("td");
             tdEl.setAttribute("class", "tableField");
-            tdEl.setAttribute("draggable", "true");
+            tdEl.setAttribute("class", "unselectable");
             tdEl.setAttribute("id", id + "|" + col + "|" + row);
             trEl.appendChild(tdEl);
             if (onClickFunction != null) {
@@ -104,8 +104,11 @@ class ScheduleTable {
         return tEl
     }
 
-    update() {
-        document.getElementById(this.tableDomId).innerHTML = this.generateDom().innerHTML;
+    _createHeader() {
+        let header = [];
+        for (let i = 0; i < this.schedule.durationInDays; i++) {
+            header.push()
+        }
     }
 
     _bindCallback(trigger, callback) {
@@ -136,9 +139,14 @@ class ScheduleTable {
         tdEl.setAttribute("taskIndex", index);
     }
     
-    _getCallbackResult(el) {
+    _getCallbackResult(res) {
+        let el;
+        el = res.originalTarget;
+        if (el == undefined) {
+            el = res.srcElement;
+        }
+        //el = res.srcElement;
         const coords = getFieldCoords(el);
-        console.log(coords)
         const index = el.getAttribute("taskIndex");
         let task;
         if (index == null) {
@@ -151,24 +159,26 @@ class ScheduleTable {
         result.day = coords[0] + 1;
         result.clickedDay = coords[0] + 1;
         result.clickedHour = coords[1];
+        console.log(result);
         return result;
     }
 
     _clickCallback(res){
-        const el = res.originalTarget
-        const result = this._getCallbackResult(el);
+        // const el = res.srcElement ** CHROME USES THIS
+        const result = this._getCallbackResult(res);
         this.onFieldClicked(result);
     }
 
     _dragCallback(res) {
-        const el = res.originalTarget
-        const result = this._getCallbackResult(el);
+        // const el = res.srcElement ** CHROME USES THIS
+        const result = this._getCallbackResult(res);
         this.onFieldDragged(result);
     }
     
     _dropCallback(res) {
-        const el = res.originalTarget
-        const result = this._getCallbackResult(el);
+        // const el = res.srcElement ** CHROME USES THIS
+        const result = this._getCallbackResult(res);
         this.onFieldDropped(result);
     }
+
 }
