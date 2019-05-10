@@ -83,10 +83,11 @@ function onUserTasksReceived() {
     for (let i = 0; i < tasks.length; i++) {
         const task = tasks[i];
         const taskButton = document.createElement("button");
-        taskButton.textContent = task.title;
+        taskButton.innerHTML = task.title;
         taskButton.setAttribute("taskId", task.id);
         taskButton.addEventListener('click', onTaskSelectClicked);
         toDisplay.appendChild(taskButton);
+        toDisplay.appendChild(document.createElement('br'));
     }
 }
 
