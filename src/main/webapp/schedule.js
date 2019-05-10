@@ -163,4 +163,5 @@ function onBinMouseUp() {
 
 function onEditMouseUp() {
     showTask(gSelectedTaskId);
+    showBackToScheduleButton();
 }

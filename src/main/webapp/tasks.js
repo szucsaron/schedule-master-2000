@@ -19,6 +19,7 @@ function onTasksLoad(tasks) {
 
 function onTaskClicked() {
     const taskId = this.dataset.taskId;
+    hideBackToScheduleButton();
     showTask(taskId);
 }
 
