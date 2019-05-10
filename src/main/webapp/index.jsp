@@ -128,7 +128,7 @@
         <img src="bin.png">
     </div>
     <div id="toolbox" class="hidden content">
-        <img src="toolbox2.jpg">
+        <img src="toolbox2.png">
     </div>
 </body>
 </html>
