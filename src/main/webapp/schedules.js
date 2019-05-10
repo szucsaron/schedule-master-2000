@@ -34,7 +34,7 @@ function onScheduleClicked() {
 function onScheduleResponse() {
     if (this.status === OK) {
         clearMessages();
-        showContents(['pass', 'schedule-content', 'back-to-profile-content', 'logout-content']);
+        showContents(['bin', 'toolbox', 'pass', 'schedule-content', 'back-to-profile-content', 'logout-content']);
         showSchedule(JSON.parse(this.responseText));
     } else {
         onOtherResponse(schedulesContentDivEl, this);

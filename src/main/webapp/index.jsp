@@ -124,5 +124,11 @@
     <div id="schedule-content" class="hidden content">
     </div>
     <div id="pass" class="content"></div>
+    <div id="bin" class="hidden content">
+        <img src="bin.png">
+    </div>
+    <div id="toolbox" class="hidden content">
+        <img src="toolbox2.jpg">
+    </div>
 </body>
 </html>
