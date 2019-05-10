@@ -50,7 +50,7 @@ AS '
 		IF NEW.hour_start >= 23 OR NEW.hour_start < 0 THEN
 			RAISE EXCEPTION ''hour_start must be between 0 and 23'';
 		END IF;
-		IF NEW.hour_end >= 24 OR NEW.hour_end < 1 THEN
+		IF NEW.hour_end > 24 OR NEW.hour_end < 1 THEN
 			RAISE EXCEPTION ''hour_end must be between 1 and 24'';
 		END IF;
 		IF NEW.hour_end <= NEW.hour_start THEN

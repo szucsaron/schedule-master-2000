@@ -125,7 +125,7 @@ class ScheduleTable {
             const hourStart = this.tasks[i].hourStart;
             const hourEnd = this.tasks[i].hourEnd;
             for (let h = hourStart - 1; h < hourEnd - 1; h++) {
-                const tdEl = getTableField(tableEl, day - 1, h);
+                const tdEl = getTableField(tableEl, day - 1, h + 1);
                 this._assignTaskToField(tdEl, this.tasks[i].task, i)
             }
         }
@@ -138,6 +138,7 @@ class ScheduleTable {
     
     _getCallbackResult(el) {
         const coords = getFieldCoords(el);
+        console.log(coords)
         const index = el.getAttribute("taskIndex");
         let task;
         if (index == null) {
@@ -149,7 +150,7 @@ class ScheduleTable {
         result.task = task;
         result.day = coords[0] + 1;
         result.clickedDay = coords[0] + 1;
-        result.clickedHour = coords[1] + 1;
+        result.clickedHour = coords[1];
         return result;
     }
 
