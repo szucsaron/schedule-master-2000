@@ -62,6 +62,9 @@ AS '
 		IF (SELECT count(*) FROM schedule_task WHERE schedule_id = NEW.schedule_id AND day = NEW.day AND hour_start < NEW.hour_end AND hour_end > NEW.hour_start) > 0 THEN
 			RAISE EXCEPTION ''Overlapping hours!'';
 		END IF;
+		IF (SELECT user_id FROM task WHERE id = NEW.task_id) != (SELECT users_id FROM schedule WHERE id = NEW.schedule_id) THEN
+			RAISE EXCEPTION ''Tasks cannot be attached to a schedule with different user id! '';
+		END IF;
 		RETURN NEW;
 	END; '
 LANGUAGE plpgsql;
@@ -96,7 +99,7 @@ INSERT INTO schedule (users_id, name, date, max_days) VALUES
 
 INSERT INTO task (user_id, title, content) VALUES
 (1, 'Radiator building', 'Refurbishing my living room radiator'), --1
-(2, 'Implementing skeleton code', 'Implementation of base skeleton code'),  --2
+(1, 'Implementing skeleton code', 'Implementation of base skeleton code'),  --2
 (1, 'Database init script', 'Creating an init script for db operations'),  --3
 (1, 'Git tests', 'Testing git and resolving possible errors'),  --4
 (1, 'Java module reconfiguration', 'Reconfiguring java module for web use'),  --5
@@ -118,6 +121,7 @@ INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUE
 (1, 6, 2, 14, 16),
 (1, 7, 3, 16, 18),
 (1, 8, 1, 18, 19)
+
 ;
 
 
