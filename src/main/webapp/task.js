@@ -24,18 +24,17 @@ function showBackToScheduleButton() {
 }
 
 function onTaskUpdate() {
-    debugger;
-    const id = document.getElementById("hidden-id");
-    const title = document.getElementById("task-title");
-    const text = document.getElementById("task-text");
-
+    const id = document.getElementById("hidden-id").getAttribute("value");
+    const title = document.getElementById("task-title").getAttribute("value");
+    const text = document.getElementById("task-text").getAttribute("value");
+    console.log(id, title, text);
     const params = new URLSearchParams();
     params.append('id', id);
     params.append('title', title);
     params.append('text', text);
 
     const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onTaskClicked);
+    xhr.addEventListener('load', showTask.bind(null, id));
     xhr.addEventListener('error', onNetworkError);
     xhr.open('PUT', 'task');
     xhr.send(params);
