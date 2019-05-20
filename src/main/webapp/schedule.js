@@ -21,59 +21,11 @@ function showSchedule(scheduleTaskDto) {
     displayTaskPopup()
 }
 
-function showTasks(){
-
-}
-
-function deleteSchedule(){
-
-}
-
-function assignTask(){
-
-}
-
-function removeTask(){
-
-}
-
-
-
-//experimental code
-
-
-
-function addTaskToDate() {
-    const params = new URLSearchParams();
-    params.append('scheduleId', gScheduleId);
-    params.append("taskId", this.getAttribute("taskId"));
-    params.append("row", gRow);
-    params.append("col", gCol);
-
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onScheduleClicked);
-    xhr.addEventListener('error', onNetworkError);
-    xhr.open('POST', 'addTask?' + params.toString());
-    xhr.send();
-}
-// old
-function onTableBoxClicked(res) {
-    const taskDto = res.task;
-    const params = new URLSearchParams();
-    params.append('scheduleId', gScheduleTable.schedule.id);
-
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', displayTaskPopup);
-    xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'addTask?' + params.toString());
-    xhr.send();
-}
-
 function displayTaskPopup() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onUserTasksReceived);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'user_tasks');
+    xhr.open('GET', 'tasks');
     xhr.send();
 }
 
@@ -127,7 +79,7 @@ function onTableFieldDropped(res) {
         const xhr = new XMLHttpRequest();
         xhr.addEventListener('load', onTasksModified);
         xhr.addEventListener('error', onNetworkError);
-        xhr.open('POST', 'addTask?');
+        xhr.open('POST', 'scheduleTable?');
         xhr.send(params);
     }
 }
@@ -157,8 +109,8 @@ function onBinMouseUp() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onTasksModified);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('POST', 'detachTask?');
-    xhr.send(params);
+    xhr.open('DELETE', 'scheduleTable?' + params.toString());
+    xhr.send();
 }
 
 function onEditMouseUp() {
