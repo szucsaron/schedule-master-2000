@@ -70,16 +70,19 @@
     </div>
     <div id="tasks-content" class="hidden content">
         <h1>Your tasks</h1>
-        <table id="tasks">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Content</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <form id="tasks-delete-form" onsubmit="return false">
+            <table id="tasks">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button onclick="onTasksDeleteClicked();">Delete</button>
+        </form>
         <h2>Add new task</h2>
         <form id="task-form" onsubmit="return false;">
             <input type="text" name="name">

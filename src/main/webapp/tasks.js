@@ -10,6 +10,42 @@ function appendTasks(tasks) {
     }
 }
 
+function appendTask(task) {
+    /*const idTdEl = document.createElement('td');
+    idTdEl.textContent = task.id;*/
+
+    const aEl = document.createElement('a');
+    aEl.textContent = task.title;
+    aEl.href = 'javascript:void(0);';
+    aEl.dataset.taskId = task.id;
+    aEl.addEventListener('click', onTaskClicked);
+
+    const titleTdEl = document.createElement('td');
+    titleTdEl.appendChild(aEl);
+
+    const contentTdEl = document.createElement('td');
+    contentTdEl.textContent = task.content;
+
+    const delCheckBoxEl = document.createElement('input')
+    delCheckBoxEl.setAttribute('type', 'checkbox')
+    delCheckBoxEl.setAttribute('name', 'tasks-del')
+    delCheckBoxEl.setAttribute('value', task.id)
+
+    const delTdEl = document.createElement('td')
+    delTdEl.appendChild(delCheckBoxEl)
+
+    /*const dateTdEl = document.createElement('td');
+    dateTdEl.textContent = task.date.dayOfMonth + "." + task.date.monthValue + "." + task.date.year;*/
+
+    const trEl = document.createElement('tr');
+    // trEl.appendChild(idTdEl);
+    trEl.appendChild(titleTdEl);
+    trEl.appendChild(contentTdEl);
+    trEl.appendChild(delTdEl)
+    //trEl.appendChild(dateTdEl);
+    tasksTableBodyEl.appendChild(trEl);
+}
+
 function onTasksLoad(tasks) {
     tasksTableEl = document.getElementById('tasks');
     tasksTableBodyEl = tasksTableEl.querySelector('tbody');
@@ -101,3 +137,25 @@ function onTaskAddClicked() {
     xhr.send(params);
 }
 
+function onTasksDeleteClicked() {
+    const taskDelFormEl = document.getElementsByName('tasks-del');
+    let taskIds = [];
+    for (let i = 0; i < taskDelFormEl.length; i++) {
+        const checkboxEl = taskDelFormEl.item(i);
+        if (checkboxEl.checked) {
+            taskIds.push(checkboxEl.value);
+        }
+    }
+
+    const params = new URLSearchParams();
+    params.append('taskIds', taskIds.join(','));
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onTasksClicked);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('DELETE', 'tasks?' + params.toString())
+    xhr.send();
+}
+
+function onTasksDeleteResponse() {
+
+}

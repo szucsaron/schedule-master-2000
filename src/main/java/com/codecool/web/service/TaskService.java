@@ -20,7 +20,7 @@ public interface TaskService {
 
     TaskDto findDtoById(String scheduleId, String id) throws SQLException, ServiceException;
 
-    int add(String title, String content) throws SQLException;
+    int add(int userId, String title, String content) throws SQLException;
 
     void attachTaskToSchedule(String scheduleId, String taskId, String day, String hourStart, String hourEnd)
             throws SQLException, ServiceException;
@@ -29,8 +29,9 @@ public interface TaskService {
 
     void update(String id, String title, String content) throws SQLException, ServiceException;
 
+    void deleteByIds(String ids) throws SQLException, ServiceException;
 
-     List<String> findDtoByTaskId(int taskId) throws SQLException;
+    List<String> findDtoByTaskId(int taskId) throws SQLException;
 
     void updateLink(String scheduleId, String taskId, String day, String hourStart, String hourEnd) throws SQLException, ServiceException;
 }

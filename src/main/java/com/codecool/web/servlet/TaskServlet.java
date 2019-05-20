@@ -54,6 +54,26 @@ public class TaskServlet extends AbstractServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try (Connection connection = getConnection(req.getServletContext())) {
+            TaskDao taskDao = new SimpleTaskDao(connection);
+            TaskService taskService = new SimpleTaskService(taskDao);
+
+            String taskId = req.getParameter("id");
+            String title = req.getParameter("title");
+            String content = req.getParameter("content");
+
+            taskService.update(taskId, title, content);
+
+            sendMessage(resp, HttpServletResponse.SC_OK, "Task (id = " + taskId +") updated.");
+        } catch (ServiceException ex) {
+            sendMessage(resp, HttpServletResponse.SC_OK, ex.getMessage());
+        } catch (SQLException ex) {
+            handleSqlError(resp, ex);
+        }
+    }
+
+    @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection connection = getConnection(req.getServletContext())) {
             TaskDao taskDao = new SimpleTaskDao(connection);

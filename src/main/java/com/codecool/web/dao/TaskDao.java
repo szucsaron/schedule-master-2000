@@ -21,7 +21,7 @@ public interface TaskDao {
 
     TaskDto findDtoById(int scheduleId, int taskId) throws SQLException;
 
-    int add(String title, String content) throws SQLException;
+    int add(int userId, String title, String content) throws SQLException;
 
     void update(int id, String title, String content) throws SQLException;
 
@@ -30,6 +30,8 @@ public interface TaskDao {
     void attachTaskToSchedule(int scheduleId, int taskId, int day, int hourStart, int hourEnd) throws SQLException;
 
     void detachTaskFromSchedule(int scheduleId, int taskId) throws SQLException;
+
+    void deleteTask(int taskId) throws SQLException;
 
     List<String> findDtoByTaskId(int taskId) throws SQLException;
 }

@@ -46,8 +46,8 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         return taskDao.findDtoById(scheduleIdVal, taskIdVal);
     }
 
-    public int add(String title, String content) throws SQLException {
-        return taskDao.add(title, content);
+    public int add(int userId, String title, String content) throws SQLException {
+        return taskDao.add(userId, title, content);
     }
 
     public void update(String id, String title, String content) throws SQLException, ServiceException {
@@ -80,6 +80,17 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         int taskIdVal = fetchInt(taskId, "taskId");
         taskDao.detachTaskFromSchedule(scheduleIdVal, taskIdVal);
 
+    }
+
+    public void deleteByIds(String idChainString) throws SQLException, ServiceException{
+        try {
+            String[] idsStr = idChainString.split(",");
+            for (int i = 0; i < idsStr.length; i++) {
+                taskDao.deleteTask(Integer.parseInt(idsStr[i]));
+            }
+        } catch (NumberFormatException e) {
+            throw new ServiceException("idChainString must contain integer ids separated by commas (,)");
+        }
     }
 
 

@@ -122,7 +122,7 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
         return schedules;
     }
 
-    public int add(String title, String content) throws SQLException {
+    public int add(int userId, String title, String content) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         String sql = "INSERT INTO task (title, content) VALUES (?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -176,6 +176,14 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, scheduleId);
             statement.setInt(2, taskId);
+            statement.executeUpdate();
+        }
+    }
+
+    public void deleteTask(int taskId) throws SQLException{
+        String sql = "DELETE FROM task WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, taskId);
             statement.executeUpdate();
         }
     }
