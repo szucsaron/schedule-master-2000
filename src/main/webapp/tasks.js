@@ -72,8 +72,10 @@ function onTaskLoad(schedules) {
     const taskIdSpanEl = document.getElementById('hidden-id');
 
     removeAllChildren(taskSchedulesSpanEl);
+    removeAllChildren(taskSchedulesSpanEl);
 
     taskIdSpanEl.value = schedules[0];
+    taskIdSpanEl.dataset.taskId = schedules[0];
     taskTitleSpanEl.value = schedules[1];
     taskContentSpanEl.value = schedules[2];
     for(let i = 3; i < schedules.length; i++) {
