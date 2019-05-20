@@ -63,7 +63,7 @@ AS '
 			RAISE EXCEPTION ''Overlapping hours!'';
 		END IF;
 		IF (SELECT user_id FROM task WHERE id = NEW.task_id) != (SELECT users_id FROM schedule WHERE id = NEW.schedule_id) THEN
-			RAISE EXCEPTION ''Tasks and schedules with different user ids cannot be connected! '';
+			RAISE EXCEPTION ''Tasks cannot be attached to a schedule with different user id! '';
 		END IF;
 		RETURN NEW;
 	END; '
