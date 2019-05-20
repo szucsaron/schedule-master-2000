@@ -143,7 +143,7 @@ function onTasksDeleteClicked() {
     const params = new URLSearchParams();
     params.append('taskIds', taskIds.join(','));
     const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onTasksDeleteResponse);
+    xhr.addEventListener('load', onTasksClicked);
     xhr.addEventListener('error', onNetworkError);
     xhr.open('DELETE', 'tasks?' + params.toString())
     xhr.send();

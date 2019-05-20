@@ -31,5 +31,7 @@ public interface TaskDao {
 
     void detachTaskFromSchedule(int scheduleId, int taskId) throws SQLException;
 
+    void deleteTask(int taskId) throws SQLException;
+
     List<String> findDtoByTaskId(int taskId) throws SQLException;
 }

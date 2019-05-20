@@ -32,7 +32,7 @@ CREATE TABLE task (
 
 CREATE TABLE schedule_task (
 	schedule_id INT REFERENCES schedule(id) ON DELETE CASCADE,
-	task_id INT REFERENCES task(id),
+	task_id INT REFERENCES task(id) ON DELETE CASCADE,
 	day NUMERIC(1),
 	hour_start NUMERIC(2),
 	hour_end NUMERIC(2),

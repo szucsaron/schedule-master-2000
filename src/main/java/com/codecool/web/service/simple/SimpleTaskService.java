@@ -83,12 +83,14 @@ public class SimpleTaskService extends AbstractService implements TaskService {
     }
 
     public void deleteByIds(String idChainString) throws SQLException, ServiceException{
-        String[] idsStr = idChainString.split(",");
-        int[] ids = new int[idsStr.length];
-        for (int i = 0; i < idsStr.length; i++) {
-            ids[i] = Integer.parseInt(idsStr[i]);
+        try {
+            String[] idsStr = idChainString.split(",");
+            for (int i = 0; i < idsStr.length; i++) {
+                taskDao.deleteTask(Integer.parseInt(idsStr[i]));
+            }
+        } catch (NumberFormatException e) {
+            throw new ServiceException("idChainString must contain integer ids separated by commas (,)");
         }
-
     }
 
 

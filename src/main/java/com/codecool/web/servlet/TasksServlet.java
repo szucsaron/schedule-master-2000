@@ -5,6 +5,7 @@ import com.codecool.web.dao.simple.SimpleTaskDao;
 import com.codecool.web.model.Task;
 import com.codecool.web.model.User;
 import com.codecool.web.service.TaskService;
+import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleTaskService;
 
 import javax.servlet.ServletException;
@@ -38,9 +39,14 @@ public class TasksServlet extends AbstractServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String scheduleId = req.getParameter("taskIds");
 
-
+        try (Connection connection = getConnection(req.getServletContext())) {
+            TaskService taskService = new SimpleTaskService(new SimpleTaskDao(connection));
+            String taskIdChain = req.getParameter("taskIds");
+            taskService.deleteByIds(taskIdChain);
+        } catch (SQLException  | ServiceException ex) {
+            handleSqlError(resp, ex);
+        }
 
     }
 }
