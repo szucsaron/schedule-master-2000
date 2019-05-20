@@ -89,7 +89,6 @@
     </div>
     <div id="task-content" class="hidden content">
         <h1>Task</h1>
-        <form id="taskForm">
             <h2>Title</h2>
             <input type="hidden" name="id" value="" id="hidden-id" data-task-id = "">
             <input type="text" name="title" id="task-title">
@@ -98,7 +97,6 @@
             <textarea rows="10" cols="30" type="text" name="content" id="task-text"></textarea>
             <p>Schedules: <span id="task-schedules"></span></p>
             <button onclick="onTaskUpdate();" id="update">Update</button>
-        </form>
         <h2>Add to schedules</h2>
         <form id="task-schedules-form" onsubmit="return false">
             <select name="schedules" multiple>

@@ -107,7 +107,7 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
 
     public List<String> findDtoByTaskId(int taskId) throws SQLException {
         List<String> schedules = new ArrayList<>();
-        String sql = "SELECT schedule.name FROM schedule " +
+        String sql = "SELECT schedule.name, schedule.id FROM schedule " +
                 "JOIN schedule_task ON schedule.id = schedule_id " +
                 "WHERE task_id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -116,6 +116,7 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
             ResultSet rs = statement.getResultSet();
             while (rs.next()) {
                 schedules.add(rs.getString("name"));
+                schedules.add(String.valueOf(rs.getInt("id")));
             }
         }
         return schedules;

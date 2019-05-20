@@ -36,6 +36,7 @@ function showTask(taskId) {
 
 
 function onTaskLoad(schedules) {
+    debugger;
     //taskId = schedules[0];
     //tasksTableBodyEl = tasksTableEl.querySelector('tbody');
     //const taskIdSpanEl = document.getElementById('task-id');
@@ -51,8 +52,14 @@ function onTaskLoad(schedules) {
     taskIdSpanEl.dataset.taskId = schedules[0];
     taskTitleSpanEl.value = schedules[1];
     taskContentSpanEl.value = schedules[2];
-    for(let i = 3; i < schedules.length; i++) {
-        taskSchedulesSpanEl.textContent += schedules[i] + " ";
+    for(let i = 3; i < schedules.length-1; i+=2) {
+        const scheduleLinkElement = document.createElement("a");
+        scheduleLinkElement.textContent = schedules[i];
+        scheduleLinkElement.dataset.scheduleId = schedules[i+1];
+        scheduleLinkElement.addEventListener('click', onScheduleClicked);
+        scheduleLinkElement.href = "javascript:void(0)";
+        //taskSchedulesSpanEl.textContent += schedules[i] + " ";
+        taskSchedulesSpanEl.appendChild(scheduleLinkElement);
     }
 }
 
