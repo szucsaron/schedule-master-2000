@@ -29,6 +29,7 @@ public interface TaskService {
 
     void update(String id, String title, String content) throws SQLException, ServiceException;
 
+    void deleteByIds(String ids) throws SQLException, ServiceException;
 
      List<String> findDtoByTaskId(int taskId) throws SQLException;
 

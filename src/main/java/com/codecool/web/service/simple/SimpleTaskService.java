@@ -82,6 +82,15 @@ public class SimpleTaskService extends AbstractService implements TaskService {
 
     }
 
+    public void deleteByIds(String idChainString) throws SQLException, ServiceException{
+        String[] idsStr = idChainString.split(",");
+        int[] ids = new int[idsStr.length];
+        for (int i = 0; i < idsStr.length; i++) {
+            ids[i] = Integer.parseInt(idsStr[i]);
+        }
+
+    }
+
 
     public List<String> findDtoByTaskId(int taskId) throws SQLException {
         return taskDao.findDtoByTaskId(taskId);

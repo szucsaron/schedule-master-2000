@@ -36,4 +36,11 @@ public class TasksServlet extends AbstractServlet {
         }
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String scheduleId = req.getParameter("taskIds");
+
+
+
+    }
 }

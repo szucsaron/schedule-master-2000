@@ -26,6 +26,14 @@ function appendTask(task) {
     const contentTdEl = document.createElement('td');
     contentTdEl.textContent = task.content;
 
+    const delCheckBoxEl = document.createElement('input')
+    delCheckBoxEl.setAttribute('type', 'checkbox')
+    delCheckBoxEl.setAttribute('name', 'tasks-del')
+    delCheckBoxEl.setAttribute('value', task.id)
+
+    const delTdEl = document.createElement('td')
+    delTdEl.appendChild(delCheckBoxEl)
+
     /*const dateTdEl = document.createElement('td');
     dateTdEl.textContent = task.date.dayOfMonth + "." + task.date.monthValue + "." + task.date.year;*/
 
@@ -33,6 +41,7 @@ function appendTask(task) {
     // trEl.appendChild(idTdEl);
     trEl.appendChild(titleTdEl);
     trEl.appendChild(contentTdEl);
+    trEl.appendChild(delTdEl)
     //trEl.appendChild(dateTdEl);
     tasksTableBodyEl.appendChild(trEl);
 }
@@ -121,3 +130,25 @@ function onTaskAddClicked() {
     xhr.send(params);
 }
 
+function onTasksDeleteClicked() {
+    const taskDelFormEl = document.getElementsByName('tasks-del');
+    let taskIds = [];
+    for (let i = 0; i < taskDelFormEl.length; i++) {
+        const checkboxEl = taskDelFormEl.item(i);
+        if (checkboxEl.checked) {
+            taskIds.push(checkboxEl.value);
+        }
+    }
+
+    const params = new URLSearchParams();
+    params.append('taskIds', taskIds.join(','));
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onTasksDeleteResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('DELETE', 'tasks?' + params.toString())
+    xhr.send();
+}
+
+function onTasksDeleteResponse() {
+
+}
