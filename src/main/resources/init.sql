@@ -89,7 +89,7 @@ INSERT INTO schedule (users_id, name, date, max_days) VALUES
 (2, 'Summer holidays', '2019-04-30', 5),  --4
 (2, 'Refurbishing living room', '2019-05-10', 7),  --5
 (3, 'Philosophy workshop', '2019-04-23', 7),  --6
-(4, 'Schedule Master week #1', '2019-04-21', 5),  --7
+(1, 'Schedule Master week #1', '2019-04-21', 5),  --7
 (4, 'Schedule Master week #2', '2019-05-02', 6),  --8
 (4, 'Schedule Master week #3', '2019-06-12', 5)  --9
 ;

@@ -121,7 +121,7 @@ public class SimpleTaskDao extends AbstractDao implements TaskDao {
         return schedules;
     }
 
-    public int add(String title, String content) throws SQLException {
+    public int add(int userId, String title, String content) throws SQLException {
         boolean autoCommit = connection.getAutoCommit();
         String sql = "INSERT INTO task (title, content) VALUES (?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {

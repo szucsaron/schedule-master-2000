@@ -46,8 +46,8 @@ public class SimpleTaskService extends AbstractService implements TaskService {
         return taskDao.findDtoById(scheduleIdVal, taskIdVal);
     }
 
-    public int add(String title, String content) throws SQLException {
-        return taskDao.add(title, content);
+    public int add(int userId, String title, String content) throws SQLException {
+        return taskDao.add(userId, title, content);
     }
 
     public void update(String id, String title, String content) throws SQLException, ServiceException {
