@@ -49,25 +49,5 @@ public class AddTaskServlet extends AbstractServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Find Schedule by userId
-        try (Connection connection = getConnection(req.getServletContext())) {
-            TaskDao taskDao = new SimpleTaskDao(connection);
-            TaskService taskService = new SimpleTaskService(taskDao);
-            String scheduleId = req.getParameter("scheduleId");
-            String taskId = req.getParameter("taskId");
-            String day = req.getParameter("day");
-            String hourStart = req.getParameter("hourStart");
-            String hourEnd = req.getParameter("hourEnd");
 
-            taskService.detachTaskFromSchedule(scheduleId, taskId);
-            taskService.attachTaskToSchedule(scheduleId, taskId, day, hourStart, hourEnd);
-
-        } catch (SQLException ex) {
-            handleSqlError(resp, ex);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
-    }
 }
