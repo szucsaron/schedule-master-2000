@@ -34,7 +34,7 @@ function onScheduleClicked() {
 function onScheduleResponse() {
     if (this.status === OK) {
         clearMessages();
-        showContents(['user-menu','bin', 'toolbox', 'pass', 'schedule-content', 'back-to-profile-content', 'logout-content']);
+        showContents(['user-menu','bin', 'toolbox', 'pass', 'schedule-content']);
         showSchedule(JSON.parse(this.responseText));
     } else {
         onOtherResponse(schedulesContentDivEl, this);
@@ -47,7 +47,7 @@ function testFunction(result) {
 
 function onSchedulesResponse() {
     if (this.status === OK) {
-        showContents(['user-menu','schedules-content', 'back-to-profile-content', 'logout-content']);
+        showContents(['user-menu','schedules-content']);
         onSchedulesLoad(JSON.parse(this.responseText));
     } else {
         onOtherResponse(schedulesContentDivEl, this);
