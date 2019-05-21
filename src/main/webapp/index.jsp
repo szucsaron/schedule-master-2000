@@ -18,6 +18,7 @@
     <c:url value="/schedules.js" var="schedulesScriptUrl"/>
     <c:url value="/date_adder.js" var="dateAdderScriptUrl"/>
     <c:url value="/new_table.js" var="tableScriptUrl"/>
+    <c:url value="/auth.js" var="authScriptUrl"/>
     <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
     <script src="${taskScriptUrl}"></script>
@@ -32,7 +33,7 @@
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
 <body>
-    <div id="login-content" class="content">
+    <div id="login-content" class="hidden content">
         <h1>Login</h1>
         <form id="login-form" onsubmit="return false;">
             <input type="text" name="email" placeholder="Email">
@@ -137,5 +138,6 @@
         <img src="toolbox2.png">
     </div>
     <div id="pass" class="content"></div>
+    <script src="${authScriptUrl}"></script>
 </body>
 </html>
