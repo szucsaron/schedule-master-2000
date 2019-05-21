@@ -25,7 +25,7 @@ function displayTaskPopup() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onUserTasksReceived);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'tasks');
+    xhr.open('GET', 'protected/tasks');
     xhr.send();
 }
 
