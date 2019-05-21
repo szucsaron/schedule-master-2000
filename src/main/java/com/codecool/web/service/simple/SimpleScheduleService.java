@@ -4,12 +4,13 @@ package com.codecool.web.service.simple;
 import com.codecool.web.dao.ScheduleDao;
 import com.codecool.web.model.Schedule;
 import com.codecool.web.service.ScheduleService;
+import com.codecool.web.service.exception.ServiceException;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-public class SimpleScheduleService implements ScheduleService {
+public class SimpleScheduleService extends AbstractService implements ScheduleService  {
 
     private final ScheduleDao scheduleDao;
 
@@ -34,8 +35,10 @@ public class SimpleScheduleService implements ScheduleService {
     }
 
     @Override
-    public void add(String userId, String name, LocalDate date, int days) throws SQLException {
-        scheduleDao.add(Integer.parseInt(userId), name, date, days);
+    public void add(int userId, String name, String date, String days) throws SQLException, ServiceException {
+        int daysVal = fetchInt(days, "days");
+        LocalDate dateVal = fetchDate(date, "date");
+        scheduleDao.add(userId, name, dateVal, daysVal);
     }
 
     @Override

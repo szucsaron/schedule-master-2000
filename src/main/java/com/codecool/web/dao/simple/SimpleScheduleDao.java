@@ -75,7 +75,8 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
     @Override
     public Schedule add(int userId, String name, LocalDate date, int days) throws SQLException {
         String sql = "INSERT INTO schedule (users_id, name, date, max_days) VALUES(?, ?, ?, ?);";
-
+        boolean autoCommit = connection.getAutoCommit();
+        connection.setAutoCommit(false);
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, userId);
             statement.setString(2, name);
@@ -84,6 +85,8 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
             statement.executeUpdate();
             int scheduleId = fetchGeneratedId(statement);
             return new Schedule(scheduleId, userId, name, date, days);
+        } finally {
+            connection.setAutoCommit(autoCommit);
         }
     }
 

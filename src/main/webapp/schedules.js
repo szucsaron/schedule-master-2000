@@ -41,10 +41,6 @@ function onScheduleResponse() {
     }
 }
 
-function testFunction(result) {
-    console.log(result);
-}
-
 function onSchedulesResponse() {
     if (this.status === OK) {
         showContents(['schedules-content', 'back-to-profile-content', 'logout-content']);
@@ -103,14 +99,20 @@ function onScheduleAddClicked() {
     const scheduleFormEl = document.forms['schedule-form'];
 
     const nameInputEl = scheduleFormEl.querySelector('input[name="name"]');
+    const dateInputEl = scheduleFormEl.querySelector('input[name="starting-date"]');
+    const durationInputEl = scheduleFormEl.querySelector('input[name="schedule-duration"]');
 
     const name = nameInputEl.value;
+    const date = dateInputEl.value;
+    const duration = durationInputEl.value;
 
     const params = new URLSearchParams();
     params.append('name', name);
+    params.append('date', date);
+    params.append('duration', duration);
 
     const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onScheduleAddResponse);
+    xhr.addEventListener('load', onSchedulesClicked);
     xhr.addEventListener('error', onNetworkError);
     xhr.open('POST', 'protected/schedules');
     xhr.send(params);

@@ -9,6 +9,7 @@ import com.codecool.web.dto.TaskDto;
 import com.codecool.web.model.Schedule;
 import com.codecool.web.model.User;
 import com.codecool.web.service.ScheduleService;
+import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleScheduleService;
 
 import javax.servlet.ServletException;
@@ -44,7 +45,7 @@ public class ScheduleServlet extends AbstractServlet {
             ScheduleTaskDto scheduleTaskDto = new ScheduleTaskDto(schedule, tasks);
 
             sendMessage(resp, SC_OK, scheduleTaskDto);
-        } catch (SQLException ex) {
+        } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
         }
     }

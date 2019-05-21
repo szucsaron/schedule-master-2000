@@ -21,7 +21,7 @@ function onSchedulesClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onSchedulesResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'schedules');
+    xhr.open('GET', 'protected/schedules');
     xhr.send();
 }
 

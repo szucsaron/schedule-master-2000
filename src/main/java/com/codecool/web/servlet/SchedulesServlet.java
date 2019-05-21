@@ -5,6 +5,7 @@ import com.codecool.web.dao.simple.SimpleScheduleDao;
 import com.codecool.web.model.Schedule;
 import com.codecool.web.model.User;
 import com.codecool.web.service.ScheduleService;
+import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleScheduleService;
 
 import javax.servlet.ServletException;
@@ -19,7 +20,7 @@ import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 
-@WebServlet("/schedules")
+@WebServlet("/protected/schedules")
 public class SchedulesServlet extends AbstractServlet {
 
     @Override
@@ -37,7 +38,7 @@ public class SchedulesServlet extends AbstractServlet {
             List<Schedule> schedules = scheduleService.findByUser(userId);
 
             sendMessage(resp, SC_OK, schedules);
-        } catch (SQLException ex) {
+        } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
         }
     }
@@ -51,12 +52,16 @@ public class SchedulesServlet extends AbstractServlet {
             ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
             ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
 
-            User loggedInUser = (User) req.getSession().getAttribute("user");
-            String userId = String.valueOf(loggedInUser.getId());
+            String name = req.getParameter("name");
+            String date = req.getParameter("date");
+            String duration = req.getParameter("duration");
 
-            scheduleService.add(userId, "schedule name here", LocalDate.now(),7);
+            User loggedInUser = (User) req.getSession().getAttribute("user");
+            int userId = loggedInUser.getId();
+
+            scheduleService.add(userId, name, date, duration);
             sendMessage(resp, SC_OK, "new schedule created");
-        } catch (SQLException ex) {
+        } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
         }
     }
@@ -76,7 +81,7 @@ public class SchedulesServlet extends AbstractServlet {
             scheduleService.update("1", userId, "updated schedule name here");
 
             sendMessage(resp, SC_OK, "Schedule's name modified");
-        } catch (SQLException ex) {
+        } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
         }
 
@@ -97,7 +102,7 @@ public class SchedulesServlet extends AbstractServlet {
             scheduleService.delete("1", userId);
 
             sendMessage(resp, SC_OK, "Schedule deleted");
-        } catch (SQLException ex) {
+        } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
         }
     }
