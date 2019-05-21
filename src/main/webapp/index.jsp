@@ -36,11 +36,10 @@
     <div id="user-menu" class="content">
         <table>
             <tr>
-               <!--<td> <a href="javascript:void(0);" id="login-button">Homepage </a></td> --> 
+                <td><a href="javascript:void(0);" onclick="onBackToProfileClicked();">Homepage</a></td> 
                 <td><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></td> 
-                <td> <a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a> </td>  
-                <td> <a href="javascript:void(0);" id="logout-button">Logout </a></td>
-                <!--<button id="logout-button">Logout</button>-->
+                <td><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></td>  
+                <td><a href="javascript:void(0);" id="logout-button">Logout </a></td>
         </table>  
     </div>
     <div id="login-content" class="hidden content">
