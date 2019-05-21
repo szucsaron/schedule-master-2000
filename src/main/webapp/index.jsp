@@ -32,6 +32,17 @@
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
 <body>
+    <div id="user-menu" class="content">
+        <table>
+            <tr>
+                <td> <a href="javascript:void(0);" id="logout-button">Homepage </a></td>
+                <td><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></td> 
+                <td> <a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a> </td>  
+                <td> <a href="javascript:void(0);" id="logout-button">Logout </a></td>
+                <!--<button id="logout-button">Logout</button>-->
+        </table>
+        
+    </div>
     <div id="login-content" class="content">
         <h1>Login</h1>
         <form id="login-form" onsubmit="return false;">
