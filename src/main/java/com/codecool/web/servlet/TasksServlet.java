@@ -19,7 +19,7 @@ import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 
-@WebServlet("/tasks")
+@WebServlet("/protected/tasks")
 public class TasksServlet extends AbstractServlet {
 
     @Override
@@ -38,13 +38,29 @@ public class TasksServlet extends AbstractServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try (Connection connection = getConnection(req.getServletContext())) {
+            User loggedInUser = (User) req.getSession().getAttribute("user");
+            TaskService taskService = new SimpleTaskService(new SimpleTaskDao(connection));
+
+            String title = req.getParameter("title");
+            String content = req.getParameter("content");
+
+            taskService.add(loggedInUser.getId(), title, content);
+        } catch (SQLException ex) {
+            handleSqlError(resp, ex);
+        }
+
+    }
+
+    @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         try (Connection connection = getConnection(req.getServletContext())) {
             TaskService taskService = new SimpleTaskService(new SimpleTaskDao(connection));
             String taskIdChain = req.getParameter("taskIds");
             taskService.deleteByIds(taskIdChain);
-        } catch (SQLException  | ServiceException ex) {
+        } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
         }
 

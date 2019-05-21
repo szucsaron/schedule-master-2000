@@ -13,7 +13,7 @@ function onTasksClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onTasksResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'tasks');
+    xhr.open('GET', 'protected/tasks');
     xhr.send();
 }
 
