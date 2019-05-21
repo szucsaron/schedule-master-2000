@@ -18,6 +18,7 @@
     <c:url value="/schedules.js" var="schedulesScriptUrl"/>
     <c:url value="/date_adder.js" var="dateAdderScriptUrl"/>
     <c:url value="/new_table.js" var="tableScriptUrl"/>
+    <c:url value="/auth.js" var="authScriptUrl"/>
     <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
     <script src="${taskScriptUrl}"></script>
@@ -32,7 +33,16 @@
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
 <body>
-    <div id="login-content" class="content">
+    <div id="user-menu" class="content">
+        <table>
+            <tr>
+                <td><a href="javascript:void(0);" onclick="onBackToProfileClicked();">Homepage</a></td> 
+                <td><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></td> 
+                <td><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></td>  
+                <td><a href="javascript:void(0);" id="logout-button">Logout </a></td>
+        </table>  
+    </div>
+    <div id="login-content" class="hidden content">
         <h1>Login</h1>
         <form id="login-form" onsubmit="return false;">
             <input type="text" name="email" placeholder="Email">
@@ -59,14 +69,9 @@
         <h1>Profile</h1>
         <p>Email: <span id="user-email"></span></p>
         <p>Password: <span id="user-password"></span></p>
-        <li><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></li>
-        <li><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></li>
     </div>
     <div id="back-to-profile-content" class="hidden content">
         <button onclick="onBackToProfileClicked();">Back to profile</button>
-    </div>
-    <div id="logout-content" class="hidden content">
-        <button id="logout-button">Logout</button>
     </div>
     <div id="tasks-content" class="hidden content">
         <h1>Your tasks</h1>
@@ -137,5 +142,6 @@
         <img src="toolbox2.png">
     </div>
     <div id="pass" class="content"></div>
+    <script src="${authScriptUrl}"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 function onProfileLoad(user) {
     clearMessages();
-    showContents(['profile-content', 'logout-content']);
+    showContents(['user-menu','profile-content']);
 
     const userEmailSpandEl = document.getElementById('user-email');
     const userPasswordSpanEl = document.getElementById('user-password');
@@ -26,5 +26,5 @@ function onSchedulesClicked() {
 }
 
 function onBackToProfileClicked() {
-    showContents(['profile-content', 'logout-content']);
+    showContents(['user-menu','profile-content']);
 }
