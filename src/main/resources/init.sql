@@ -1,7 +1,11 @@
 -- Creating table structure
 
+DROP TRIGGER IF EXISTS schedule_check ON schedule;
 DROP TRIGGER IF EXISTS schedule_task_check ON schedule_task;
+
+DROP FUNCTION IF EXISTS schedule_check;
 DROP FUNCTION IF EXISTS schedule_task_check;
+
 DROP TABLE IF EXISTS schedule_task;
 DROP TABLE IF EXISTS task;
 DROP TABLE IF EXISTS schedule;
@@ -39,10 +43,10 @@ CREATE TABLE schedule_task (
 	PRIMARY KEY (schedule_id, task_id)
 );
 
+CREATE INDEX schedule_date_index ON schedule(date);
+
 
 -- Trigger functions
-
-CREATE INDEX schedule_date_index ON schedule(date);
 
 CREATE FUNCTION schedule_task_check() RETURNS trigger 
 AS '
@@ -59,8 +63,12 @@ AS '
 		IF NEW.day > (SELECT max_days FROM schedule WHERE NEW.schedule_id = schedule.id) THEN
 			RAISE EXCEPTION ''Task day can''''t be greater than schedule max days'';
 		END IF;
-		IF (SELECT count(*) FROM schedule_task WHERE schedule_id = NEW.schedule_id AND day = NEW.day AND hour_start < NEW.hour_end AND hour_end > NEW.hour_start) > 0 THEN
-			RAISE EXCEPTION ''Overlapping hours!'';
+		IF (SELECT count(*) FROM schedule_task
+			WHERE schedule_id = NEW.schedule_id
+			AND day = NEW.day
+			AND hour_start < NEW.hour_end
+			AND hour_end > NEW.hour_start) > 0
+			THEN RAISE EXCEPTION ''Overlapping hours!'';
 		END IF;
 		IF (SELECT user_id FROM task WHERE id = NEW.task_id) != (SELECT users_id FROM schedule WHERE id = NEW.schedule_id) THEN
 			RAISE EXCEPTION ''Tasks cannot be attached to a schedule with different user id! '';
@@ -69,10 +77,25 @@ AS '
 	END; '
 LANGUAGE plpgsql;
 
-
-
 CREATE TRIGGER schedule_task_check BEFORE INSERT OR UPDATE ON schedule_task
 	FOR EACH ROW EXECUTE PROCEDURE schedule_task_check();
+
+CREATE FUNCTION schedule_check() RETURNS trigger 
+AS '
+	BEGIN
+		IF (SELECT count(*) FROM schedule
+			WHERE users_id = NEW.users_id
+			AND date < NEW.date + interval ''1 day'' * NEW.max_days
+			AND date + interval ''1 day'' * max_days > NEW.date
+			) > 0
+			THEN RAISE EXCEPTION ''Overlapping schedule dates!'';
+		END IF;
+		RETURN NEW;
+	END; '
+LANGUAGE plpgsql;
+
+CREATE TRIGGER schedule_check BEFORE INSERT OR UPDATE ON schedule
+	FOR EACH ROW EXECUTE PROCEDURE schedule_check();
 
 
 --Filling tables with stock data
@@ -86,16 +109,17 @@ INSERT INTO users (email, password, name, role) VALUES
 ;
 
 INSERT INTO schedule (users_id, name, date, max_days) VALUES
-(1, 'Experimentation week', '2019-04-23', 7),  --1
-(1, 'Shakespeare art project', '2019-04-30', 7),  --2
-(2, 'SCRUM Refactoring Tournament', '2019-04-23', 6),  --3
-(2, 'Summer holidays', '2019-04-30', 5),  --4
+(1, 'Experimentation week', '2019-01-15', 7),  --1
+(1, 'Shakespeare art project', '2019-02-21', 7),  --2
+(2, 'SCRUM Refactoring Tournament', '2019-02-21', 6),  --3
+(2, 'Summer holidays', '2019-04-12', 5),  --4
 (2, 'Refurbishing living room', '2019-05-10', 7),  --5
-(3, 'Philosophy workshop', '2019-04-23', 7),  --6
-(1, 'Schedule Master week #1', '2019-04-21', 5),  --7
-(4, 'Schedule Master week #2', '2019-05-02', 6),  --8
-(4, 'Schedule Master week #3', '2019-06-12', 5)  --9
+(3, 'Philosophy workshop', '2019-05-10', 7),  --6
+(1, 'Schedule Master week #1', '2019-07-21', 5),  --7
+(4, 'Schedule Master week #2', '2019-08-02', 6),  --8
+(4, 'Schedule Master week #3', '2019-09-12', 5)  --9
 ;
+
 
 INSERT INTO task (user_id, title, content) VALUES
 (1, 'Radiator building', 'Refurbishing my living room radiator'), --1
