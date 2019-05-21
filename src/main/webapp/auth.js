@@ -3,7 +3,7 @@ xhr.onload = function() {
     if(this.status !== 200) {
         showContents(['login-content']);
     } else {
-        showContents(['profile-content', 'logout-content']);
+        showContents(['profile-content', 'user-menu']);
     }
 }
 xhr.open('GET', 'protected/auth');

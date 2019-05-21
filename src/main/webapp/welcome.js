@@ -1,6 +1,6 @@
 function onProfileLoad(user) {
     clearMessages();
-    showContents(['profile-content', 'logout-content']);
+    showContents(['user-menu','profile-content', 'logout-content']);
 
     const userEmailSpandEl = document.getElementById('user-email');
     const userPasswordSpanEl = document.getElementById('user-password');
@@ -13,7 +13,7 @@ function onTasksClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onTasksResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'tasks');
+    xhr.open('GET', 'protected/tasks');
     xhr.send();
 }
 
@@ -26,5 +26,5 @@ function onSchedulesClicked() {
 }
 
 function onBackToProfileClicked() {
-    showContents(['profile-content', 'logout-content']);
+    showContents(['user-menu','profile-content', 'logout-content']);
 }

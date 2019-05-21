@@ -101,7 +101,7 @@ function onTaskLoad(schedules) {
 
 function onTasksResponse() {
     if (this.status === OK) {
-        showContents(['tasks-content', 'back-to-profile-content', 'logout-content']);
+        showContents(['user-menu','tasks-content', 'back-to-profile-content', 'logout-content']);
         onTasksLoad(JSON.parse(this.responseText));
     } else {
         onOtherResponse(tasksContentDivEl, this);
@@ -120,9 +120,8 @@ function onTaskAddResponse() {
 function onTaskAddClicked() {
     const taskFormEl = document.forms['task-form'];
 
-    const titleInputEl = taskFormEl.querySelector('input[name="title"]');
+    const titleInputEl = taskFormEl.querySelector('input[name="name"]');
     const contentInputEl = taskFormEl.querySelector('input[name="content"]');
-
     const title = titleInputEl.value;
     const content = contentInputEl.value;
 
@@ -131,7 +130,7 @@ function onTaskAddClicked() {
     params.append('content', content);
 
     const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onTaskAddResponse);
+    xhr.addEventListener('load', onTasksClicked);
     xhr.addEventListener('error', onNetworkError);
     xhr.open('POST', 'protected/tasks');
     xhr.send(params);
