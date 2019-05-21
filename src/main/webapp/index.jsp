@@ -90,8 +90,8 @@
         </form>
         <h2>Add new task</h2>
         <form id="task-form" onsubmit="return false;">
-            <input type="text" name="name">
-            <input type="text" name="content">
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="content" placeholder="Description">
             <button onclick="onTaskAddClicked();">Add</button>
         </form>
     </div>
