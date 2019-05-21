@@ -115,17 +115,20 @@
     </div>
     <div id="schedules-content" class="hidden content">
         <h1>Your schedules</h1>
-        <table id="schedules">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Starting date</th>
-                <th>Finishing date</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <form id="schedules-delete-form" onsubmit="return false">
+            <table id="schedules">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Starting date</th>
+                    <th>Finishing date</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <button onclick="onSchedulesDeleteClicked();">Delete</button>
+        </form>
         <h2>Add new schedule</h2>
         <form id="schedule-form" onsubmit="return false;">
             <input type="text" name="name" placeholder="Name">

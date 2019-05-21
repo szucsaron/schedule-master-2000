@@ -47,8 +47,11 @@ public class SimpleScheduleService extends AbstractService implements ScheduleSe
     }
 
     @Override
-    public void delete(String scheduleId, String userId) throws SQLException {
-        scheduleDao.delete(Integer.parseInt(scheduleId), Integer.parseInt(userId));
+    public void delete(String scheduleIdChain, int userId) throws SQLException, ServiceException {
+        String[] ids = scheduleIdChain.split(",");
+        for (String id : ids) {
+            scheduleDao.delete(userId, fetchInt(id, "id"));
+        }
 
     }
 }

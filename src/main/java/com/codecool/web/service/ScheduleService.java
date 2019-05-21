@@ -19,6 +19,6 @@ public interface ScheduleService {
 
     void update(String scheduleId, String userId, String name) throws SQLException, ServiceException;
 
-    void delete(String scheduleId, String userId) throws SQLException, ServiceException;
+    void delete(String scheduleIdChain, int userId) throws SQLException, ServiceException;
 
 }

@@ -51,9 +51,6 @@ function onSchedulesResponse() {
 }
 
 function appendSchedule(schedule) {
-    /*const idTdEl = document.createElement('td');
-    idTdEl.textContent = schedule.id;*/
-
     const aEl = document.createElement('a');
     aEl.textContent = schedule.name;
     aEl.href = 'javascript:void(0);';
@@ -62,25 +59,24 @@ function appendSchedule(schedule) {
 
     const nameTdEl = document.createElement('td');
     nameTdEl.appendChild(aEl);
-
     const contentTdEl = document.createElement('td');
     contentTdEl.textContent = schedule.content;
-
     const startingTdEl = document.createElement('td');
-    startingTdEl.textContent = schedule.startingDate.dayOfMonth + "." + schedule.startingDate.monthValue + "." + schedule.startingDate.year;
-
-    let newDate = new Date(convertDate(schedule.startingDate));
+    let startingDate = new Date(convertDate(schedule.startingDate));
+    startingTdEl.textContent = getDateStr(startingDate);
     console.log(schedule);
-    const scheduleFinish = newDate.addDays(schedule.durationInDays);
-    // alert(scheduleFinish.toString())
+    const scheduleFinish = startingDate.addDays(schedule.durationInDays);
 
     const finishingTdEl = document.createElement('td');
-    finishingTdEl.textContent = scheduleFinish.getDate() + "." + (scheduleFinish.getMonth() + 1) + "." + scheduleFinish.getFullYear();
+    finishingTdEl.textContent = getDateStr(scheduleFinish);
     const trEl = document.createElement('tr');
-    // trEl.appendChild(idTdEl);
+
+    const delChkBox = createCheckBoxTd('schedules-del', schedule.id);
+
     trEl.appendChild(nameTdEl);
     trEl.appendChild(startingTdEl);
     trEl.appendChild(finishingTdEl);
+    trEl.appendChild(delChkBox);
     schedulesTableBodyEl.appendChild(trEl);
 }
 
@@ -116,4 +112,14 @@ function onScheduleAddClicked() {
     xhr.addEventListener('error', onNetworkError);
     xhr.open('POST', 'protected/schedules');
     xhr.send(params);
+}
+
+function onSchedulesDeleteClicked() {
+    const idStrChain = getCheckBoxCheckedValues('schedules-del');
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onSchedulesClicked);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('DELETE', 'protected/schedules?scheduleIds=' + idStrChain);
+    xhr.send();
 }
