@@ -1,3 +1,5 @@
+
+
 function onLoginResponse() {
     if (this.status === OK) {
         const user = JSON.parse(this.responseText);

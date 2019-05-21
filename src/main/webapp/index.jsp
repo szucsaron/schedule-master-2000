@@ -18,6 +18,7 @@
     <c:url value="/schedules.js" var="schedulesScriptUrl"/>
     <c:url value="/date_adder.js" var="dateAdderScriptUrl"/>
     <c:url value="/new_table.js" var="tableScriptUrl"/>
+    <c:url value="/auth.js" var="authScriptUrl"/>
     <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
     <script src="${taskScriptUrl}"></script>
@@ -43,7 +44,7 @@
         </table>
         
     </div>
-    <div id="login-content" class="content">
+    <div id="login-content" class="hidden content">
         <h1>Login</h1>
         <form id="login-form" onsubmit="return false;">
             <input type="text" name="email" placeholder="Email">
@@ -75,9 +76,6 @@
     </div>
     <div id="back-to-profile-content" class="hidden content">
         <button onclick="onBackToProfileClicked();">Back to profile</button>
-    </div>
-    <div id="logout-content" class="hidden content">
-        <button id="logout-button">Logout</button>
     </div>
     <div id="tasks-content" class="hidden content">
         <h1>Your tasks</h1>
@@ -148,5 +146,6 @@
         <img src="toolbox2.png">
     </div>
     <div id="pass" class="content"></div>
+    <script src="${authScriptUrl}"></script>
 </body>
 </html>
