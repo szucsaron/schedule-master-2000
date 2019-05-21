@@ -132,7 +132,7 @@
         <h2>Add new schedule</h2>
         <form id="schedule-form" onsubmit="return false;">
             <input type="text" name="name" placeholder="Name">
-            <input type="datetime-local" name="starting-date" placeholder="Date">
+            <input type="date" name="starting-date" placeholder="Date">
             <input type="text" name="schedule-duration" placeholder="Duration in days">
             <button onclick="onScheduleAddClicked();">Add</button>
         </form>
