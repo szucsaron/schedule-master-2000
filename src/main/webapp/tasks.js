@@ -101,7 +101,7 @@ function onTaskLoad(schedules) {
 
 function onTasksResponse() {
     if (this.status === OK) {
-        showContents(['tasks-content', 'back-to-profile-content', 'logout-content']);
+        showContents(['user-menu','tasks-content', 'back-to-profile-content', 'logout-content']);
         onTasksLoad(JSON.parse(this.responseText));
     } else {
         onOtherResponse(tasksContentDivEl, this);

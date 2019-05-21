@@ -4,7 +4,7 @@ let taskId;
 function onTaskResponse() {
     if (this.status === OK) {
         clearMessages();
-        showContents(['task-content', 'back-to-profile-content', 'logout-content']);
+        showContents(['user-menu','task-content', 'back-to-profile-content', 'logout-content']);
         onTaskLoad(JSON.parse(this.responseText));
     } else {
         onOtherResponse(tasksContentDivEl, this);
@@ -12,7 +12,7 @@ function onTaskResponse() {
 }
 
 function onTaskBackToScheduleClicked() {
-    showContents(['bin', 'toolbox', 'pass', 'schedule-content', 'back-to-profile-content', 'logout-content']);
+    showContents(['user-menu','bin', 'toolbox', 'pass', 'schedule-content', 'back-to-profile-content', 'logout-content']);
 }
 
 function hideBackToScheduleButton() {
