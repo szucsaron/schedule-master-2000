@@ -41,8 +41,7 @@
                 <td> <a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a> </td>  
                 <td> <a href="javascript:void(0);" id="logout-button">Logout </a></td>
                 <!--<button id="logout-button">Logout</button>-->
-        </table>
-        
+        </table>  
     </div>
     <div id="login-content" class="hidden content">
         <h1>Login</h1>
@@ -71,8 +70,6 @@
         <h1>Profile</h1>
         <p>Email: <span id="user-email"></span></p>
         <p>Password: <span id="user-password"></span></p>
-        <li><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></li>
-        <li><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></li>
     </div>
     <div id="back-to-profile-content" class="hidden content">
         <button onclick="onBackToProfileClicked();">Back to profile</button>
