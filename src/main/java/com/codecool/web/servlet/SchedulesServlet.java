@@ -25,7 +25,6 @@ public class SchedulesServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         // Find Schedule by userId
 
         try (Connection connection = getConnection(req.getServletContext())) {
@@ -45,7 +44,6 @@ public class SchedulesServlet extends AbstractServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         // Create Schedule
 
         try (Connection connection = getConnection(req.getServletContext())) {
@@ -68,7 +66,6 @@ public class SchedulesServlet extends AbstractServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         // Modify Schedule (RENAME ONLY)
         // TODO : need to get the schedule's ID
 
@@ -89,17 +86,16 @@ public class SchedulesServlet extends AbstractServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         // Delete Schedule
-        // TODO : need to get the schedule's ID
 
         try (Connection connection = getConnection(req.getServletContext())) {
             ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
             ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
 
             User loggedInUser = (User) req.getSession().getAttribute("user");
-            String userId = String.valueOf(loggedInUser.getId());
-            scheduleService.delete("1", userId);
+            int userId = loggedInUser.getId();
+            String scheduleIdChain = req.getParameter("scheduleIds");
+            scheduleService.delete(scheduleIdChain, userId);
 
             sendMessage(resp, SC_OK, "Schedule deleted");
         } catch (SQLException | ServiceException ex) {

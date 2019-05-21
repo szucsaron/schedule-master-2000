@@ -26,13 +26,7 @@ function appendTask(task) {
     const contentTdEl = document.createElement('td');
     contentTdEl.textContent = task.content;
 
-    const delCheckBoxEl = document.createElement('input')
-    delCheckBoxEl.setAttribute('type', 'checkbox')
-    delCheckBoxEl.setAttribute('name', 'tasks-del')
-    delCheckBoxEl.setAttribute('value', task.id)
-
-    const delTdEl = document.createElement('td')
-    delTdEl.appendChild(delCheckBoxEl)
+    const delTdEl = createCheckBoxTd('tasks-del', task.id);
 
     /*const dateTdEl = document.createElement('td');
     dateTdEl.textContent = task.date.dayOfMonth + "." + task.date.monthValue + "." + task.date.year;*/
@@ -137,17 +131,9 @@ function onTaskAddClicked() {
 }
 
 function onTasksDeleteClicked() {
-    const taskDelFormEl = document.getElementsByName('tasks-del');
-    let taskIds = [];
-    for (let i = 0; i < taskDelFormEl.length; i++) {
-        const checkboxEl = taskDelFormEl.item(i);
-        if (checkboxEl.checked) {
-            taskIds.push(checkboxEl.value);
-        }
-    }
-
+    const taskIdStrChain = getCheckBoxCheckedValues('tasks-del');
     const params = new URLSearchParams();
-    params.append('taskIds', taskIds.join(','));
+    params.append('taskIds', taskIdStrChain);
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onTasksClicked);
     xhr.addEventListener('error', onNetworkError);

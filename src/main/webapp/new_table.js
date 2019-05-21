@@ -96,7 +96,7 @@ class ScheduleTable {
                         clickedHour
         */
         
-        const header = ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"];
+        const header = this._createHeader();
         const tEl = createTable(this.tableDomId, 24, header, this._bindCallback(this.onFieldClicked, this._clickCallback),
                                                              this._bindCallback(this.onFieldDragged, this._dragCallback),
                                                              this._bindCallback(this.onFieldDropped, this._dropCallback));
@@ -106,9 +106,12 @@ class ScheduleTable {
 
     _createHeader() {
         let header = [];
+        const startingDate = convertDate(this.schedule.startingDate);
         for (let i = 0; i < this.schedule.durationInDays; i++) {
-            header.push()
+            const date = startingDate.addDays(i);
+            header.push(getDateStr(date));
         }
+        return header;
     }
 
     _bindCallback(trigger, callback) {
@@ -180,5 +183,4 @@ class ScheduleTable {
         const result = this._getCallbackResult(res);
         this.onFieldDropped(result);
     }
-
 }
