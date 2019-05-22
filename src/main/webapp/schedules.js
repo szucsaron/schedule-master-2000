@@ -11,6 +11,15 @@ function appendSchedules(schedules) {
     }
 }
 
+function appendPublicSchedules(schedules) { // 2
+    removeAllChildren(schedulesTableBodyEl);
+
+    for (let i = 0; i < schedules.length; i++) {
+        const schedule = schedules[i];
+        appendPublicSchedule(schedule);
+    }
+}
+
 function onSchedulesLoad(schedules) {
     schedulesTableEl = document.getElementById('schedules');
     schedulesTableBodyEl = schedulesTableEl.querySelector('tbody');
@@ -18,11 +27,11 @@ function onSchedulesLoad(schedules) {
     appendSchedules(schedules);
 }
 
-function onPublicSchedulesLoad(schedules) {
+function onPublicSchedulesLoad(schedules) { // 1
     schedulesTableEl = document.getElementById('pubschedules');
     schedulesTableBodyEl = schedulesTableEl.querySelector('tbody');
 
-    appendSchedules(schedules);
+    appendPublicSchedules(schedules);
 }
 
 function onScheduleClicked() {
@@ -30,9 +39,24 @@ function onScheduleClicked() {
 
     const params = new URLSearchParams();
     params.append('id', scheduleId);
+    params.append('isPublic','false');
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onScheduleResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'schedule?' + params.toString());
+    xhr.send();
+}
+
+function onPublicScheduleClicked() { // 4
+    const scheduleId = this.dataset.scheduleId;
+    
+    const params = new URLSearchParams();
+    params.append('id', scheduleId);
+    params.append('isPublic','true');
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onPublicScheduleResponse);
     xhr.addEventListener('error', onNetworkError);
     xhr.open('GET', 'schedule?' + params.toString());
     xhr.send();
@@ -48,6 +72,16 @@ function onScheduleResponse() {
     }
 }
 
+
+function onPublicScheduleResponse() { //5
+    if (this.status === OK) {
+        clearMessages();
+        showContents(['user-menu', 'schedule-content']);
+        showPublicSchedule(JSON.parse(this.responseText));
+    } else {
+        onOtherResponse(schedulesContentDivEl, this);
+    }
+}
 function onSchedulesResponse() {
     if (this.status === OK) {
         showContents(['user-menu','schedules-content']);
@@ -96,6 +130,32 @@ function appendSchedule(schedule) {
     schedulesTableBodyEl.appendChild(trEl);
 }
 
+function appendPublicSchedule(schedule) { // 3
+    const aEl = document.createElement('a');
+    aEl.textContent = schedule.name;
+    aEl.href = 'javascript:void(0);';
+    aEl.dataset.scheduleId = schedule.id;
+    aEl.addEventListener('click', onPublicScheduleClicked);
+
+    const nameTdEl = document.createElement('td');
+    nameTdEl.appendChild(aEl);
+    const contentTdEl = document.createElement('td');
+    contentTdEl.textContent = schedule.content;
+    const startingTdEl = document.createElement('td');
+    let startingDate = new Date(convertDate(schedule.startingDate));
+    startingTdEl.textContent = getDateStr(startingDate);
+    console.log(schedule);
+    const scheduleFinish = startingDate.addDays(schedule.durationInDays);
+
+    const finishingTdEl = document.createElement('td');
+    finishingTdEl.textContent = getDateStr(scheduleFinish);
+    const trEl = document.createElement('tr');
+
+    trEl.appendChild(nameTdEl);
+    trEl.appendChild(startingTdEl);
+    trEl.appendChild(finishingTdEl);
+    schedulesTableBodyEl.appendChild(trEl);
+} 
 
 
 function onScheduleAddResponse() {
