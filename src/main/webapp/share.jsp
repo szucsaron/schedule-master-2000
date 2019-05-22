@@ -7,6 +7,7 @@
     <title>Schedule Master 2000</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <c:url value="/style.css" var="styleUrl"/>
+    <c:url value="/share-init.js" var="shareInitUrl"/>
     <c:url value="/index.js" var="indexScriptUrl"/>
     <c:url value="/schedule.js" var="scheduleScriptUrl"/>
     <c:url value="/date_adder.js" var="dateAdderScriptUrl"/>
@@ -16,10 +17,12 @@
     <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
     <script src="${scheduleScriptUrl}"></script>
+    <script src="${shareInitUrl}"></script>
     <script src="${indexScriptUrl}"></script>
+
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
 <body>
-    <div id="schedule-content" class="content"></div>
+    <div id="schedule-content" class="content" schedule_id = "${scheduleId}"></div>
 </body>
 </html>

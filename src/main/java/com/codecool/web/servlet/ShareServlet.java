@@ -31,7 +31,10 @@ public class ShareServlet extends AbstractServlet {
         // Find shared schedule by id
         try (Connection connection = getConnection(req.getServletContext())) {
             String scheduleId = req.getParameter("schedule_id");
-            if (scheduleId == null) {
+            String fetch = req.getParameter("fetch");
+
+            if (fetch == null) {
+                req.setAttribute("scheduleId", scheduleId);
                 req.getRequestDispatcher("share.jsp").forward(req, resp);
             } else {
                 ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
