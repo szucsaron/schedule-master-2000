@@ -20,7 +20,7 @@ public interface ScheduleDao {
 
     Schedule add(int userId, String name, LocalDate date, int days) throws SQLException;
 
-    void update(int userId, int scheduleId, String newName) throws SQLException;
+    void update(int scheduleId, String name, LocalDate date, int days) throws SQLException;
 
     void delete(int userId, int scheduleId) throws SQLException;
 

@@ -8,6 +8,7 @@ import com.codecool.web.service.exception.ServiceException;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class SimpleScheduleService extends AbstractService implements ScheduleService  {
@@ -55,10 +56,6 @@ public class SimpleScheduleService extends AbstractService implements ScheduleSe
         scheduleDao.add(userId, name, dateVal, daysVal);
     }
 
-    @Override
-    public void update(String scheduleId, String userId, String name) throws SQLException {
-        scheduleDao.update(Integer.parseInt(userId), Integer.parseInt(scheduleId), name);
-    }
 
     @Override
     public void delete(String scheduleIdChain, int userId) throws SQLException, ServiceException {
@@ -68,4 +65,20 @@ public class SimpleScheduleService extends AbstractService implements ScheduleSe
         }
 
     }
+
+
+    /*public void update(String scheduleIdChain, String newNameChain, String newStartChain, String newFinishChain, int userId) throws SQLException, ServiceException {
+        String[] ids = scheduleIdChain.split(",");
+        for (String id : ids) {
+            scheduleDao.delete(userId, fetchInt(id, "id"));
+        }
+
+    }*/
+    @Override
+    public void update(String[] ids, String[] names, List<LocalDate> starting, List<LocalDate> finishing) throws SQLException, ServiceException {
+        for(int i = 0; i < ids.length; i++) {
+            scheduleDao.update(Integer.parseInt(ids[i]), names[i], starting.get(i), (int)ChronoUnit.DAYS.between(starting.get(i), finishing.get(i)));
+        }
+    }
+
 }

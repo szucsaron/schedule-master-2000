@@ -61,6 +61,11 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
 
 
     @Override
+    public Schedule fetchShared(int scheduleId) throws SQLException {
+        return null;
+    }
+
+    @Override
     public Schedule findById(int userId, int scheduleId) throws SQLException {
         String sql = "SELECT id, users_id, date, max_days, name FROM Schedule WHERE users_id = ? AND id = ?";
 
@@ -125,17 +130,6 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         }
     }
 
-    @Override
-    public void update(int userId, int scheduleId, String newName) throws SQLException {
-        String sql = "UPDATE Schedule SET name = ?  WHERE users_id = ? AND id = ?;";
-
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, newName);
-            statement.setInt(2, scheduleId);
-            statement.setInt(3, scheduleId);
-            statement.executeUpdate();
-        }
-    }
 
     @Override
     public void delete(int userId, int scheduleId) throws SQLException {
@@ -144,6 +138,18 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, userId);
             statement.setInt(2, scheduleId);
+            statement.executeUpdate();
+        }
+    }
+
+    @Override
+    public void update(int scheduleId, String name, LocalDate date, int days) throws SQLException {
+        String sql = "UPDATE schedule SET name=?, date=?, max_days=? WHERE id=?;";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, name);
+            statement.setObject(2, date);
+            statement.setInt(3, days);
+            statement.setInt(4, scheduleId);
             statement.executeUpdate();
         }
     }
