@@ -17,6 +17,8 @@ public interface ScheduleService {
 
     Schedule findById(String scheduleId, String userId) throws SQLException, ServiceException;
 
+    Schedule findByScheduleId(String scheduleId) throws SQLException;
+
     void add(int userId, String name, String date, String days) throws SQLException, ServiceException;
 
     void update(String scheduleId, String userId, String name) throws SQLException, ServiceException;
