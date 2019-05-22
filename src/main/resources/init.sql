@@ -52,7 +52,7 @@ CREATE INDEX schedule_date_index ON schedule(date);
 CREATE FUNCTION schedule_task_check() RETURNS trigger 
 AS '
 	BEGIN
-		IF NEW.hour_start >= 23 OR NEW.hour_start < 0 THEN
+		IF NEW.hour_start > 23 OR NEW.hour_start < 0 THEN
 			RAISE EXCEPTION ''hour_start must be between 0 and 23'';
 		END IF;
 		IF NEW.hour_end > 24 OR NEW.hour_end < 1 THEN
@@ -145,6 +145,6 @@ INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUE
 (1, 5, 3, 12, 14),
 (1, 6, 2, 14, 16),
 (1, 7, 3, 16, 18),
-(1, 8, 1, 18, 19)
+(1, 8, 1, 23, 24)
 ;
 

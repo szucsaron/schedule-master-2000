@@ -1,7 +1,7 @@
 // Basic table functions
 
 function createTable(id, rowNum, header, onClickFunction, onDragFunction, onDropFunction) {
-    console.log(onClickFunction)
+    initDrag();
     const tEl = document.createElement("table");
     tEl.setAttribute("id", id);
     tEl.appendChild(_createTableHeader(header, header.length));
@@ -13,17 +13,18 @@ function createTable(id, rowNum, header, onClickFunction, onDragFunction, onDrop
         for (let col = 0; col < header.length; col++) {
             const tdEl = document.createElement("td");
             tdEl.setAttribute("class", "tableField");
-            tdEl.setAttribute("class", "unselectable");
+            tdEl.setAttribute("draggable", "true");
             tdEl.setAttribute("id", id + "|" + col + "|" + row);
             trEl.appendChild(tdEl);
+
             if (onClickFunction != null) {
                 tdEl.addEventListener("click", onClickFunction);
             }
             if (onDragFunction != null) {
-                tdEl.addEventListener("mousedown", onDragFunction);
+                tdEl.addEventListener("dragstart", onDragFunction);
             }
             if (onDropFunction != null) {
-                tdEl.addEventListener("mouseup", onDropFunction);
+                tdEl.addEventListener("drop", onDropFunction);
             }
         }
         tEl.appendChild(trEl);
@@ -88,7 +89,7 @@ class ScheduleTable {
         Params: tableDomId: id of the table element to be created
                 schedule: a schedule model object
                 tasks: a list of task dto objects
-                callback: a callback function executed when a table field is being clicked on.
+                callback: a callback function executed when a table field is beinelementg clicked on.
                     It must contain a result variable, which will be provided as an object
                     with the following fields:
                         task: a task object (null if field is empty)
@@ -162,7 +163,7 @@ class ScheduleTable {
         result.day = coords[0] + 1;
         result.clickedDay = coords[0] + 1;
         result.clickedHour = coords[1];
-        console.log(result);
+        result.element = el;
         return result;
     }
 
@@ -176,11 +177,13 @@ class ScheduleTable {
         // const el = res.srcElement ** CHROME USES THIS
         const result = this._getCallbackResult(res);
         this.onFieldDragged(result);
+
     }
     
     _dropCallback(res) {
         // const el = res.srcElement ** CHROME USES THIS
         const result = this._getCallbackResult(res);
         this.onFieldDropped(result);
+
     }
 }

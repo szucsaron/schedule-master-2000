@@ -20,6 +20,8 @@
     <c:url value="/date_adder.js" var="dateAdderScriptUrl"/>
     <c:url value="/new_table.js" var="tableScriptUrl"/>
     <c:url value="/auth.js" var="authScriptUrl"/>
+    <c:url value="/draggable.js" var="draggableUrl"/>
+
     <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
     <script src="${taskScriptUrl}"></script>
@@ -32,6 +34,8 @@
     <script src="${welcomeScriptUrl}"></script>
     <script src="${logoutScriptUrl}"></script>
     <script src="${registerScriptUrl}"></script>
+    <script src="${draggableUrl}"></script>
+
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
 <body>
