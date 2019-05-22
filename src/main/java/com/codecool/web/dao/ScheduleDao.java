@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ScheduleDao {
 
-    List<Schedule> findAll() throws SQLException;
+    List<Schedule> findAll(boolean getOnlyPublic) throws SQLException;
 
     Schedule fetchShared(int scheduleId) throws SQLException;
 

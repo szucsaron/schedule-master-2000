@@ -18,6 +18,13 @@ function onSchedulesLoad(schedules) {
     appendSchedules(schedules);
 }
 
+function onPublicSchedulesLoad(schedules) {
+    schedulesTableEl = document.getElementById('pubschedules');
+    schedulesTableBodyEl = schedulesTableEl.querySelector('tbody');
+
+    appendSchedules(schedules);
+}
+
 function onScheduleClicked() {
     const scheduleId = this.dataset.scheduleId;
 
@@ -45,6 +52,15 @@ function onSchedulesResponse() {
     if (this.status === OK) {
         showContents(['user-menu','schedules-content']);
         onSchedulesLoad(JSON.parse(this.responseText));
+    } else {
+        onOtherResponse(schedulesContentDivEl, this);
+    }
+}
+
+function onPublicSchedulesResponse() {
+    if (this.status === OK) {
+        showContents(['user-menu','public-schedules']);
+        onPublicSchedulesLoad(JSON.parse(this.responseText));
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }

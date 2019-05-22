@@ -1,14 +1,3 @@
-function onProfileLoad(user) {
-    clearMessages();
-    showContents(['user-menu','profile-content']);
-
-    const userEmailSpandEl = document.getElementById('user-email');
-    const userPasswordSpanEl = document.getElementById('user-password');
-
-    userEmailSpandEl.textContent = user.email;
-    userPasswordSpanEl.textContent = user.password;
-}
-
 function onTasksClicked() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onTasksResponse);
@@ -25,6 +14,10 @@ function onSchedulesClicked() {
     xhr.send();
 }
 
-function onBackToProfileClicked() {
-    showContents(['user-menu','profile-content']);
+function onHomepageClicked(){
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onPublicSchedulesResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'protected/public-schedules');
+    xhr.send();
 }

@@ -21,8 +21,8 @@ public class SimpleScheduleService extends AbstractService implements ScheduleSe
 
 
     @Override
-    public List<Schedule> findAll() throws SQLException {
-        return scheduleDao.findAll();
+    public List<Schedule> findAll(boolean getOnlyPublic) throws SQLException {
+        return scheduleDao.findAll(getOnlyPublic);
     }
 
     @Override

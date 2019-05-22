@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ScheduleService {
 
-    List<Schedule> findAll() throws SQLException, ServiceException;
+    List<Schedule> findAll(boolean getOnlyPublic) throws SQLException, ServiceException;
 
     List<Schedule> findByUser(String userId) throws SQLException, ServiceException;
 
