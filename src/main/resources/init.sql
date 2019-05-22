@@ -95,7 +95,7 @@ AS '
 	END; '
 LANGUAGE plpgsql;
 
-CREATE TRIGGER schedule_check BEFORE INSERT OR UPDATE ON schedule
+CREATE TRIGGER schedule_check BEFORE INSERT ON schedule
 	FOR EACH ROW EXECUTE PROCEDURE schedule_check();
 
 

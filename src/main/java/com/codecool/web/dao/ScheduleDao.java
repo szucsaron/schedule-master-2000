@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ScheduleDao {
 
-    List<Schedule> findAll() throws SQLException;
+    List<Schedule> findAll(boolean getOnlyPublic) throws SQLException;
 
     Schedule fetchShared(int scheduleId) throws SQLException;
 
@@ -19,7 +19,7 @@ public interface ScheduleDao {
 
     Schedule add(int userId, String name, LocalDate date, int days) throws SQLException;
 
-    void update(int userId, int scheduleId, String newName) throws SQLException;
+    void update(int scheduleId, String name, LocalDate date, int days) throws SQLException;
 
     void delete(int userId, int scheduleId) throws SQLException;
 

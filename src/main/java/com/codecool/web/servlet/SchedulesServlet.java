@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
@@ -68,6 +70,8 @@ public class SchedulesServlet extends AbstractServlet {
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Modify Schedule (RENAME ONLY)
         // TODO : need to get the schedule's ID
+        List<LocalDate> starting = new ArrayList();
+        List<LocalDate> finishing = new ArrayList();
 
         try (Connection connection = getConnection(req.getServletContext())) {
             ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
@@ -75,11 +79,28 @@ public class SchedulesServlet extends AbstractServlet {
 
             User loggedInUser = (User) req.getSession().getAttribute("user");
             String userId = String.valueOf(loggedInUser.getId());
-            scheduleService.update("1", userId, "updated schedule name here");
+            String[] ids = req.getParameter("ids").split(",");
+            String[] names = req.getParameter("newNames").split(",");
+            String[] starts = req.getParameter("newStarts").split(",");
+            String[] finishes = req.getParameter("newFinishes").split(",");
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+            for(String start : starts) {
+                LocalDate localDate = LocalDate.parse(start, formatter);
+                starting.add(localDate);
+            }
+            for(String finish : finishes) {
+                LocalDate localDate = LocalDate.parse(finish, formatter);
+                finishing.add(localDate);
+            }
+            scheduleService.update(ids, names, starting, finishing);
 
             sendMessage(resp, SC_OK, "Schedule's name modified");
-        } catch (SQLException | ServiceException ex) {
+        } catch (SQLException ex) {
             handleSqlError(resp, ex);
+        } catch (ServiceException e) {
+            e.printStackTrace();
         }
 
     }
