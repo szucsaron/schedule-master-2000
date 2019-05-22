@@ -27,8 +27,14 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
     }
 
     @Override
-    public List<Schedule> findAll() throws SQLException {
-        String sql = "SELECT id, users_id, name FROM Schedule";
+    public List<Schedule> findAll(boolean getOnlyPublic) throws SQLException {
+        String sql;
+        if (getOnlyPublic){
+            sql = "SELECT * FROM Schedule WHERE public = true";
+        }
+        else {
+            sql = "SELECT * name FROM Schedule";
+        }
 
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
