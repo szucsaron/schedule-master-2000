@@ -1,4 +1,4 @@
-let gSchedulePrivate = false;
+let gSchedulePrivate = true;
 let gScheduleTable;
 let gSelectedTaskId;
 let gDragStartHour

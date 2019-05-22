@@ -12,6 +12,7 @@ import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleScheduleService;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,10 +22,13 @@ import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 
+@WebServlet("/share")
 public class ShareServlet extends AbstractServlet {
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Find Schedule by userId
+
+        // Find shared schedule by id
         try (Connection connection = getConnection(req.getServletContext())) {
             String scheduleId = req.getParameter("schedule_id");
             ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
