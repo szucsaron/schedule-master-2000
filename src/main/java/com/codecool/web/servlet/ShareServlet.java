@@ -31,16 +31,21 @@ public class ShareServlet extends AbstractServlet {
         // Find shared schedule by id
         try (Connection connection = getConnection(req.getServletContext())) {
             String scheduleId = req.getParameter("schedule_id");
-            ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
-            ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
-            TaskDao taskDao = new SimpleTaskDao(connection);
+            if (scheduleId == null) {
+                req.getRequestDispatcher("share.jsp").forward(req, resp);
+            } else {
+                ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
+                ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
+                TaskDao taskDao = new SimpleTaskDao(connection);
 
-            Schedule schedule = scheduleService.fetchShared(scheduleId);
-            List<TaskDto> tasks = taskDao.findDtosByScheduleId(Integer.parseInt(scheduleId));
+                Schedule schedule = scheduleService.fetchShared(scheduleId);
+                List<TaskDto> tasks = taskDao.findDtosByScheduleId(Integer.parseInt(scheduleId));
 
-            ScheduleTaskDto scheduleTaskDto = new ScheduleTaskDto(schedule, tasks);
+                ScheduleTaskDto scheduleTaskDto = new ScheduleTaskDto(schedule, tasks);
 
-            sendMessage(resp, SC_OK, scheduleTaskDto);
+                sendMessage(resp, SC_OK, scheduleTaskDto);
+            }
+
         } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
         }
