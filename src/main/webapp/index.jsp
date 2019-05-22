@@ -128,6 +128,7 @@
                 </tbody>
             </table>
             <button onclick="onSchedulesDeleteClicked();">Delete</button>
+            <button onclick="onSchedulesUpdateClicked();">Update</button>
         </form>
         <h2>Add new schedule</h2>
         <form id="schedule-form" onsubmit="return false;">

@@ -19,7 +19,7 @@ public interface ScheduleService {
 
     void add(int userId, String name, String date, String days) throws SQLException, ServiceException;
 
-    void update(String scheduleId, String userId, String name) throws SQLException, ServiceException;
+    void update(String[] ids, String[] names, List<LocalDate> starting, List<LocalDate> finishing) throws SQLException, ServiceException;
 
     void delete(String scheduleIdChain, int userId) throws SQLException, ServiceException;
 
