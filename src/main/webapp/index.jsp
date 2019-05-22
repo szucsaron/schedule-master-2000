@@ -36,7 +36,7 @@
     <div id="user-menu" class="content">
         <table>
             <tr>
-                <td><a href="javascript:void(0);" onclick="onBackToProfileClicked();">Homepage</a></td> 
+                <td><a href="javascript:void(0);" onclick="onHomepageClicked();">Homepage</a></td> 
                 <td><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></td> 
                 <td><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></td>  
                 <td><a href="javascript:void(0);" id="logout-button">Logout </a></td>
@@ -64,14 +64,6 @@
             <br>
             <button id="registration-button">Register</button>
         </form>
-    </div>
-    <div id="profile-content" class="hidden content">
-        <h1>Profile</h1>
-        <p>Email: <span id="user-email"></span></p>
-        <p>Password: <span id="user-password"></span></p>
-    </div>
-    <div id="back-to-profile-content" class="hidden content">
-        <button onclick="onBackToProfileClicked();">Back to profile</button>
     </div>
     <div id="tasks-content" class="hidden content">
         <h1>Your tasks</h1>
@@ -112,6 +104,20 @@
             <button onclick="onTaskSchedulesAddClicked();">Add</button>
             <button id="task-back-to-schedule" onclick="onTaskBackToScheduleClicked();">Back to Schedule</button>
         </form>
+    </div>
+    <div id="public-schedules" class="hidden content">
+        <h1>Public schedules</h1>
+        <table id="pubschedules">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Starting date</th>
+                <th>Finishing date</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>
     <div id="schedules-content" class="hidden content">
         <h1>Your schedules</h1>
