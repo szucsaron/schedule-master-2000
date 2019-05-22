@@ -28,9 +28,9 @@ public class ScheduleServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Find Schedule by userId
         try (Connection connection = getConnection(req.getServletContext())) {
             String scheduleId = req.getParameter("id");
+            String isPublic = req.getParameter("isPublic");
 
             User loggedInUser = (User) req.getSession().getAttribute("user");
             String userId = String.valueOf(loggedInUser.getId());
@@ -39,8 +39,14 @@ public class ScheduleServlet extends AbstractServlet {
             ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
             TaskDao taskDao = new SimpleTaskDao(connection);
 
-            Schedule schedule = scheduleService.findById(userId, scheduleId);
             List<TaskDto> tasks = taskDao.findDtosByScheduleId(Integer.parseInt(scheduleId));
+            Schedule schedule;
+
+            if (Boolean.valueOf(isPublic)) {
+                schedule = scheduleService.findByScheduleId(scheduleId);
+            } else {
+                schedule = scheduleService.findById(userId, scheduleId);
+            }
 
             ScheduleTaskDto scheduleTaskDto = new ScheduleTaskDto(schedule, tasks);
 
@@ -49,6 +55,4 @@ public class ScheduleServlet extends AbstractServlet {
             handleSqlError(resp, ex);
         }
     }
-
-
 }
