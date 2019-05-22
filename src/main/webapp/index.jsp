@@ -7,6 +7,7 @@
     <title>Schedule Master 2000</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <c:url value="/style.css" var="styleUrl"/>
+    <c:url value="/normal-init.js" var="normalInitUrl"/>
     <c:url value="/index.js" var="indexScriptUrl"/>
     <c:url value="/login.js" var="loginScriptUrl"/>
     <c:url value="/logout.js" var="logoutScriptUrl"/>
@@ -25,6 +26,7 @@
     <script src="${tasksScriptUrl}"></script>
     <script src="${scheduleScriptUrl}"></script>
     <script src="${schedulesScriptUrl}"></script>
+    <script src="${normalInitUrl}"></script>
     <script src="${indexScriptUrl}"></script>
     <script src="${loginScriptUrl}"></script>
     <script src="${welcomeScriptUrl}"></script>

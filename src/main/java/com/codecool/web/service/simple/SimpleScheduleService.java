@@ -34,6 +34,15 @@ public class SimpleScheduleService extends AbstractService implements ScheduleSe
         return scheduleDao.findById(Integer.parseInt(userId), Integer.parseInt(scheduleId));
     }
 
+    public Schedule fetchShared(String scheduleId) throws SQLException, ServiceException {
+        Schedule schedule = scheduleDao.fetchShared(fetchInt(scheduleId, "scheduleId"));
+        if (schedule == null) {
+            throw new ServiceException("Unauthorized access!");
+        }
+        return schedule;
+    }
+
+
     @Override
     public void add(int userId, String name, String date, String days) throws SQLException, ServiceException {
         int daysVal = fetchInt(days, "days");
