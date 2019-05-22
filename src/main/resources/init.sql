@@ -21,10 +21,11 @@ CREATE TABLE users (
 
 CREATE TABLE schedule (
 	id SERIAL PRIMARY KEY,
+	name VARCHAR(200),
 	users_id INT REFERENCES users(id),
 	date DATE,
 	max_days NUMERIC(1),
-	name VARCHAR(200)
+	public bool
 );
 
 CREATE TABLE task (
@@ -108,16 +109,16 @@ INSERT INTO users (email, password, name, role) VALUES
 ('kucslubta@codecool.hu', '1234', 'Kucslubta Sándorné', 0)  --5
 ;
 
-INSERT INTO schedule (users_id, name, date, max_days) VALUES
-(1, 'Experimentation week', '2019-01-15', 7),  --1
-(1, 'Shakespeare art project', '2019-02-21', 7),  --2
-(2, 'SCRUM Refactoring Tournament', '2019-02-21', 6),  --3
-(2, 'Summer holidays', '2019-04-12', 5),  --4
-(2, 'Refurbishing living room', '2019-05-10', 7),  --5
-(3, 'Philosophy workshop', '2019-05-10', 7),  --6
-(1, 'Schedule Master week #1', '2019-07-21', 5),  --7
-(4, 'Schedule Master week #2', '2019-08-02', 6),  --8
-(4, 'Schedule Master week #3', '2019-09-12', 5)  --9
+INSERT INTO schedule (users_id, name, date, max_days, public) VALUES
+(1, 'Experimentation week', '2019-01-15', 7, '1'),  --1
+(1, 'Shakespeare art project', '2019-02-21', 7, '0'),  --2
+(2, 'SCRUM Refactoring Tournament', '2019-02-21', 6, '0'),  --3
+(2, 'Summer holidays', '2019-04-12', 5, '0'),  --4
+(2, 'Refurbishing living room', '2019-05-10', 7, '0'),  --5
+(3, 'Philosophy workshop', '2019-05-10', 7, '0'),  --6
+(1, 'Schedule Master week #1', '2019-07-21', 5, '0'),  --7
+(4, 'Schedule Master week #2', '2019-08-02', 6, '0'),  --8
+(4, 'Schedule Master week #3', '2019-09-12', 5, '0')  --9
 ;
 
 

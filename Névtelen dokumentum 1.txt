@@ -1,0 +1,15 @@
+
+schedule original:
+GET schedule, onTasksModified: Get schedule table with tasks, used on initial display and refreshing
+
+GET user_tasks, displayTaskPopup: Get tasks of a single user
+POST addTask, onTableFieldDropped: Add task to schedule table
+POST detachTask, onBinMouseUp: Detach task from schedule table
+
+
+schedule modified:
+
+GET schedule, onTasksModified: Get schedule table with tasks, used on initial display and refreshing
+GET tasks, displayTaskPopup: Get tasks of a single user (user_task goes here)
+POST scheduleTable, onTableFieldDropped: Add task to schedule table
+DELETE scheduleTable, onBinMouseUp: Detach task from schedule table

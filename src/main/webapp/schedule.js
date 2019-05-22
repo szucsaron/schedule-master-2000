@@ -1,3 +1,4 @@
+let gSchedulePrivate = false;
 let gScheduleTable;
 let gSelectedTaskId;
 let gDragStartHour
@@ -11,8 +12,10 @@ function showSchedule(scheduleTaskDto) {
 
     gScheduleId = scheduleTaskDto.schedule.id;
     gScheduleTable = new ScheduleTable("scheduleTable", scheduleTaskDto.schedule, scheduleTaskDto.taskDto)
-    gScheduleTable.onFieldDragged = onTableFieldDragged;
-    gScheduleTable.onFieldDropped = onTableFieldDropped;
+    if (gSchedulePrivate) {
+        gScheduleTable.onFieldDragged = onTableFieldDragged;
+        gScheduleTable.onFieldDropped = onTableFieldDropped;
+    }
     const tableContent = gScheduleTable.generateDom();
     scheduleContentEl.appendChild(tableContent);
 
@@ -116,4 +119,12 @@ function onBinMouseUp() {
 function onEditMouseUp() {
     showTask(gSelectedTaskId);
     showBackToScheduleButton();
+}
+
+function setScheduleAsPublic() {
+    gSchedulePrivate = false;
+}
+
+function setScheduleAsPrivate() {
+    gSchedulePrivate = true;
 }
