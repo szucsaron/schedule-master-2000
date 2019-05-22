@@ -13,6 +13,8 @@ public interface ScheduleService {
 
     List<Schedule> findByUser(String userId) throws SQLException, ServiceException;
 
+    Schedule fetchShared(String scheduleId) throws SQLException, ServiceException;
+
     Schedule findById(String scheduleId, String userId) throws SQLException, ServiceException;
 
     void add(int userId, String name, String date, String days) throws SQLException, ServiceException;

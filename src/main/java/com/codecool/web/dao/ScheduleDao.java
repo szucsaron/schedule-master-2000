@@ -10,6 +10,8 @@ public interface ScheduleDao {
 
     List<Schedule> findAll() throws SQLException;
 
+    Schedule fetchShared(int scheduleId) throws SQLException;
+
     List<Schedule> findByUser(int userId) throws SQLException;
 
     Schedule findById(int userId, int scheduleId) throws SQLException;
