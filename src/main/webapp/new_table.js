@@ -141,6 +141,7 @@ class ScheduleTable {
         tdEl.textContent = task.title;
         tdEl.setAttribute("taskIndex", index);
     }
+    
     _getCallbackResult(res) {
         let el;
         el = res.originalTarget;
