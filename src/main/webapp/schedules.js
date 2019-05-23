@@ -11,7 +11,7 @@ function appendSchedules(schedules) {
     }
 }
 
-function appendPublicSchedules(schedules) { // 2
+function appendPublicSchedules(schedules) {
     removeAllChildren(schedulesTableBodyEl);
 
     for (let i = 0; i < schedules.length; i++) {
@@ -27,7 +27,7 @@ function onSchedulesLoad(schedules) {
     appendSchedules(schedules);
 }
 
-function onPublicSchedulesLoad(schedules) { // 1
+function onPublicSchedulesLoad(schedules) {
     schedulesTableEl = document.getElementById('pubschedules');
     schedulesTableBodyEl = schedulesTableEl.querySelector('tbody');
 
@@ -39,7 +39,7 @@ function onScheduleClicked() {
 
     const params = new URLSearchParams();
     params.append('id', scheduleId);
-    params.append('isPublic','false');
+    params.append('isPublic', 'false');
 
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onScheduleResponse);
@@ -48,53 +48,20 @@ function onScheduleClicked() {
     xhr.send();
 }
 
-function onPublicScheduleClicked() { // 4
-    const scheduleId = this.dataset.scheduleId;
-    
-    const params = new URLSearchParams();
-    params.append('id', scheduleId);
-    params.append('isPublic','true');
-
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener('load', onPublicScheduleResponse);
-    xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'schedule?' + params.toString());
-    xhr.send();
-}
-
 function onScheduleResponse() {
     if (this.status === OK) {
         clearMessages();
-        showContents(['user-menu','bin', 'toolbox', 'pass', 'schedule-content']);
+        showContents(['user-menu', 'bin', 'toolbox', 'pass', 'schedule-content']);
         showSchedule(JSON.parse(this.responseText));
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }
 }
 
-
-function onPublicScheduleResponse() { //5
-    if (this.status === OK) {
-        clearMessages();
-        showContents(['user-menu', 'schedule-content']);
-        showPublicSchedule(JSON.parse(this.responseText));
-    } else {
-        onOtherResponse(schedulesContentDivEl, this);
-    }
-}
 function onSchedulesResponse() {
     if (this.status === OK) {
-        showContents(['user-menu','schedules-content']);
+        showContents(['user-menu', 'schedules-content']);
         onSchedulesLoad(JSON.parse(this.responseText));
-    } else {
-        onOtherResponse(schedulesContentDivEl, this);
-    }
-}
-
-function onPublicSchedulesResponse() {
-    if (this.status === OK) {
-        showContents(['user-menu','public-schedules']);
-        onPublicSchedulesLoad(JSON.parse(this.responseText));
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }
@@ -138,33 +105,13 @@ function appendSchedule(schedule) {
     schedulesTableBodyEl.appendChild(trEl);
 }
 
-function appendPublicSchedule(schedule) { // 3
+function appendPublicSchedule(schedule) {
     const aEl = document.createElement('a');
     aEl.textContent = schedule.name;
     aEl.href = 'javascript:void(0);';
     aEl.dataset.scheduleId = schedule.id;
     aEl.setAttribute('href', 'share?schedule_id=' + schedule.id)
-
-    const nameTdEl = document.createElement('td');
-    nameTdEl.appendChild(aEl);
-    const contentTdEl = document.createElement('td');
-    contentTdEl.textContent = schedule.content;
-    const startingTdEl = document.createElement('td');
-    let startingDate = new Date(convertDate(schedule.startingDate));
-    startingTdEl.textContent = getDateStr(startingDate);
-    console.log(schedule);
-    const scheduleFinish = startingDate.addDays(schedule.durationInDays);
-
-    const finishingTdEl = document.createElement('td');
-    finishingTdEl.textContent = getDateStr(scheduleFinish);
-    const trEl = document.createElement('tr');
-
-    trEl.appendChild(nameTdEl);
-    trEl.appendChild(startingTdEl);
-    trEl.appendChild(finishingTdEl);
-    schedulesTableBodyEl.appendChild(trEl);
-} 
-
+}
 
 function onScheduleAddResponse() {
     clearMessages();
@@ -211,16 +158,16 @@ function onSchedulesDeleteClicked() {
 function onSchedulesUpdateClicked() {
     const idStrChain = getCheckBoxCheckedValues('schedules-del');
     console.log(idStrChain);
-    var ids  = idStrChain.split(",");
+    var ids = idStrChain.split(",");
     var newNames = new Array();
     var newStarts = new Array();
     var newFinishes = new Array();
 
     var i;
     for (i = 0; i < ids.length; i++) {
-    newNames.push(document.getElementById("schedulename" + ids[i]).text + document.getElementById("schedulenameplus" + ids[i]).textContent + ",");
-    newStarts.push(document.getElementById("schedulestart" + ids[i]).innerHTML + ",");
-    newFinishes.push(document.getElementById("schedulefinish" + ids[i]).innerHTML + ",");
+        newNames.push(document.getElementById("schedulename" + ids[i]).text + document.getElementById("schedulenameplus" + ids[i]).textContent + ",");
+        newStarts.push(document.getElementById("schedulestart" + ids[i]).innerHTML + ",");
+        newFinishes.push(document.getElementById("schedulefinish" + ids[i]).innerHTML + ",");
     }
 
     const params = new URLSearchParams();

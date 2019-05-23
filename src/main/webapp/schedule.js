@@ -28,23 +28,6 @@ function showSchedule(scheduleTaskDto) {
     displayTaskPopup()
 }
 
-
-function showPublicSchedule(scheduleTaskDto) { //6
-    const scheduleContentEl = document.getElementById("schedule-content");
-    removeAllChildren(scheduleContentEl);
-    
-    gScheduleId = scheduleTaskDto.schedule.id;
-    gScheduleTable = new ScheduleTable("scheduleTable", scheduleTaskDto.schedule, scheduleTaskDto.taskDto)
-    /*if (gSchedulePrivate) {
-        gScheduleTable.onFieldDragged = onTableFieldDragged;
-        gScheduleTable.onFieldDropped = onTableFieldDropped;
-    }*/
-    const tableContent = gScheduleTable.generateDom();
-    scheduleContentEl.appendChild(tableContent);
-
-    displayTaskPopup()
-}
-
 function displayTaskPopup() {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onUserTasksReceived);
