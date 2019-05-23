@@ -1,9 +1,11 @@
 let gSchedulePrivate = true;
-let gScheduleTable;
-let gSelectedTaskId;
-let gSelectedTaskName;
-let gDragStartHour;
-let gDragStartDay;
+let gScheduleTable = null;
+let gSelectResult = null;
+
+let gDragResult = null;
+let gDropResult = null;
+let gClickResult = null;
+
 let gDragMode;
 let scheduleId;
 
@@ -72,42 +74,49 @@ function onUserTasksReceived() {
     }
 }
 
+// Table user operations
+
 function isTaskSelected() {
     return gSelectedTaskId != undefined;
 }
 
-function selectTask(res) {
-    if (res.task.task != null) {
-        gSelectedTaskId = res.task.task.id;
-        gSelectedTaskName = res.task.task.title;
-    }
-    gDragStartHour = res.clickedHour;
-    gDragStartDay = res.clickedDay;
-}
-
-// Table user operations
-
-function onTableFieldSelected() {
-    gDragMode = "new";
-    gSelectedTaskId = this.getAttribute("taskId");
-    gSelectedTaskName = this.textContent;
-
+function onTableFieldClicked(res) {
+    gClickResult = res;
 }
 
 function onTableFieldDragged(res) {
-    if (gDragMode != 'move') {
-        if (res.task.task == null) {
-            gDragMode = "new"
-        } else {
-            gDragMode = "change"
-        }
-    }
-    selectTask(res);
-    res.element.textContent = gSelectedTaskName;
+    gDragResult = res;
 }
 
 function onTableFieldDropped(res) {
-    if (res.task == null) {
+    gDropResult = res;
+    if (gDropResult.task == null) {
+        if (gClickResult) {
+            insertTaskInTable();
+        } else if (gDragResult.task != null) {
+            if (gDragResult.clickedDay == gDropResult.clickedDay) {
+                changeExistingTasTimekInTable()
+            } else {
+                dragTaskToDifferentDayInTable();
+            }
+        }
+    }   
+}
+
+function insertTaskInTable() {
+    alert('insert')
+}
+
+function changeExistingTasTimekInTable() {
+    alert('change time')
+}
+
+function dragTaskToDifferentDayInTable() {
+    alert('change day')
+}
+
+/*
+ if (res.task == null) {
         const params = new URLSearchParams();
         params.append('scheduleId', gScheduleTable.schedule.id);
         params.append('taskId', gSelectedTaskId);
@@ -127,7 +136,9 @@ function onTableFieldDropped(res) {
         xhr.send(params);
     }
     gDragMode = undefined;
-}
+*/
+
+// *************************************************
 
 function changeTaskInTable(res, params) {
     if (gDragStartDay == res.clickedDay) {
@@ -170,12 +181,6 @@ function onTasksModified() {
     xhr.open('GET', 'schedule?' + params.toString());
     xhr.send();
 
-}
-
-function onTableFieldClicked(res) {
-    selectTask(res);
-    gDragMode = 'move'
-    console.log('task clicked');
 }
 
 function onScheduleRefresh() {
