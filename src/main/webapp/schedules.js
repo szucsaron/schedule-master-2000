@@ -143,7 +143,7 @@ function appendPublicSchedule(schedule) { // 3
     aEl.textContent = schedule.name;
     aEl.href = 'javascript:void(0);';
     aEl.dataset.scheduleId = schedule.id;
-    aEl.addEventListener('click', onPublicScheduleClicked);
+    aEl.setAttribute('href', 'share?schedule_id=' + schedule.id)
 
     const nameTdEl = document.createElement('td');
     nameTdEl.appendChild(aEl);
