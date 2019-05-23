@@ -102,7 +102,7 @@ CREATE TRIGGER schedule_check BEFORE INSERT ON schedule
 --Filling tables with stock data
 
 INSERT INTO users (email, password, name, role) VALUES
-('a', 'a', 'a', 0), --1
+('a', 'a', 'a', 1), --1
 ('hectorbrown@codecool.com', '1234', 'Hector Brown jr.', 0),  --2
 ('janeklawovsky', '1234', 'Jane Klawovsky', 0),  --3
 ('horvath@codecool.hu', '1234', 'Horváth Ödön', 0),  --4
