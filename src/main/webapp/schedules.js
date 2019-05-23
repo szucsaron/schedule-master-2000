@@ -157,6 +157,9 @@ function appendPublicSchedule(schedule) { // 3
     console.log(schedule);
     const scheduleFinish = startingDate.addDays(schedule.durationInDays);
 
+    const userNameTdEl = document.createElement('td');
+    userNameTdEl.textContent = schedule.creatorsName;
+
     const finishingTdEl = document.createElement('td');
     finishingTdEl.textContent = getDateStr(scheduleFinish);
     const trEl = document.createElement('tr');
@@ -164,6 +167,7 @@ function appendPublicSchedule(schedule) { // 3
     trEl.appendChild(nameTdEl);
     trEl.appendChild(startingTdEl);
     trEl.appendChild(finishingTdEl);
+    trEl.appendChild(userNameTdEl);
     schedulesTableBodyEl.appendChild(trEl);
 } 
 
