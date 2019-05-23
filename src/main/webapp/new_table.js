@@ -1,7 +1,6 @@
 // Basic table functions
 
 function createTable(id, rowNum, header, onClickFunction, onDragFunction, onDropFunction) {
-    initDrag();
     const tEl = document.createElement("table");
     tEl.setAttribute("id", id);
     tEl.appendChild(_createTableHeader(header, header.length));
@@ -21,6 +20,7 @@ function createTable(id, rowNum, header, onClickFunction, onDragFunction, onDrop
                 tdEl.addEventListener("click", onClickFunction);
             }
             if (onDragFunction != null) {
+                initDrag();
                 tdEl.addEventListener("dragstart", onDragFunction);
             }
             if (onDropFunction != null) {

@@ -119,6 +119,7 @@
                 <th>Name</th>
                 <th>Starting date</th>
                 <th>Finishing date</th>
+                <th>Created by</th>
             </tr>
             </thead>
             <tbody>

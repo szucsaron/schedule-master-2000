@@ -143,7 +143,9 @@ function appendPublicSchedule(schedule) { // 3
     aEl.textContent = schedule.name;
     aEl.href = 'javascript:void(0);';
     aEl.dataset.scheduleId = schedule.id;
+//    aEl.setAttribute('href', 'share?schedule_id=' + schedule.id)
     aEl.addEventListener('click', onPublicScheduleClicked);
+
 
     const nameTdEl = document.createElement('td');
     nameTdEl.appendChild(aEl);
@@ -155,6 +157,9 @@ function appendPublicSchedule(schedule) { // 3
     console.log(schedule);
     const scheduleFinish = startingDate.addDays(schedule.durationInDays);
 
+    const userNameTdEl = document.createElement('td');
+    userNameTdEl.textContent = schedule.creatorsName;
+
     const finishingTdEl = document.createElement('td');
     finishingTdEl.textContent = getDateStr(scheduleFinish);
     const trEl = document.createElement('tr');
@@ -162,6 +167,7 @@ function appendPublicSchedule(schedule) { // 3
     trEl.appendChild(nameTdEl);
     trEl.appendChild(startingTdEl);
     trEl.appendChild(finishingTdEl);
+    trEl.appendChild(userNameTdEl);
     schedulesTableBodyEl.appendChild(trEl);
 } 
 
