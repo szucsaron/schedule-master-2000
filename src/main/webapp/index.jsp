@@ -41,7 +41,7 @@
 <body>
     <div id="user-menu" class="content">
         <table>
-            <tr>
+            <tr id= user-menu-tr>
                 <td><a href="javascript:void(0);" onclick="onHomepageClicked();">Homepage</a></td> 
                 <td><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></td> 
                 <td><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></td>  
