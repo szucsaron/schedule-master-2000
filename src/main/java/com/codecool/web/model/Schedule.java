@@ -9,6 +9,7 @@ public class Schedule {
     private String name;
     private LocalDate startingDate;
     private int durationInDays;
+    private String creatorsName;
 
     public Schedule(int id, int userId, String name, LocalDate startingDate, int durationInDays) {
         this.id = id;
@@ -16,6 +17,15 @@ public class Schedule {
         this.name = name;
         this.startingDate = startingDate;
         this.durationInDays = durationInDays;
+    }
+
+    public Schedule(int id, int userId, String name, LocalDate startingDate, int durationInDays, String creatorsName) {
+        this.id = id;
+        this.userId = userId;
+        this.name = name;
+        this.startingDate = startingDate;
+        this.durationInDays = durationInDays;
+        this.creatorsName = creatorsName;
     }
 
     public int getId() {
@@ -36,5 +46,9 @@ public class Schedule {
 
     public int getDurationInDays() {
         return durationInDays;
+    }
+
+    public String getCreatorsName() {
+        return creatorsName;
     }
 }
