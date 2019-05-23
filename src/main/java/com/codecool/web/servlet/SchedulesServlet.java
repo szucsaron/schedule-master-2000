@@ -84,6 +84,7 @@ public class SchedulesServlet extends AbstractServlet {
             String[] starts = req.getParameter("newStarts").split(",");
             String[] finishes = req.getParameter("newFinishes").split(",");
 
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
             for(String start : starts) {

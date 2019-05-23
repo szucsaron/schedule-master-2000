@@ -209,6 +209,7 @@ function onSchedulesDeleteClicked() {
 }
 
 function onSchedulesUpdateClicked() {
+    debugger;
     const idStrChain = getCheckBoxCheckedValues('schedules-del');
     console.log(idStrChain);
     var ids  = idStrChain.split(",");
@@ -218,13 +219,13 @@ function onSchedulesUpdateClicked() {
 
     var i;
     for (i = 0; i < ids.length; i++) {
-    newNames.push(document.getElementById("schedulename" + ids[i]).text + document.getElementById("schedulenameplus" + ids[i]).textContent + ",");
-    newStarts.push(document.getElementById("schedulestart" + ids[i]).innerHTML + ",");
-    newFinishes.push(document.getElementById("schedulefinish" + ids[i]).innerHTML + ",");
+    newNames.push(document.getElementById("schedulenameplus" + ids[i]).textContent);
+    newStarts.push(document.getElementById("schedulestart" + ids[i]).innerHTML);
+    newFinishes.push(document.getElementById("schedulefinish" + ids[i]).innerHTML);
     }
 
     const params = new URLSearchParams();
-    params.append("ids", idStrChain)
+    params.append("ids", idStrChain);
     params.append('newNames', newNames);
     params.append("newStarts", newStarts);
     params.append("newFinishes", newFinishes);
