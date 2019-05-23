@@ -17,7 +17,7 @@ function showSchedule(scheduleTaskDto) {
     if (gSchedulePrivate) {
         gScheduleTable.onFieldDragged = onTableFieldDragged;
         gScheduleTable.onFieldDropped = onTableFieldDropped;
-        gScheduleTable.onFieldClicked = onTaskClicked;
+        gScheduleTable.onFieldClicked = onTableFieldClicked;
 
     }
     const tableContent = gScheduleTable.generateDom();
@@ -172,7 +172,7 @@ function onTasksModified() {
 
 }
 
-function onTaskClicked(res) {
+function onTableFieldClicked(res) {
     selectTask(res);
     gDragMode = 'move'
     console.log('task clicked');
