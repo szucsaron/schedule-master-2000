@@ -1,9 +1,5 @@
-document.addEventListener('DOMContentLoaded', onLoaded);
 
-function onLoaded() {
-    // Adding event listener to clickable element
-   test();
-}
+
 
 function initDrag() {
     
