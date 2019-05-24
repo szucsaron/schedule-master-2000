@@ -181,29 +181,6 @@ function onScheduleTaskModified() {
 
 }
 
-/*
- if (res.task == null) {
-        const params = new URLSearchParams();
-        params.append('scheduleId', gScheduleTable.schedule.id);
-        params.append('taskId', gSelectedTaskId);
-        params.append('day', res.clickedDay);
-
-        if (gDragMode == "change") {
-            changeTaskInTable(res, params)
-        } else if (gDragMode == 'new') {
-            placeTaskInTable(res, params);
-        } else if (gDragMode == 'move') {
-            moveTaskInTable(res, params);
-        }
-        const xhr = new XMLHttpRequest();
-        xhr.addEventListener('load', onScheduleTaskModified);
-        xhr.addEventListener('error', onNetworkError);
-        xhr.open('POST', 'scheduleTable?');
-        xhr.send(params);
-    }
-    gDragMode = undefined;
-*/
-
 
 function changeTaskInTable(res, params) {
     if (gDragStartDay == res.clickedDay) {
@@ -249,7 +226,7 @@ function onBinMouseUp() {
 }
 
 function onEditMouseUp() {
-    showTask(gSelectedTaskId);
+    showTask(gDragResult.task.task.id);
     showBackToScheduleButton();
 }
 
