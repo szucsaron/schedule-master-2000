@@ -12,6 +12,7 @@ function onTaskResponse() {
 }
 
 function onTaskBackToScheduleClicked() {
+    refreshSchedule();
     showContents(['user-menu','bin', 'toolbox', 'pass', 'schedule-content']);
 }
 

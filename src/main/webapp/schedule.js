@@ -30,6 +30,10 @@ function showSchedule(scheduleTaskDto) {
     displayTaskPopup()
 }
 
+function refreshSchedule() {
+    onScheduleTaskModified();
+}
+
 
 function showPublicSchedule(scheduleTaskDto) { //6
     const scheduleContentEl = document.getElementById("schedule-content");
