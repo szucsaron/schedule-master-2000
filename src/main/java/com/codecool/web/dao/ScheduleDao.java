@@ -18,6 +18,8 @@ public interface ScheduleDao {
 
     Schedule findByScheduleId( int scheduleId) throws SQLException;
 
+    List<Schedule> findAllByUser(int userId) throws SQLException;
+
     Schedule add(int userId, String name, LocalDate date, int days) throws SQLException;
 
     void update(int scheduleId, String name, LocalDate date, int days) throws SQLException;
