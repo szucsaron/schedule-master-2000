@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserDao{
 
-    List<User> findAll() throws SQLException;
+    List<User> findAllExceptCurrent(int id) throws SQLException;
 
     User findById(int id) throws SQLException;
 

@@ -21,3 +21,11 @@ function onHomepageClicked(){
     xhr.open('GET', 'protected/public-schedules');
     xhr.send();
 }
+
+function onAdminMenuClicked(){
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onAllUsersReceived);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'protected/users');
+    xhr.send();
+}

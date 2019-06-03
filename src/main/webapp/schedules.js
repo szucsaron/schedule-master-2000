@@ -84,8 +84,9 @@ function onPublicScheduleResponse() { //5
 }
 function onSchedulesResponse() {
     if (this.status === OK) {
+        const responseTextContent = JSON.parse(this.responseText);
         showContents(['user-menu','schedules-content']);
-        onSchedulesLoad(JSON.parse(this.responseText));
+        onSchedulesLoad(responseTextContent.schedules);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }
@@ -93,8 +94,23 @@ function onSchedulesResponse() {
 
 function onPublicSchedulesResponse() {
     if (this.status === OK) {
+        const h1 = document.getElementById('public-schedules-h1');
+        h1.textContent= 'Public Schedules';
         showContents(['user-menu','public-schedules']);
         onPublicSchedulesLoad(JSON.parse(this.responseText));
+    } else {
+        onOtherResponse(schedulesContentDivEl, this);
+    }
+}
+
+
+function onUserSchedulesResponse() {
+    if (this.status === OK) {
+        const response = JSON.parse(this.responseText);
+        const h1 = document.getElementById('public-schedules-h1');
+        h1.textContent= response.user.name + '\'s Schedules';
+        showContents(['user-menu','public-schedules']);
+        onPublicSchedulesLoad(response.schedules);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
     }

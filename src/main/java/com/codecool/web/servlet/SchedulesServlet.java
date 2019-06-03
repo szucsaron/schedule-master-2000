@@ -1,12 +1,18 @@
 package com.codecool.web.servlet;
 
 import com.codecool.web.dao.ScheduleDao;
+import com.codecool.web.dao.UserDao;
 import com.codecool.web.dao.simple.SimpleScheduleDao;
+import com.codecool.web.dao.simple.SimpleUserDao;
+import com.codecool.web.dto.UserSchedulesDto;
+import com.codecool.web.model.Role;
 import com.codecool.web.model.Schedule;
 import com.codecool.web.model.User;
 import com.codecool.web.service.ScheduleService;
+import com.codecool.web.service.UserService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleScheduleService;
+import com.codecool.web.service.simple.SimpleUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,15 +39,33 @@ public class SchedulesServlet extends AbstractServlet {
         // Find Schedule by userId
 
         try (Connection connection = getConnection(req.getServletContext())) {
+
             ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
             ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
+            UserDao userDao = new SimpleUserDao(connection);
+            UserService userService = new SimpleUserService(userDao);
+
+            List<Schedule> schedules;
+            UserSchedulesDto userSchedulesDto;
 
             User loggedInUser = (User) req.getSession().getAttribute("user");
-            String userId = String.valueOf(loggedInUser.getId());
+            String loggedInUserId = String.valueOf(loggedInUser.getId());
 
-            List<Schedule> schedules = scheduleService.findByUser(userId);
+            if (req.getParameter("userId") != null && loggedInUser.getRole() == Role.ADMIN){
+                String userId = req.getParameter("userId");
+                User user = userService.findById(Integer.parseInt(userId));
+
+                schedules = scheduleService.findAllByUser(Integer.parseInt(userId));
+                userSchedulesDto = new UserSchedulesDto(user,schedules);
+
+            } else {
+                schedules = scheduleService.findByUser(loggedInUserId);
+                userSchedulesDto = new UserSchedulesDto(loggedInUser,schedules);
+            }
+
+
             logger.info("Schedules displayed");
-            sendMessage(resp, SC_OK, schedules);
+            sendMessage(resp, SC_OK,  userSchedulesDto);
         } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
             logger.error("error", ex);
