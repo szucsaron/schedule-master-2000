@@ -23,7 +23,12 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         Date date = resultSet.getDate("date");
         LocalDate localDate = date.toLocalDate();
         int days = resultSet.getInt("max_days");
-        return new Schedule(scheduleId, userId, name, localDate, days);
+        Schedule schedule = new Schedule(scheduleId, userId, name, localDate, days);
+        try {
+            boolean shared = resultSet.getBoolean("public");
+            schedule.setPublic(shared);
+        } catch (SQLException e) {}
+        return schedule;
     }
 
     private Schedule fetchScheduleWithCreator(ResultSet resultSet) throws SQLException {
@@ -34,7 +39,12 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         LocalDate localDate = date.toLocalDate();
         int days = resultSet.getInt("max_days");
         String creatorsName = resultSet.getString("creator");
-        return new Schedule(scheduleId, userId, name, localDate, days,creatorsName);
+        Schedule schedule = new Schedule(scheduleId, userId, name, localDate, days);
+        try {
+            boolean shared = resultSet.getBoolean("public");
+            schedule.setPublic(shared);
+        } catch (SQLException e) {}
+        return schedule;
     }
 
     @Override
@@ -108,7 +118,7 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
 
     @Override
     public List<Schedule> findByUser(int userId) throws SQLException {
-        String sql = "SELECT id, users_id, date, max_days, name FROM Schedule WHERE users_id = ?";
+        String sql = "SELECT id, users_id, date, max_days, name, public FROM Schedule WHERE users_id = ? ORDER BY name";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, userId);
@@ -159,6 +169,16 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
             statement.setObject(2, date);
             statement.setInt(3, days);
             statement.setInt(4, scheduleId);
+            statement.executeUpdate();
+        }
+    }
+
+    @Override
+    public void setPublic(int scheduleId, boolean isPublic) throws SQLException {
+        String sql = "UPDATE schedule SET public=? WHERE id=?;";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setBoolean(1, isPublic);
+            statement.setInt(2, scheduleId);
             statement.executeUpdate();
         }
     }

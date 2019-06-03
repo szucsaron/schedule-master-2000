@@ -23,33 +23,25 @@ import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 
-@WebServlet("/share")
-public class ShareServlet extends AbstractServlet {
+@WebServlet("/protected/shareUpdate")
+public class ShareUpdateServlet extends AbstractServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Create Schedule
 
-        // Find shared schedule by id
         try (Connection connection = getConnection(req.getServletContext())) {
-            String scheduleId = req.getParameter("schedule_id");
-            String fetch = req.getParameter("fetch");
+            ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
+            ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
 
-            if (fetch == null) {
-                req.setAttribute("scheduleId", scheduleId);
-                req.getRequestDispatcher("share.jsp").forward(req, resp);
-            } else {
-                ScheduleDao scheduleDao = new SimpleScheduleDao(connection);
-                ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
-                TaskDao taskDao = new SimpleTaskDao(connection);
+            String id = req.getParameter("schedule_id");
+            String isPublic = req.getParameter("is_public");
 
-                Schedule schedule = scheduleService.fetchShared(scheduleId);
-                List<TaskDto> tasks = taskDao.findDtosByScheduleId(Integer.parseInt(scheduleId));
+            User loggedInUser = (User) req.getSession().getAttribute("user");
+            int userId = loggedInUser.getId();
 
-                ScheduleTaskDto scheduleTaskDto = new ScheduleTaskDto(schedule, tasks);
-
-                sendMessage(resp, SC_OK, scheduleTaskDto);
-            }
-
+            scheduleService.setPublic(id, isPublic);
+            sendMessage(resp, SC_OK, "new schedule created");
         } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
         }

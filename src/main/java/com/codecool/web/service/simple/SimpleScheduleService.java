@@ -6,6 +6,8 @@ import com.codecool.web.model.Schedule;
 import com.codecool.web.service.ScheduleService;
 import com.codecool.web.service.exception.ServiceException;
 
+import javax.servlet.annotation.WebServlet;
+import java.lang.annotation.Inherited;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -40,12 +42,31 @@ public class SimpleScheduleService extends AbstractService implements ScheduleSe
         return scheduleDao.findByScheduleId(Integer.parseInt(scheduleId)) ;
     }
 
+    @Override
     public Schedule fetchShared(String scheduleId) throws SQLException, ServiceException {
         Schedule schedule = scheduleDao.fetchShared(fetchInt(scheduleId, "scheduleId"));
         if (schedule == null) {
             throw new ServiceException("Unauthorized access!");
         }
         return schedule;
+    }
+
+    @Override
+    public void setPublic(String scheduleId, String isPublic) throws SQLException, ServiceException {
+        int id = fetchInt(scheduleId, "scheduleId");
+        boolean isPublicVal;
+        switch (isPublic) {
+            case "true":
+                isPublicVal = true;
+                break;
+            case "false":
+                isPublicVal = false;
+                break;
+            default:
+                throw new ServiceException("isPublic must be true or false");
+        }
+        scheduleDao.setPublic(id, isPublicVal);
+
     }
 
 
