@@ -21,6 +21,8 @@
     <c:url value="/new_table.js" var="tableScriptUrl"/>
     <c:url value="/auth.js" var="authScriptUrl"/>
     <c:url value="/draggable.js" var="draggableUrl"/>
+    <c:url value="/admin.js" var="adminUrl"/>
+
 
     <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
@@ -35,6 +37,8 @@
     <script src="${logoutScriptUrl}"></script>
     <script src="${registerScriptUrl}"></script>
     <script src="${draggableUrl}"></script>
+    <script src="${adminUrl}"></script>
+
 
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
@@ -120,6 +124,21 @@
                 <th>Starting date</th>
                 <th>Finishing date</th>
                 <th>Created by</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div id="users-content" class="hidden content">
+        <h1>Registered users</h1>
+        <table id="users-table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
             </tr>
             </thead>
             <tbody>
