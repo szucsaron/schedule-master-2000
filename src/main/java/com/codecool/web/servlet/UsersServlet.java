@@ -16,8 +16,8 @@ import java.util.List;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 
-@WebServlet("/protected/admin")
-public class AdminServlet extends AbstractServlet {
+@WebServlet("/protected/users")
+public class UsersServlet extends AbstractServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
