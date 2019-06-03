@@ -29,4 +29,9 @@ public class SimpleUserService implements UserService {
     public List<User> findAllExceptCurrent(int id) throws SQLException {
         return userDao.findAllExceptCurrent(id);
     }
+
+    @Override
+    public User findById(int id) throws SQLException {
+        return userDao.findById(id);
+    }
 }
