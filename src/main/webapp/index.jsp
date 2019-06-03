@@ -116,7 +116,7 @@
         </form>
     </div>
     <div id="public-schedules" class="hidden content">
-        <h1>Public schedules</h1>
+        <h1 id='public-schedules-h1'></h1>
         <table id="pubschedules">
             <thead>
             <tr>
