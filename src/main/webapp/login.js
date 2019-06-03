@@ -9,7 +9,7 @@ function onLoginResponse() {
             adminMenuTdEl = document.createElement('td');
             let adminMenuEl = document.createElement('a');
 
-            let linkText = document.createTextNode("ADMIN MENU");
+            let linkText = document.createTextNode("[List Users");
             adminMenuEl.appendChild(linkText);
             adminMenuEl.title="TITLE";
             adminMenuEl.href="javascript:void(0);";
