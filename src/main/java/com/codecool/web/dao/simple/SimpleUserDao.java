@@ -30,7 +30,14 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
 
     @Override
     public User findById(int id) throws SQLException {
-        return null;
+        String sql = "SELECT id, name, email, role FROM users WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
+            rs.next();
+            return fetchUserWithoutPw(rs);
+        }
     }
 
     @Override
