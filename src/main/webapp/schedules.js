@@ -288,6 +288,6 @@ function onScheduleShareClicked() {
 }
 
 function onGetSharedScheduleLinkClicked() {
-    const link =  'http://localhost:8080/schedule-master-2000/share?schedule_id=' + this.dataset.scheduleId;
+    const link =  getBaseUrl() + '/share?schedule_id=' + this.dataset.scheduleId;
     alert(link);
 }
