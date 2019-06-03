@@ -5,6 +5,8 @@ import com.codecool.web.dao.simple.SimpleTaskDao;
 import com.codecool.web.service.TaskService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleTaskService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,8 @@ import java.sql.SQLException;
 
 @WebServlet("/scheduleTable")
 public class ScheduleTableServlet extends AbstractServlet{
+    private static final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Find Schedule by userId
@@ -31,10 +35,13 @@ public class ScheduleTableServlet extends AbstractServlet{
             taskService.detachTaskFromSchedule(scheduleId, taskId);
             taskService.attachTaskToSchedule(scheduleId, taskId, day, hourStart, hourEnd);
 
+            logger.info("Table created");
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         } catch (ServiceException e) {
             e.printStackTrace();
+            logger.error("error", e);
         }
     }
 
@@ -48,11 +55,13 @@ public class ScheduleTableServlet extends AbstractServlet{
             String taskId = req.getParameter("taskId");
 
             taskService.detachTaskFromSchedule(scheduleId, taskId);
-
+            logger.info("Task detachded");
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         } catch (ServiceException e) {
             e.printStackTrace();
+            logger.error("error", e);
         }
     }
 }

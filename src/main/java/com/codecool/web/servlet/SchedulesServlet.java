@@ -7,6 +7,8 @@ import com.codecool.web.model.User;
 import com.codecool.web.service.ScheduleService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleScheduleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +26,7 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
 
 @WebServlet("/protected/schedules")
 public class SchedulesServlet extends AbstractServlet {
+    private static final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,10 +40,11 @@ public class SchedulesServlet extends AbstractServlet {
             String userId = String.valueOf(loggedInUser.getId());
 
             List<Schedule> schedules = scheduleService.findByUser(userId);
-
+            logger.info("Schedules displayed");
             sendMessage(resp, SC_OK, schedules);
         } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         }
     }
 
@@ -60,9 +64,11 @@ public class SchedulesServlet extends AbstractServlet {
             int userId = loggedInUser.getId();
 
             scheduleService.add(userId, name, date, duration);
+            logger.info("Schedule added");
             sendMessage(resp, SC_OK, "new schedule created");
         } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         }
     }
 
@@ -96,12 +102,14 @@ public class SchedulesServlet extends AbstractServlet {
                 finishing.add(localDate);
             }
             scheduleService.update(ids, names, starting, finishing);
-
+            logger.info("Schedule updated");
             sendMessage(resp, SC_OK, "Schedule's name modified");
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         } catch (ServiceException e) {
             e.printStackTrace();
+            logger.error("error", e);
         }
 
     }

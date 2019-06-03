@@ -5,6 +5,8 @@ import com.codecool.web.dao.simple.SimpleUserDao;
 import com.codecool.web.model.User;
 import com.codecool.web.service.simple.SimpleLoginService;
 import com.codecool.web.service.exception.ServiceException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginServlet extends AbstractServlet{
+    private static final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -27,12 +30,14 @@ public class LoginServlet extends AbstractServlet{
 
             User user = simpleLoginService.loginUser(email, password);
             req.getSession().setAttribute("user", user);
-
+            logger.info("Login succesful");
             sendMessage(resp, HttpServletResponse.SC_OK, user);
         } catch (ServiceException ex) {
             sendMessage(resp, HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
+            logger.error("error", ex);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         }
     }
 }
