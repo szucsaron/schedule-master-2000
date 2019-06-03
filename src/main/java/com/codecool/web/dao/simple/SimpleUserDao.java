@@ -14,16 +14,18 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
         super(connection);
     }
 
-    public List<User> findAll() throws SQLException {
-        String sql = "SELECT id, name, email, role FROM users";
-        try (Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
-            List<User> users = new ArrayList<>();
-            while (resultSet.next()) {
-                users.add(fetchUser(resultSet));
+    public List<User> findAllExceptCurrent(int id) throws SQLException {
+        String sql = "SELECT id, name, email, role FROM users WHERE id != ?";
+        List<User> users = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
+                users.add(fetchUserWithoutPw(rs));
             }
-            return users;
         }
+        return users;
     }
 
     @Override
@@ -101,6 +103,14 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
         String name = resultSet.getString("name");
         Role role = resultSet.getInt("role") == 1 ? Role.ADMIN : Role.REGULAR;
         return new User(id, name, password, email, role);
+    }
+
+    private User fetchUserWithoutPw(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        String email = resultSet.getString("email");
+        String name = resultSet.getString("name");
+        Role role = resultSet.getInt("role") == 1 ? Role.ADMIN : Role.REGULAR;
+        return new User(id, name, email, role);
     }
 
 }
