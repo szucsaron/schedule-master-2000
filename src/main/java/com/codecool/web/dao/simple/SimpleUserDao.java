@@ -15,7 +15,7 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
     }
 
     public List<User> findAll() throws SQLException {
-        String sql = "SELECT id, name, email, password, role FROM users";
+        String sql = "SELECT id, name, email, role FROM users";
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
             List<User> users = new ArrayList<>();
