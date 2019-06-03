@@ -23,11 +23,11 @@ function appendUsersTable(users) { // 2
 
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
-        appendPublicSchedule(user);
+        appendUsers(user);
     }
 }
 
-function appendPublicSchedule(user) { // 3
+function appendUsers(user) { // 3
     const aEl = document.createElement('a');
     aEl.textContent = user.name;
     aEl.href = 'javascript:void(0);';
