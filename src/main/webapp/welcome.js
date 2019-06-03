@@ -26,6 +26,6 @@ function onAdminMenuClicked(){
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onAllUsersReceived);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('GET', 'protected/admin');
+    xhr.open('GET', 'protected/users');
     xhr.send();
 }
