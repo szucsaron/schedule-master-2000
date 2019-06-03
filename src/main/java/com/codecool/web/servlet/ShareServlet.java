@@ -7,9 +7,12 @@ import com.codecool.web.dao.simple.SimpleTaskDao;
 import com.codecool.web.dto.ScheduleTaskDto;
 import com.codecool.web.dto.TaskDto;
 import com.codecool.web.model.Schedule;
+import com.codecool.web.model.User;
 import com.codecool.web.service.ScheduleService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleScheduleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +27,8 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
 
 @WebServlet("/share")
 public class ShareServlet extends AbstractServlet {
+
+    private static final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,11 +51,13 @@ public class ShareServlet extends AbstractServlet {
 
                 ScheduleTaskDto scheduleTaskDto = new ScheduleTaskDto(schedule, tasks);
 
+                logger.info("Schedule shared");
                 sendMessage(resp, SC_OK, scheduleTaskDto);
             }
 
         } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         }
     }
 }

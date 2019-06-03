@@ -136,22 +136,46 @@ function appendSchedule(schedule) {
     startingTdEl.textContent = getDateStr(startingDate);
     startingTdEl.setAttribute("contenteditable", true);
     startingTdEl.setAttribute("id", "schedulestart" + schedule.id)
-    console.log(schedule);
     const scheduleFinish = startingDate.addDays(schedule.durationInDays);
 
     const finishingTdEl = document.createElement('td');
     finishingTdEl.textContent = getDateStr(scheduleFinish);
     finishingTdEl.setAttribute("contenteditable", true);
-    finishingTdEl.setAttribute("id", "schedulefinish" + schedule.id)
-    const trEl = document.createElement('tr');
+    finishingTdEl.setAttribute("id", "schedulefinish" + schedule.id);
+
+    const shareEl = generateShareDt(schedule);
+
 
     const delChkBox = createCheckBoxTd('schedules-del', schedule.id);
-
+    
+    const trEl = document.createElement('tr');
     trEl.appendChild(nameTdEl);
     trEl.appendChild(startingTdEl);
     trEl.appendChild(finishingTdEl);
+    trEl.appendChild(shareEl);
     trEl.appendChild(delChkBox);
     schedulesTableBodyEl.appendChild(trEl);
+}
+
+function generateShareDt(schedule) {
+    const shareEl = document.createElement('td');
+    const shareBtEl = document.createElement('button');
+    shareBtEl.dataset.scheduleId = schedule.id;
+    shareEl.appendChild(shareBtEl);
+    if (schedule.public) {
+        shareBtEl.textContent = 'Unshare';
+        shareBtEl.dataset.isPublic = 'true';
+        const getLinkBtEl = document.createElement('button');
+        getLinkBtEl.textContent = 'Get Link';
+        getLinkBtEl.dataset.scheduleId = schedule.id;
+        getLinkBtEl.addEventListener('click', onGetSharedScheduleLinkClicked);
+        shareEl.appendChild(getLinkBtEl);
+    } else {
+        shareBtEl.textContent = 'Share';
+        shareBtEl.dataset.isPublic = 'false';
+    }
+    shareBtEl.addEventListener('click', onScheduleShareClicked);
+    return shareEl;
 }
 
 function appendPublicSchedule(schedule) { // 3
@@ -170,7 +194,6 @@ function appendPublicSchedule(schedule) { // 3
     const startingTdEl = document.createElement('td');
     let startingDate = new Date(convertDate(schedule.startingDate));
     startingTdEl.textContent = getDateStr(startingDate);
-    console.log(schedule);
     const scheduleFinish = startingDate.addDays(schedule.durationInDays);
 
     const userNameTdEl = document.createElement('td');
@@ -233,7 +256,6 @@ function onSchedulesDeleteClicked() {
 function onSchedulesUpdateClicked() {
     debugger;
     const idStrChain = getCheckBoxCheckedValues('schedules-del');
-    console.log(idStrChain);
     var ids  = idStrChain.split(",");
     var newNames = new Array();
     var newStarts = new Array();
@@ -257,4 +279,37 @@ function onSchedulesUpdateClicked() {
     xhr.addEventListener('error', onNetworkError);
     xhr.open('PUT', 'protected/schedules?' + params.toString());
     xhr.send();
+}
+
+function onScheduleShareClicked() {
+    console.log(this.dataset.isPublic);
+    const params = new URLSearchParams();
+    let isPublic;
+    switch (this.dataset.isPublic) {
+        case 'true':
+            isPublic = false;
+            break;
+        case 'false':
+            isPublic = true;
+            break;
+    }
+    params.append('schedule_id', this.dataset.scheduleId);
+    params.append('is_public', isPublic);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onSchedulesClicked);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('POST', 'protected/shareUpdate');
+    xhr.send(params);
+}
+
+function onPublicScheduleLinkCloseClicked() {
+    document.getElementById('public-schedule-link').classList.add('hidden');
+}
+
+function onGetSharedScheduleLinkClicked() {
+    const link =  getBaseUrl() + '/share?schedule_id=' + this.dataset.scheduleId;
+    const el = document.getElementById('public-schedule-link');
+    el.classList.remove('hidden');
+    document.getElementById('public-schedule-link-txt').textContent = link;
 }

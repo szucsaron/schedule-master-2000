@@ -24,6 +24,8 @@ public interface ScheduleDao {
 
     void update(int scheduleId, String name, LocalDate date, int days) throws SQLException;
 
+    void setPublic(int scheduleId, boolean isPublic) throws SQLException;
+
     void delete(int userId, int scheduleId) throws SQLException;
 
 

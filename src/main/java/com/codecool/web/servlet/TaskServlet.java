@@ -11,6 +11,8 @@ import com.codecool.web.service.TaskService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleScheduleService;
 import com.codecool.web.service.simple.SimpleTaskService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.annotation.WebServlet;
 import java.sql.SQLException;
@@ -29,6 +31,7 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
 
 @WebServlet("/task")
 public class TaskServlet extends AbstractServlet {
+    private static final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -44,12 +47,14 @@ public class TaskServlet extends AbstractServlet {
             results.add(1, task.getTitle());
             results.add(2, task.getContent());
 
-
+            logger.info("Task displayed");
             sendMessage(resp, HttpServletResponse.SC_OK, results);
         } catch (ServiceException ex) {
             sendMessage(resp, HttpServletResponse.SC_OK, ex.getMessage());
+            logger.error("error", ex);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
+            logger.error("error, ex");
         }
     }
 
@@ -64,12 +69,14 @@ public class TaskServlet extends AbstractServlet {
             String content = req.getParameter("content");
 
             taskService.update(taskId, title, content);
-
+            logger.info("Task added");
             sendMessage(resp, HttpServletResponse.SC_OK, "Task (id = " + taskId +") updated.");
         } catch (ServiceException ex) {
             sendMessage(resp, HttpServletResponse.SC_OK, ex.getMessage());
+            logger.error("error", ex);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         }
     }
 
@@ -84,12 +91,14 @@ public class TaskServlet extends AbstractServlet {
             String content = req.getParameter("content");
 
             taskService.update(taskId, title, content);
-
+            logger.info("Task updated");
             sendMessage(resp, HttpServletResponse.SC_OK, "Task (id = " + taskId +") updated.");
         } catch (ServiceException ex) {
             sendMessage(resp, HttpServletResponse.SC_OK, ex.getMessage());
+            logger.error("error", ex);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         }
     }
 }

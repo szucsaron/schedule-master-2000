@@ -6,6 +6,8 @@
     <meta charset="UTF-8">
     <title>Schedule Master 2000</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="472009180218-teaa5pdnbh4msj27s068l2rpgqa3d0gh.apps.googleusercontent.com">
+
     <c:url value="/style.css" var="styleUrl"/>
     <c:url value="/normal-init.js" var="normalInitUrl"/>
     <c:url value="/index.js" var="indexScriptUrl"/>
@@ -24,6 +26,7 @@
     <c:url value="/admin.js" var="adminUrl"/>
 
 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
     <script src="${taskScriptUrl}"></script>
@@ -60,6 +63,7 @@
             <button id="login-button">Login</button>
             <button id="register-button">Register</button>
         </form>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
     <div id="register-content" class="hidden content">
         <h1>Register</h1>
@@ -147,6 +151,13 @@
     </div>
     <div id="schedules-content" class="hidden content">
         <h1>Your schedules</h1>
+        <div id="public-schedule-link" class = "hidden">
+            <button id="public-schedule-link-close"  onClick="onPublicScheduleLinkCloseClicked();">
+                x
+            </button>
+            Link: 
+            <div id = "public-schedule-link-txt"></div>
+        </div>
         <form id="schedules-delete-form" onsubmit="return false">
             <table id="schedules">
                 <thead>

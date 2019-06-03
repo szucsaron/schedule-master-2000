@@ -15,6 +15,8 @@ public interface ScheduleService {
 
     Schedule fetchShared(String scheduleId) throws SQLException, ServiceException;
 
+    void setPublic(String scheduleId, String isPublic) throws SQLException, ServiceException;
+
     Schedule findById(String scheduleId, String userId) throws SQLException, ServiceException;
 
     Schedule findByScheduleId(String scheduleId) throws SQLException;
