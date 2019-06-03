@@ -2,7 +2,7 @@ let usersTableEl;
 let usersTableBodyEl;
 
 
-function onAllUsersReceived(){
+function onAllUsersReceived() {
     if (this.status === OK) {
         showContents(['user-menu', 'users-content']);
         onAllUsersLoad(JSON.parse(this.responseText));
@@ -11,7 +11,7 @@ function onAllUsersReceived(){
     }
 }
 
-function onAllUsersLoad(users){
+function onAllUsersLoad(users) {
     usersTableEl = document.getElementById('users-table');
     usersTableBodyEl = usersTableEl.querySelector('tbody');
 
@@ -32,10 +32,10 @@ function appendUsers(user) { // 3
     aEl.textContent = user.name;
     aEl.href = 'javascript:void(0);';
     aEl.dataset.userId = user.id;
-    aEl.addEventListener('click', onUserClicked); 
+    aEl.addEventListener('click', onUserClicked);
 
     const idTdEl = document.createElement('td');
-    idTdEl.textContent= user.id;
+    idTdEl.textContent = user.id;
 
     const nameTdEl = document.createElement('td');
     nameTdEl.appendChild(aEl);
@@ -53,9 +53,17 @@ function appendUsers(user) { // 3
     trEl.appendChild(emailTdEl);
     trEl.appendChild(roleTdEl);
     usersTableBodyEl.appendChild(trEl);
-} 
+}
 
-function onUserClicked(){
-    alert('niceuo');
-    //magic
+function onUserClicked() {
+    const userId = this.dataset.userId;
+
+    const params = new URLSearchParams();
+    params.append('userId', userId);
+
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', onUserSchedulesResponse);
+    xhr.addEventListener('error', onNetworkError);
+    xhr.open('GET', 'protected/schedules?' + params.toString());
+    xhr.send();
 }
