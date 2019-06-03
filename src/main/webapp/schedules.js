@@ -287,7 +287,13 @@ function onScheduleShareClicked() {
     xhr.send(params);
 }
 
+function onPublicScheduleLinkCloseClicked() {
+    document.getElementById('public-schedule-link').classList.add('hidden');
+}
+
 function onGetSharedScheduleLinkClicked() {
     const link =  getBaseUrl() + '/share?schedule_id=' + this.dataset.scheduleId;
-    alert(link);
+    const el = document.getElementById('public-schedule-link');
+    el.classList.remove('hidden');
+    document.getElementById('public-schedule-link-txt').textContent = link;
 }
