@@ -26,6 +26,7 @@
     <c:url value="/admin.js" var="adminUrl"/>
 
 
+
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="${tableScriptUrl}"></script>
     <script src="${dateAdderScriptUrl}"></script>
@@ -41,8 +42,6 @@
     <script src="${registerScriptUrl}"></script>
     <script src="${draggableUrl}"></script>
     <script src="${adminUrl}"></script>
-
-
     <link rel="stylesheet" type="text/css" href="${styleUrl}">
 </head>
 <body>
@@ -87,6 +86,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Content</th>
+                    <th>Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -94,6 +94,7 @@
             </table>
             <button onclick="onTasksDeleteClicked();">Delete</button>
         </form>
+
         <h2>Add new task</h2>
         <form id="task-form" onsubmit="return false;">
             <input type="text" name="name" placeholder="Name">
@@ -111,8 +112,8 @@
             <textarea rows="10" cols="30" type="text" name="content" id="task-text"></textarea>
             <p>Schedules: <span id="task-schedules"></span></p>
             <button onclick="onTaskUpdate();" id="update">Update</button>
-        <h2>Add to schedules</h2>
-        <form id="task-schedules-form" onsubmit="return false">
+            <h2>Add to schedules</h2>
+            <form id="task-schedules-form" onsubmit="return false">
             <select name="schedules" multiple>
             </select>
             <button onclick="onTaskSchedulesAddClicked();">Add</button>
@@ -155,7 +156,7 @@
             <button id="public-schedule-link-close"  onClick="onPublicScheduleLinkCloseClicked();">
                 x
             </button>
-            Link: 
+            Link:
             <div id = "public-schedule-link-txt"></div>
         </div>
         <form id="schedules-delete-form" onsubmit="return false">
@@ -165,6 +166,8 @@
                     <th>Name</th>
                     <th>Starting date</th>
                     <th>Finishing date</th>
+                    <th>Share schedule</th>
+                    <th>Edit</th>
                 </tr>
                 </thead>
                 <tbody>

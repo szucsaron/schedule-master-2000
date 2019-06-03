@@ -10,14 +10,17 @@
     display: none;
 }
 
-/*body {
-    background-size: cover;
+body {
+    background: url('business2.jpg') #221c5a;
     background-repeat: no-repeat;
-    background-image: url('clock.gif');
-}*/
+    background-position: top center;
+    background-attachment: fixed;
+    background-size: cover;
+}
 
 td {
     border-style: solid;
+    background-color: aliceblue;
 }
 
 table {
@@ -73,10 +76,72 @@ td, th {
 
 th {
     color: white;
-    background-color: blue;
+    background-color: cadetblue;
     border-top: none;
 }
 
 td:first-child, th:first-child {
     border-left: none;
 }
+
+h1, h2
+{
+    width: 30%;
+    border: 2px solid;
+    margin: 10 auto;
+    text-align: center;
+    background: aliceblue;
+    box-shadow: 4px 2px 9px 4px black;
+}
+
+button{
+    background:#1AAB8A;
+    color:#fff;
+    border:none;
+    position:relative;
+    height:30px;
+    font-size:0.8em;
+    padding:0 2em;
+    cursor:pointer;
+    transition:800ms ease all;
+    outline:none;
+}
+button:hover{
+    background:#fff;
+    color:#1AAB8A;
+}
+button:before,button:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    width:0;
+    background: #1AAB8A;
+    transition:400ms ease all;
+}
+button:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+}
+button:hover:before,button:hover:after{
+    width:100%;
+    transition:800ms ease all;
+}
+
+input[type='checkbox'] {
+    width:20px;
+    height:20px;
+    border-radius:5px;
+    border:2px solid #555;
+}
+
+input {
+    width: 200px;
+    height: 30px;
+    border-radius:5px;
+    border:2px solid #555;
+}
+
