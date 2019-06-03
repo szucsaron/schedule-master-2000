@@ -13,7 +13,7 @@ function onLoginResponse() {
             adminMenuEl.appendChild(linkText);
             adminMenuEl.title="TITLE";
             adminMenuEl.href="javascript:void(0);";
-            adminMenuEl.onclick=function() {alert("ADMIN stuff")}; 
+            adminMenuEl.onclick=function() {onAdminMenuClicked()}; 
 
             adminMenuTdEl.appendChild(adminMenuEl);
             document.getElementById("user-menu-tr").appendChild(adminMenuTdEl);
