@@ -132,6 +132,13 @@
     </div>
     <div id="schedules-content" class="hidden content">
         <h1>Your schedules</h1>
+        <div id="public-schedule-link" class = "hidden">
+            <button id="public-schedule-link-close"  onClick="onPublicScheduleLinkCloseClicked();">
+                x
+            </button>
+            Link: 
+            <div id = "public-schedule-link-txt"></div>
+        </div>
         <form id="schedules-delete-form" onsubmit="return false">
             <table id="schedules">
                 <thead>

@@ -10,6 +10,7 @@ public class Schedule {
     private LocalDate startingDate;
     private int durationInDays;
     private String creatorsName;
+    private boolean isPublic;
 
     public Schedule(int id, int userId, String name, LocalDate startingDate, int durationInDays) {
         this.id = id;
@@ -26,6 +27,10 @@ public class Schedule {
         this.startingDate = startingDate;
         this.durationInDays = durationInDays;
         this.creatorsName = creatorsName;
+    }
+
+    public void setPublic(boolean aPublic) {
+        this.isPublic = aPublic;
     }
 
     public int getId() {
@@ -50,5 +55,9 @@ public class Schedule {
 
     public String getCreatorsName() {
         return creatorsName;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
     }
 }

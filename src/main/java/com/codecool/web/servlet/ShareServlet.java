@@ -7,6 +7,7 @@ import com.codecool.web.dao.simple.SimpleTaskDao;
 import com.codecool.web.dto.ScheduleTaskDto;
 import com.codecool.web.dto.TaskDto;
 import com.codecool.web.model.Schedule;
+import com.codecool.web.model.User;
 import com.codecool.web.service.ScheduleService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleScheduleService;
