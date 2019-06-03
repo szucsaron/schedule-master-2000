@@ -81,4 +81,8 @@ public class SimpleScheduleService extends AbstractService implements ScheduleSe
         }
     }
 
+    @Override
+    public List<Schedule> findAllByUser(int userId) throws SQLException {
+        return scheduleDao.findAllByUser(userId);
+    }
 }
