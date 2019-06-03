@@ -14,6 +14,8 @@ import com.codecool.web.service.TaskService;
 import com.codecool.web.service.exception.ServiceException;
 import com.codecool.web.service.simple.SimpleScheduleService;
 import com.codecool.web.service.simple.SimpleTaskService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +30,8 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
 
 @WebServlet("/user_tasks")
 public class UserTasksServlet extends AbstractServlet {
+    private static final Logger logger = LoggerFactory.getLogger(UserTasksServlet.class);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,9 +42,11 @@ public class UserTasksServlet extends AbstractServlet {
             User loggedInUser = (User) req.getSession().getAttribute("user");
             int userId = loggedInUser.getId();
             List<Task> tasks = taskService.findByUserId(userId);
+            logger.info("User tasks displayed");
             sendMessage(resp, SC_OK, tasks);
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
+            logger.error("error", ex);
         }
     }
 }
