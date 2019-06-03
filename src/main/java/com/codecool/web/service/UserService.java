@@ -13,4 +13,5 @@ public interface UserService {
 
     List<User> findAllExceptCurrent(int id) throws SQLException;
 
+    User findById(int id) throws SQLException;
 }
