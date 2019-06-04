@@ -16,7 +16,9 @@ function onLoginResponse() {
             adminMenuEl.onclick=function() {onAdminMenuClicked()}; 
 
             adminMenuTdEl.appendChild(adminMenuEl);
-            document.getElementById("user-menu-tr").appendChild(adminMenuTdEl);
+
+            logoutButtonEl = document.getElementById('logout-td');
+            logoutButtonEl.before(adminMenuTdEl);
         }
         onHomepageClicked();
     } else {

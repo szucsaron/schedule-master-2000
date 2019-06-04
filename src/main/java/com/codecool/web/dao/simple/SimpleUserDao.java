@@ -41,11 +41,6 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
     }
 
     @Override
-    public User add(String name, int percentage) throws SQLException {
-        return null;
-    }
-
-    @Override
     public User add(String name, String password, String email, Role role) throws SQLException {
         if (name == null || "".equals(name)) {
             throw new IllegalArgumentException("Name cannot be null or empty");

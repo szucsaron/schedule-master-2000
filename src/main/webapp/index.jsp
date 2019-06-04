@@ -48,11 +48,11 @@
     <div id="user-menu" class="content">
         <table>
             <tr id= user-menu-tr>
-                <td><a href="javascript:void(0);" onclick="onHomepageClicked();">Homepage</a></td>
-                <td><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></td>
-                <td><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></td>
-                <td><a href="javascript:void(0);" id="logout-button">Logout </a></td>
-        </table>
+                <td><a href="javascript:void(0);" onclick="onHomepageClicked();">Homepage</a></td> 
+                <td><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></td> 
+                <td><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></td>  
+                <td id="logout-td"><a href="javascript:void(0);" id="logout-button">Logout </a></td>
+        </table>  
     </div>
     <div id="login-content" class="hidden content">
         <h1>Login</h1>
