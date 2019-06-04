@@ -220,7 +220,6 @@ br {
 
 #public-schedule-link {
     background: aliceblue;
-    display: inline-block;
     border-radius: 5px;
     padding:10px;
 }
@@ -255,8 +254,10 @@ br {
     text-align: center;
     background: whitesmoke;
     box-shadow: 4px 2px 9px 4px black;
-    display: inline-block;
     font-size: 1.5em;
     border-radius: 5px;
     padding-right: 90px;
+    position: absolute;
+    top: 6%;
+    right: 13%;
 }
