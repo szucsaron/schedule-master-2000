@@ -16,6 +16,7 @@ body {
     background-position: top center;
     background-attachment: fixed;
     background-size: cover;
+
 }
 
 td {
@@ -187,8 +188,9 @@ br {
     text-align: center;
     background: aliceblue;
     box-shadow: 4px 2px 9px 4px black;
-    font-size: 1.5em;
+    font-size: 1em;
     padding: 5px;
+    font-weight: bold;
 }
 
 #task-text, #task-title {
@@ -200,16 +202,61 @@ br {
     box-shadow: 4px 2px 9px 4px black;
     font-size: 1em;
     padding: 5px;
+    font-weight: bold;
 }
 
 #scheduleLink {
     padding: 5px;
 }
 
-#scheduleBr {
+.scheduleBr {
     line-height: 50%;
 }
 
+#public-schedule-link-txt {
+    font-weight: bold;
+    font-size: 150%;
+}
 
+#public-schedule-link {
+    background: aliceblue;
+    display: inline-block;
+    border-radius: 5px;
+    padding:10px;
+}
 
+#public-schedule-link-close {
+    width: 30px;
+    padding: 0 0;
+}
 
+#user-menu td {
+    background-color: #1AAB8A;
+}
+
+#user-menu td a{
+    font-size: 1.5em;
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+#user-menu td:hover {
+    background-color: cadetblue;
+    color: white;
+}
+
+.btn {
+    text-align: center;
+}
+
+#task-list {
+    border: 2px solid;
+    margin: 10 auto;
+    text-align: center;
+    background: whitesmoke;
+    box-shadow: 4px 2px 9px 4px black;
+    display: inline-block;
+    font-size: 1.5em;
+    border-radius: 5px;
+    padding-right: 90px;
+}

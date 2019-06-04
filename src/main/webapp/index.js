@@ -13,6 +13,8 @@ let scheduleContentDivEl;
 let schedulesContentDivEl;
 let backToProfileContentDivEl;
 let logoutContentDivEl;
+let taskListContentDivEl;
+let showLinkContentDivEl;
 
 function getBaseUrl() {
     return 'http://localhost:8080/schedule-master-2000';

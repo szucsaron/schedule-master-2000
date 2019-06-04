@@ -27,6 +27,7 @@ function appendTask(task) {
     contentTdEl.textContent = task.content;
 
     const delTdEl = createCheckBoxTd('tasks-del', task.id);
+    delTdEl.setAttribute("class", "btn");
 
     /*const dateTdEl = document.createElement('td');
     dateTdEl.textContent = task.date.dayOfMonth + "." + task.date.monthValue + "." + task.date.year;*/
