@@ -8,6 +8,8 @@ function onLoad() {
     schedulesContentDivEl = document.getElementById('schedules-content');
     backToProfileContentDivEl = document.getElementById('back-to-profile-content');
     logoutContentDivEl = document.getElementById('logout-content');
+    taskListContentDivEl = document.getElementById('task-list');
+    showLinkContentDivEl = document.getElementById('public-schedule-link');
 
     const loginButtonEl = document.getElementById('login-button');
     loginButtonEl.addEventListener('click', onLoginButtonClicked);

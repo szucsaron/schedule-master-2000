@@ -109,11 +109,11 @@
             <br>
             <h2>Content</h2>
             <textarea rows="10" cols="30" type="text" name="content" id="task-text"></textarea>
+            <br>
+            <button onclick="onTaskUpdate();" id="update">Update</button>
             <h2>Schedules:</h2>
                 <span id="task-schedules"></span>
-            <button onclick="onTaskUpdate();" id="update">Update</button>
             <button id="task-back-to-schedule" onclick="onTaskBackToScheduleClicked();">Back to Schedule</button>
-        </form>
     </div>
     <div id="public-schedules" class="hidden content">
         <h1 id='public-schedules-h1'></h1>
@@ -147,13 +147,6 @@
     </div>
     <div id="schedules-content" class="hidden content">
         <h1>Your schedules</h1>
-        <div id="public-schedule-link" class = "hidden">
-            <button id="public-schedule-link-close"  onClick="onPublicScheduleLinkCloseClicked();">
-                x
-            </button>
-            Link:
-            <div id = "public-schedule-link-txt"></div>
-        </div>
         <form id="schedules-delete-form" onsubmit="return false">
             <table id="schedules">
                 <thead>
@@ -171,6 +164,14 @@
             <button onclick="onSchedulesDeleteClicked();">Delete</button>
             <button onclick="onSchedulesUpdateClicked();">Update</button>
         </form>
+        <br class="scheduleBr">
+        <div id="public-schedule-link" class = "hidden">
+            Link:
+            <div id = "public-schedule-link-txt"></div>
+            <button id="public-schedule-link-close"  onClick="onPublicScheduleLinkCloseClicked();">
+                x
+            </button>
+        </div>
         <h2>Add new schedule</h2>
         <form id="schedule-form" onsubmit="return false;">
             <input type="text" name="name" placeholder="Name">
@@ -180,11 +181,12 @@
         </form>
     </div>
     <div id="schedule-content" class="hidden content"></div>
+    <div id="task-list" class="hidden content">List of tasks: </div>
     <div id="pass" class="content"></div>
     <div id="bin" class="hidden content">
         <img id="binImg" src="bin.png">
     </div>
-    <br id="scheduleBr">
+    <br class="scheduleBr">
     <div id="toolbox" class="hidden content">
         <img id=toolImg src="toolbox2.png">
     </div>

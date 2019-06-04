@@ -65,7 +65,7 @@ function onPublicScheduleClicked() { // 4
 function onScheduleResponse() {
     if (this.status === OK) {
         clearMessages();
-        showContents(['user-menu','bin', 'toolbox', 'pass', 'schedule-content']);
+        showContents(['user-menu','task-list', 'bin', 'toolbox', 'pass', 'schedule-content']);
         showSchedule(JSON.parse(this.responseText));
     } else {
         onOtherResponse(schedulesContentDivEl, this);
@@ -85,7 +85,7 @@ function onPublicScheduleResponse() { //5
 function onSchedulesResponse() {
     if (this.status === OK) {
         const responseTextContent = JSON.parse(this.responseText);
-        showContents(['user-menu','schedules-content']);
+        showContents(['user-menu','schedules-content', 'add-schedule-content']);
         onSchedulesLoad(responseTextContent.schedules);
     } else {
         onOtherResponse(schedulesContentDivEl, this);
