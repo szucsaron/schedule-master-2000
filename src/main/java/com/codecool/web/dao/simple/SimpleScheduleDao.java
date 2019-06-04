@@ -39,7 +39,7 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         LocalDate localDate = date.toLocalDate();
         int days = resultSet.getInt("max_days");
         String creatorsName = resultSet.getString("creator");
-        Schedule schedule = new Schedule(scheduleId, userId, name, localDate, days);
+        Schedule schedule = new Schedule(scheduleId, userId, name, localDate, days,creatorsName);
         try {
             boolean shared = resultSet.getBoolean("public");
             schedule.setPublic(shared);
