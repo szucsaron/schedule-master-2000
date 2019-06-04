@@ -17,16 +17,17 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @WebServlet("/login")
-public class LoginServlet extends AbstractServlet{
+public class LoginServlet extends AbstractServlet {
     private static final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try (Connection connection = getConnection(req.getServletContext())) {
-           String token = req.getParameter("token");
-           UserDao userDao = new SimpleUserDao(connection);
-           LoginService loginService = new SimpleLoginService(userDao);
-           loginService.loginUser(token);
+            String token = req.getParameter("token");
+            UserDao userDao = new SimpleUserDao(connection);
+            LoginService loginService = new SimpleLoginService(userDao);
+            loginService.loginUser(token);
+
         } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);
         }

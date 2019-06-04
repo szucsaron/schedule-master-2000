@@ -1,14 +1,13 @@
 package com.codecool.web.service.simple;
 
 import com.codecool.web.dao.UserDao;
+import com.codecool.web.model.Role;
 import com.codecool.web.model.User;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 
-import com.codecool.web.dao.UserDao;
-import com.codecool.web.model.User;
 import com.codecool.web.service.LoginService;
 import com.codecool.web.service.exception.ServiceException;
 
@@ -22,8 +21,6 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
 //import javafx.concurrent.Service;
-import javax.sql.rowset.serial.SerialException;
-import java.sql.SQLException;
 import java.util.Collections;
 
 
@@ -36,7 +33,23 @@ public final class SimpleLoginService implements LoginService {
     }
 
 
-    public void loginUser(String token) throws SQLException, ServiceException {
+    public User loginUser(String token) throws SQLException, ServiceException {
+        User googleUser = fetchUserFromGoogle(token);
+        User user = userDao.findByEmail(googleUser.getEmail());
+        if (user == null) {
+            throw new ServiceException("Invalid User login");
+        }
+        return user;
+    }
+
+    public void registerUser(String token) throws ServiceException, SQLException {
+        User user = fetchUserFromGoogle(token);
+        String password = Integer.toString(user.getName().hashCode());
+        userDao.add(user.getName(), password, user.getEmail(), Role.REGULAR);
+
+    }
+
+    private User fetchUserFromGoogle(String token) throws ServiceException {
         try {
             JacksonFactory jacksonFactory = new JacksonFactory();
             HttpTransport transport = new NetHttpTransport();
@@ -56,21 +69,14 @@ public final class SimpleLoginService implements LoginService {
 
                 // Get profile information from payload
                 String email = payload.getEmail();
-                boolean emailVerified = Boolean.valueOf(payload.getEmailVerified());
                 String name = (String) payload.get("name");
-                String pictureUrl = (String) payload.get("picture");
-                String locale = (String) payload.get("locale");
-                String familyName = (String) payload.get("family_name");
-                String givenName = (String) payload.get("given_name");
-
-                // Use or store profile information
-                // ...
+                return new User(name, email);
 
             } else {
-                System.out.println("Invalid ID token.");
+                throw new ServiceException("Invalid id token");
             }
-        } catch (IllegalArgumentException | GeneralSecurityException | IOException ex) {
-            throw new ServiceException(ex.getMessage());
+        } catch (GeneralSecurityException | IOException e) {
+            throw new ServiceException("Google authentication error");
         }
     }
 }
