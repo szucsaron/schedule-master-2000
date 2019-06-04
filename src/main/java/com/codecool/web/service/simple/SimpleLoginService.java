@@ -10,9 +10,6 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 
-import com.codecool.web.service.LoginService;
-import com.codecool.web.service.exception.ServiceException;
-
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 
@@ -35,23 +32,33 @@ public final class SimpleLoginService implements LoginService {
     }
 
 
-    public User loginUser(String token) throws SQLException, ServiceException {
+    public User googleLoginUser(String token) throws SQLException, ServiceException {
         User googleUser = fetchUserFromGoogle(token);
-        User user = userDao.findByEmailPassword(googleUser.getEmail(), getPassword(googleUser));
+        String password = generateHashPassword(googleUser);
+        User user = userDao.findByEmailPassword(googleUser.getEmail(), generateHashPassword(googleUser));
         if (user == null) {
             throw new ServiceException("Invalid User login");
         }
         return user;
     }
 
+    public User loginUser(String email, String password) throws SQLException, ServiceException {
+        User user = userDao.findByEmailPassword(email, password);
+        if (user == null) {
+            throw new ServiceException("Invalid login!");
+        }
+        return user;
+    }
+
+
     public void registerUser(String token) throws ServiceException, SQLException {
         User user = fetchUserFromGoogle(token);
         String password = Integer.toString(user.getName().hashCode());
-        userDao.add(user.getName(), password, user.getEmail(), Role.REGULAR, 1);
+        userDao.add(user.getName(), password, user.getEmail(), Role.REGULAR, 9);
 
     }
 
-    private String getPassword(User user) {
+    private String generateHashPassword(User user) {
         return Integer.toString(user.getName().hashCode());
     }
 

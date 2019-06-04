@@ -46,14 +46,6 @@ function onLoginButtonClicked() {
     xhr.send(params);
 }
 
-function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-}
-
 function onRegisterButtonClicked() {
     showContents(['register-content']);
 }
@@ -73,7 +65,7 @@ function onSignIn(googleUser) {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onLoginResponse);
     xhr.addEventListener('error', onNetworkError);
-    xhr.open('POST', 'login');
+    xhr.open('POST', 'google_login');
     xhr.send(params);
   }
   
