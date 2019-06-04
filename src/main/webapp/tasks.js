@@ -88,8 +88,10 @@ function onTaskLoad(schedules) {
         scheduleLinkElement.dataset.scheduleId = schedules[i+1];
         scheduleLinkElement.addEventListener('click', onScheduleClicked);
         scheduleLinkElement.href = "javascript:void(0)";
+        scheduleLinkElement.setAttribute("id", "scheduleLink");
         //taskSchedulesSpanEl.textContent += schedules[i] + " ";
         taskSchedulesSpanEl.appendChild(scheduleLinkElement);
+        taskSchedulesSpanEl.appendChild(document.createElement("br"));
     }
 }
 

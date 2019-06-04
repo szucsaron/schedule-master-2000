@@ -3,6 +3,8 @@ package com.codecool.web.service.simple;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.Role;
 import com.codecool.web.model.User;
+import com.codecool.web.service.LoginService;
+import com.codecool.web.service.exception.ServiceException;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -35,7 +37,7 @@ public final class SimpleLoginService implements LoginService {
 
     public User loginUser(String token) throws SQLException, ServiceException {
         User googleUser = fetchUserFromGoogle(token);
-        User user = userDao.findByEmail(googleUser.getEmail());
+        User user = userDao.findByEmailPassword(googleUser.getEmail(), getPassword(googleUser));
         if (user == null) {
             throw new ServiceException("Invalid User login");
         }
@@ -45,8 +47,12 @@ public final class SimpleLoginService implements LoginService {
     public void registerUser(String token) throws ServiceException, SQLException {
         User user = fetchUserFromGoogle(token);
         String password = Integer.toString(user.getName().hashCode());
-        userDao.add(user.getName(), password, user.getEmail(), Role.REGULAR);
+        userDao.add(user.getName(), password, user.getEmail(), Role.REGULAR, 1);
 
+    }
+
+    private String getPassword(User user) {
+        return Integer.toString(user.getName().hashCode());
     }
 
     private User fetchUserFromGoogle(String token) throws ServiceException {

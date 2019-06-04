@@ -39,7 +39,7 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
         LocalDate localDate = date.toLocalDate();
         int days = resultSet.getInt("max_days");
         String creatorsName = resultSet.getString("creator");
-        Schedule schedule = new Schedule(scheduleId, userId, name, localDate, days);
+        Schedule schedule = new Schedule(scheduleId, userId, name, localDate, days,creatorsName);
         try {
             boolean shared = resultSet.getBoolean("public");
             schedule.setPublic(shared);
@@ -61,6 +61,24 @@ public class SimpleScheduleDao extends AbstractDao implements ScheduleDao {
 
         try (Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(sql)) {
+            List<Schedule> schedules = new ArrayList<>();
+            while (resultSet.next()) {
+                schedules.add(fetchScheduleWithCreator(resultSet));
+            }
+            return schedules;
+        }
+    }
+
+    @Override
+    public List<Schedule> findAllByUser(int userId) throws SQLException {
+        String sql = "SELECT s.id, s.name, s.users_id, s.date, s.max_days, s.public, u.name AS creator " +
+                    "FROM schedule AS s " +
+                    "JOIN users AS u ON u.id = s.users_id " +
+                    "WHERE s.users_id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
             List<Schedule> schedules = new ArrayList<>();
             while (resultSet.next()) {
                 schedules.add(fetchScheduleWithCreator(resultSet));

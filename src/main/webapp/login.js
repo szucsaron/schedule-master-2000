@@ -9,14 +9,16 @@ function onLoginResponse() {
             adminMenuTdEl = document.createElement('td');
             let adminMenuEl = document.createElement('a');
 
-            let linkText = document.createTextNode("ADMIN MENU");
+            let linkText = document.createTextNode("List Users");
             adminMenuEl.appendChild(linkText);
             adminMenuEl.title="TITLE";
             adminMenuEl.href="javascript:void(0);";
-            adminMenuEl.onclick=function() {alert("ADMIN stuff")}; 
+            adminMenuEl.onclick=function() {onAdminMenuClicked()}; 
 
             adminMenuTdEl.appendChild(adminMenuEl);
-            document.getElementById("user-menu-tr").appendChild(adminMenuTdEl);
+
+            logoutButtonEl = document.getElementById('logout-td');
+            logoutButtonEl.before(adminMenuTdEl);
         }
         onHomepageClicked();
     } else {
@@ -42,6 +44,14 @@ function onLoginButtonClicked() {
     xhr.addEventListener('error', onNetworkError);
     xhr.open('POST', 'login');
     xhr.send(params);
+}
+
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 }
 
 function onRegisterButtonClicked() {
