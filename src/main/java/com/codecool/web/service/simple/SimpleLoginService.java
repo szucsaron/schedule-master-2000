@@ -2,16 +2,12 @@ package com.codecool.web.service.simple;
 
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.model.User;
-
-import java.sql.SQLException;
-
-import com.codecool.web.dao.UserDao;
-import com.codecool.web.model.User;
 import com.codecool.web.service.LoginService;
 import com.codecool.web.service.exception.ServiceException;
-//import javafx.concurrent.Service;
-import javax.sql.rowset.serial.SerialException;
+
 import java.sql.SQLException;
+
+//import javafx.concurrent.Service;
 
 public final class SimpleLoginService implements LoginService {
 
@@ -21,12 +17,11 @@ public final class SimpleLoginService implements LoginService {
         this.userDao = userDao;
     }
 
-
     public User loginUser(String email, String password) throws SQLException, ServiceException {
         try {
-            User user = userDao.findByEmail(email);
-            if (user == null || !user.getPassword().equals(password)) {
-                throw new ServiceException("Bad login");
+            User user = userDao.findByEmailPassword(email, password);
+            if (user == null) {
+                throw new ServiceException("Bad login: email not registered!");
             }
             return user;
         } catch (IllegalArgumentException ex) {
