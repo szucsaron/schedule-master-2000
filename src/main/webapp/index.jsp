@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="59889217720-mkvqq0odl79dop79as4ivko6lsovk3fq.apps.googleusercontent.com">
 
     <title>Schedule Master 2000</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,6 +58,9 @@
             <input type="password" name="password" placeholder="Password">
             <button id="login-button">Login</button>
             <button id="register-button">Register</button>
+            <div class="g-signin2" data-onsuccess="onSignIn">
+                <button>google</button>
+            </div>
         </form>
     </div>
     <div id="register-content" class="hidden content">
