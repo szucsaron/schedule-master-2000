@@ -103,7 +103,7 @@ CREATE TRIGGER schedule_check BEFORE INSERT ON schedule
 
 INSERT INTO users (email, password, name, role) VALUES
 ('a', 'a', 'a', 1), --1
-('hectorbrown@codecool.com', '1234', 'Hector Brown jr.', 0),  --2
+('hectorbrown@codecool.com', '1234', 'Hector Brown jr.', 1),  --2
 ('janeklawovsky', '1234', 'Jane Klawovsky', 0),  --3
 ('horvath@codecool.hu', '1234', 'Horváth Ödön', 0),  --4
 ('kucslubta@codecool.hu', '1234', 'Kucslubta Sándorné', 0)  --5
