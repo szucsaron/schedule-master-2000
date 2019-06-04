@@ -83,13 +83,14 @@ public class SimpleUserDao extends AbstractDao implements UserDao {
     }
 
     @Override
-    public User findByEmail(String email) throws SQLException {
+    public User findByEmailPassword(String email, String password) throws SQLException {
         if (email == null || "".equals(email)) {
             throw new IllegalArgumentException("Email cannot be null or empty");
         }
-        String sql = "SELECT id, name, email, password, role FROM users WHERE email = ?";
+        String sql = "SELECT * FROM Users where email = ? AND password = crypt(?, password)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, email);
+            statement.setString(2, password);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     return fetchUser(resultSet);

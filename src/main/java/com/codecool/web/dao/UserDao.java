@@ -18,5 +18,5 @@ public interface UserDao{
 
     void deleteUser(String name) throws SQLException;
 
-     User findByEmail(String email) throws SQLException;
+    User findByEmailPassword(String email, String password) throws SQLException;
 }
