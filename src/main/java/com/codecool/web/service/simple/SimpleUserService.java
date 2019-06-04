@@ -17,9 +17,9 @@ public class SimpleUserService implements UserService {
     }
 
     @Override
-    public User addUser(String name, String password, String email, Role role) throws SQLException, ServiceException {
+    public User addUser(String name, String password, String email, Role role, int workLoad) throws SQLException, ServiceException {
         try {
-            return userDao.add(name, password, email, role);
+            return userDao.add(name, password, email, role, workLoad);
         } catch (IllegalArgumentException ex) {
             throw new ServiceException(ex.getMessage());
         }

@@ -12,11 +12,11 @@ public interface UserDao{
 
     User findById(int id) throws SQLException;
 
-    User add(String name, String password, String email, Role role) throws SQLException;
+    User add(String name, String password, String email, Role role, int workLoad) throws SQLException;
 
     void updateUser(String name) throws SQLException;
 
     void deleteUser(String name) throws SQLException;
 
-     User findByEmail(String email) throws SQLException;
+    User findByEmailPassword(String email, String password) throws SQLException;
 }

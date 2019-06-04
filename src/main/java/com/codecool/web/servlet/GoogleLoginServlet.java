@@ -3,6 +3,7 @@ package com.codecool.web.servlet;
 import com.codecool.web.dao.UserDao;
 import com.codecool.web.dao.simple.SimpleUserDao;
 import com.codecool.web.model.User;
+import com.codecool.web.service.LoginService;
 import com.codecool.web.service.simple.SimpleLoginService;
 import com.codecool.web.service.exception.ServiceException;
 import org.slf4j.Logger;
@@ -15,12 +16,26 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet("/login")
-public class LoginServlet extends AbstractServlet {
+@WebServlet("/google_login")
+public class GoogleLoginServlet extends AbstractServlet {
     private static final Logger logger = LoggerFactory.getLogger(TaskServlet.class);
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        try (Connection connection = getConnection(req.getServletContext())) {
+            String token = req.getParameter("token");
+            UserDao userDao = new SimpleUserDao(connection);
+            LoginService loginService = new SimpleLoginService(userDao);
+            User user = loginService.googleLoginUser(token);
+            req.getSession().setAttribute("user", user);
+            logger.info("Login succesful");
+            sendMessage(resp, HttpServletResponse.SC_OK, user);
+        } catch (SQLException | ServiceException ex) {
+            handleSqlError(resp, ex);
+        }
+    }
 
-
+    /*
      protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try (Connection connection = getConnection(req.getServletContext())) {
             UserDao userDao = new SimpleUserDao(connection);
@@ -28,9 +43,9 @@ public class LoginServlet extends AbstractServlet {
 
             String email = req.getParameter("email");
             String password = req.getParameter("password");
+            String token = req
 
-
-            User user = simpleLoginService.loginUser(email, password);
+            User user = simpleLoginService.googleLoginUser(email, password);
             req.getSession().setAttribute("user", user);
             logger.info("Login succesful");
             sendMessage(resp, HttpServletResponse.SC_OK, user);
@@ -47,5 +62,5 @@ public class LoginServlet extends AbstractServlet {
             logger.error("error", ex);
         }
     }
-
+     */
 }

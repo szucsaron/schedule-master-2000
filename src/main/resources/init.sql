@@ -1,5 +1,6 @@
 -- Creating table structure
 
+
 DROP TRIGGER IF EXISTS schedule_check ON schedule;
 DROP TRIGGER IF EXISTS schedule_task_check ON schedule_task;
 
@@ -102,11 +103,12 @@ CREATE TRIGGER schedule_check BEFORE INSERT ON schedule
 --Filling tables with stock data
 
 INSERT INTO users (email, password, name, role) VALUES
-('a', 'a', 'a', 1), --1
-('hectorbrown@codecool.com', '1234', 'Hector Brown jr.', 1),  --2
-('janeklawovsky', '1234', 'Jane Klawovsky', 0),  --3
-('horvath@codecool.hu', '1234', 'Horváth Ödön', 0),  --4
-('kucslubta@codecool.hu', '1234', 'Kucslubta Sándorné', 0)  --5
+('a', '$2a$09$JJ4Tk7UjoP8Vi0bB3HtOP.skqm9jBSxFSNtrl1OIUJLucqMsQAJBS', 'a', 1), --1
+('hectorbrown@codecool.com', '$2a$09$oIxu2TkUxSc7pyJ3uAOwt.f0LORfj28rLm7EsROr6ALj5Grup8Y1a', 'Hector Brown jr.', 1),  --2
+('janeklawovsky@codecool.com', '$2a$09$gwuETYP0flnIPAeDZ/X2BeSrz2bbo/Lv37VTe00Y2aoITflER/P3S', 'Jane Klawovsky', 0),  --3
+('horvath@codecool.hu', '$2a$09$eqcuUZxN48NvDXamPiR33eQiphNLqBU8KQPkm.m9v3UclUEmUEQjm', 'Horváth Ödön', 0),  --4
+('kucslubta@codecool.hu', '$2a$09$Xz6m5Z8Io6XWg9R1XZuP8.hGre0G8nwOmDZxFtT/hSKYZfhcCLEuC', 'Kucslubta Sándorné', 0),  --5
+('aron.szucs.miskolc@gmail.com', crypt('852573962', gen_salt('bf', 9)), 'Szűcs Áron', 0) --6
 ;
 
 INSERT INTO schedule (users_id, name, date, max_days, public) VALUES
@@ -118,7 +120,8 @@ INSERT INTO schedule (users_id, name, date, max_days, public) VALUES
 (3, 'Philosophy workshop', '2019-05-10', 7, '0'),  --6
 (1, 'Schedule Master week #1', '2019-07-21', 5, '0'),  --7
 (4, 'Schedule Master week #2', '2019-08-02', 6, '0'),  --8
-(4, 'Schedule Master week #3', '2019-09-12', 5, '0')  --9
+(4, 'Schedule Master week #3', '2019-09-12', 5, '0'),  --9
+(6, 'Dev Week', '2019-06-03', 5, '0')  --10
 ;
 
 
@@ -133,7 +136,12 @@ INSERT INTO task (user_id, title, content) VALUES
 (1, 'Doctor''s appointment', 'Regular checkup'),  --8
 (2, 'Refactoring', 'Keeping old code up to date with new standards'), --9
 (1, 'Cooking class', 'Learning to cook new exiting food'), --10
-(1, 'Meditating', 'For inner peace') --11
+(1, 'Meditating', 'For inner peace'), --11
+(6, 'Coding', 'Real work'), --12
+(6, 'Debugging', 'Real work'), --13
+(6, 'Refactoring', 'Surreal work'), --14
+(6, 'Refactoring refactored code', 'Surreal work'), --15
+(6, 'Refactoring refactored refactored code', 'Surreal work') --16
 ;
 
 INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUES
@@ -145,6 +153,14 @@ INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUE
 (1, 5, 3, 12, 14),
 (1, 6, 2, 14, 16),
 (1, 7, 3, 16, 18),
-(1, 8, 1, 23, 24)
+(1, 8, 1, 23, 24),
+(10, 12, 1, 9, 18),
+(10, 13, 2, 9, 18),
+(10, 14, 3, 9, 18),
+(10, 15, 4, 9, 18),
+(10, 16, 5, 9, 18)
 ;
+
+
+SELECT "crypt" ('9', '852573962');
 
