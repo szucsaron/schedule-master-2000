@@ -15,9 +15,10 @@ public class User {
         this.role = role;
     }
 
-    public User(String name, String email) {
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
+        this.password = password;
     }
 
     public User(int id, String name, String email, Role role) {
@@ -45,5 +46,9 @@ public class User {
 
     public Role getRole() {
         return role;
+    }
+
+    public String toString() {
+        return String.format("id: %d, name: %s, password: %s", id, name, password);
     }
 }

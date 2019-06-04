@@ -37,3 +37,8 @@ function onRegistrationButtonClicked() {
         xhr.send(params);
 
 }
+
+function onGoogleRegister(googleUser) {
+        const token = id_token = googleUser.getAuthResponse().id_token;
+        alert(token);
+}

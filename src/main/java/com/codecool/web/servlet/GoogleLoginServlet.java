@@ -6,6 +6,7 @@ import com.codecool.web.model.User;
 import com.codecool.web.service.LoginService;
 import com.codecool.web.service.simple.SimpleLoginService;
 import com.codecool.web.service.exception.ServiceException;
+import com.codecool.web.service.utils.GoogleUserDecryptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +27,9 @@ public class GoogleLoginServlet extends AbstractServlet {
             String token = req.getParameter("token");
             UserDao userDao = new SimpleUserDao(connection);
             LoginService loginService = new SimpleLoginService(userDao);
-            User user = loginService.googleLoginUser(token);
+            GoogleUserDecryptor gd = new GoogleUserDecryptor();
+            User gUser = gd.fetch(token);
+            User user = loginService.loginUser(gUser.getEmail(), gUser.getPassword());
             req.getSession().setAttribute("user", user);
             logger.info("Login succesful");
             sendMessage(resp, HttpServletResponse.SC_OK, user);

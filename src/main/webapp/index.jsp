@@ -63,8 +63,7 @@
             <input type="password" name="password" placeholder="Password">
             <button id="login-button">Login</button>
             <button id="register-button">Register</button>
-            <div class="g-signin2" data-onsuccess="onSignIn">
-                <button>google</button>
+            <div class="g-signin2" data-onsuccess="onGoogleSignIn">
             </div>
         </form>
     </div>
@@ -81,6 +80,7 @@
             <br>
             <button id="registration-button">Register</button>
         </form>
+        <div class="g-signin2" data-onsuccess="onGoogleRegister"></div>
     </div>
     <div id="tasks-content" class="hidden content">
         <h1>Your tasks</h1>
