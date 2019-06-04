@@ -48,11 +48,11 @@
     <div id="user-menu" class="content">
         <table>
             <tr id= user-menu-tr>
-                <td><a href="javascript:void(0);" onclick="onHomepageClicked();">Homepage</a></td> 
-                <td><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></td> 
-                <td><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></td>  
+                <td><a href="javascript:void(0);" onclick="onHomepageClicked();">Homepage</a></td>
+                <td><a href="javascript:void(0);" onclick="onSchedulesClicked();">Schedules</a></td>
+                <td><a href="javascript:void(0);" onclick="onTasksClicked();">Tasks</a></td>
                 <td><a href="javascript:void(0);" id="logout-button">Logout </a></td>
-        </table>  
+        </table>
     </div>
     <div id="login-content" class="hidden content">
         <h1>Login</h1>
@@ -62,7 +62,7 @@
             <button id="login-button">Login</button>
             <button id="register-button">Register</button>
         </form>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
     <div id="register-content" class="hidden content">
         <h1>Register</h1>
@@ -103,20 +103,15 @@
         </form>
     </div>
     <div id="task-content" class="hidden content">
-        <h1>Task</h1>
             <h2>Title</h2>
             <input type="hidden" name="id" value="" id="hidden-id" data-task-id = "">
             <input type="text" name="title" id="task-title">
             <br>
             <h2>Content</h2>
             <textarea rows="10" cols="30" type="text" name="content" id="task-text"></textarea>
-            <p>Schedules: <span id="task-schedules"></span></p>
+            <h2>Schedules:</h2>
+                <span id="task-schedules"></span>
             <button onclick="onTaskUpdate();" id="update">Update</button>
-            <h2>Add to schedules</h2>
-            <form id="task-schedules-form" onsubmit="return false">
-            <select name="schedules" multiple>
-            </select>
-            <button onclick="onTaskSchedulesAddClicked();">Add</button>
             <button id="task-back-to-schedule" onclick="onTaskBackToScheduleClicked();">Back to Schedule</button>
         </form>
     </div>
@@ -185,13 +180,14 @@
         </form>
     </div>
     <div id="schedule-content" class="hidden content"></div>
-    <div id="bin" class="hidden content">
-        <img src="bin.png">
-    </div>
-    <div id="toolbox" class="hidden content">
-        <img src="toolbox2.png">
-    </div>
     <div id="pass" class="content"></div>
+    <div id="bin" class="hidden content">
+        <img id="binImg" src="bin.png">
+    </div>
+    <br id="scheduleBr">
+    <div id="toolbox" class="hidden content">
+        <img id=toolImg src="toolbox2.png">
+    </div>
     <script src="${authScriptUrl}"></script>
 </body>
 </html>

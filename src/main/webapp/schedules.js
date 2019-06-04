@@ -144,9 +144,11 @@ function appendSchedule(schedule) {
     finishingTdEl.setAttribute("id", "schedulefinish" + schedule.id);
 
     const shareEl = generateShareDt(schedule);
+    shareEl.setAttribute("class", "btn");
 
 
     const delChkBox = createCheckBoxTd('schedules-del', schedule.id);
+    delChkBox.setAttribute("class", "btn");
     
     const trEl = document.createElement('tr');
     trEl.appendChild(nameTdEl);
