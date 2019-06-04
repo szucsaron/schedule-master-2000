@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserService {
 
-    User addUser(String name, String password, String email, Role role) throws SQLException, ServiceException;
+    User addUser(String name, String password, String email, Role role, int workLoad) throws SQLException, ServiceException;
 
     List<User> findAllExceptCurrent(int id) throws SQLException;
 
