@@ -14,17 +14,22 @@ function appendTask(task) {
     /*const idTdEl = document.createElement('td');
     idTdEl.textContent = task.id;*/
 
+    const btnEl = document.createElement("button");
+    btnEl.textContent = task.title;
+    btnEl.setAttribute("class", "scheduleBtn");
     const aEl = document.createElement('a');
-    aEl.textContent = task.title;
+    aEl.appendChild(btnEl);
     aEl.href = 'javascript:void(0);';
     aEl.dataset.taskId = task.id;
     aEl.addEventListener('click', onTaskClicked);
 
     const titleTdEl = document.createElement('td');
     titleTdEl.appendChild(aEl);
+    titleTdEl.setAttribute("class", "btn");
 
     const contentTdEl = document.createElement('td');
     contentTdEl.textContent = task.content;
+    contentTdEl.setAttribute("class", "btn");
 
     const delTdEl = createCheckBoxTd('tasks-del', task.id);
     delTdEl.setAttribute("class", "btn");

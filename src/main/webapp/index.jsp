@@ -61,8 +61,8 @@
         <form id="login-form" onsubmit="return false;">
             <input type="text" name="email" placeholder="Email">
             <input type="password" name="password" placeholder="Password">
-            <button id="login-button">Login</button>
-            <button id="register-button">Register</button>
+            <button class="normalBtn" id="login-button">Login</button>
+            <button class="normalBtn" id="register-button">Register</button>
             <div class="g-signin2" data-onsuccess="onGoogleSignIn">
             </div>
         </form>
@@ -78,7 +78,7 @@
             <br>
             <input type="text" name="name" placeholder="Name">
             <br>
-            <button id="registration-button">Register</button>
+            <button class="normalBtn" id="registration-button">Register</button>
         </form>
         <div class="g-signin2" data-onsuccess="onGoogleRegister"></div>
     </div>
@@ -96,14 +96,14 @@
                 <tbody>
                 </tbody>
             </table>
-            <button onclick="onTasksDeleteClicked();">Delete</button>
+            <button class="normalBtn" onclick="onTasksDeleteClicked();">Delete</button>
         </form>
 
         <h2>Add new task</h2>
         <form id="task-form" onsubmit="return false;">
             <input type="text" name="name" placeholder="Name">
             <input type="text" name="content" placeholder="Description">
-            <button onclick="onTaskAddClicked();">Add</button>
+            <button class="normalBtn" onclick="onTaskAddClicked();">Add</button>
         </form>
     </div>
     <div id="task-content" class="hidden content">
@@ -114,10 +114,10 @@
             <h2>Content</h2>
             <textarea rows="10" cols="30" type="text" name="content" id="task-text"></textarea>
             <br>
-            <button onclick="onTaskUpdate();" id="update">Update</button>
+            <button class="normalBtn" onclick="onTaskUpdate();" id="update">Update</button>
             <h2>Schedules:</h2>
                 <span id="task-schedules"></span>
-            <button id="task-back-to-schedule" onclick="onTaskBackToScheduleClicked();">Back to Schedule</button>
+            <button class="normalBtn" id="task-back-to-schedule" onclick="onTaskBackToScheduleClicked();">Back to Schedule</button>
     </div>
     <div id="public-schedules" class="hidden content">
         <h1 id='public-schedules-h1'></h1>
@@ -165,14 +165,14 @@
                 <tbody>
                 </tbody>
             </table>
-            <button onclick="onSchedulesDeleteClicked();">Delete</button>
-            <button onclick="onSchedulesUpdateClicked();">Update</button>
+            <button class="normalBtn" onclick="onSchedulesDeleteClicked();">Delete</button>
+            <button class="normalBtn" onclick="onSchedulesUpdateClicked();">Update</button>
         </form>
         <br class="scheduleBr">
         <div id="public-schedule-link" class = "hidden">
             Link:
             <div id = "public-schedule-link-txt"></div>
-            <button id="public-schedule-link-close"  onClick="onPublicScheduleLinkCloseClicked();">
+            <button class="normalBtn" id="public-schedule-link-close"  onClick="onPublicScheduleLinkCloseClicked();">
                 x
             </button>
         </div>
@@ -181,7 +181,7 @@
             <input type="text" name="name" placeholder="Name">
             <input type="date" name="starting-date" placeholder="Date">
             <input type="text" name="schedule-duration" placeholder="Duration in days">
-            <button onclick="onScheduleAddClicked();">Add</button>
+            <button class="normalBtn" onclick="onScheduleAddClicked();">Add</button>
         </form>
     </div>
     <div id="schedule-content" class="hidden content"></div>

@@ -113,7 +113,7 @@ h1, h2
     box-shadow: 4px 2px 9px 4px black;
 }
 
-button{
+.normalBtn{
     background:#1AAB8A;
     color:#fff;
     border:none;
@@ -126,11 +126,11 @@ button{
     outline:none;
     font-size: 1.2em;
 }
-button:hover{
+.normalBtn:hover{
     background:#fff;
     color:#1AAB8A;
 }
-button:before,button:after{
+.normalBtn:before,button:after{
     content:'';
     position:absolute;
     top:0;
@@ -140,13 +140,13 @@ button:before,button:after{
     background: #1AAB8A;
     transition:400ms ease all;
 }
-button:after{
+.normalBtn:after{
     right:inherit;
     top:inherit;
     left:0;
     bottom:0;
 }
-button:hover:before,button:hover:after{
+.normalBtn:hover:before,button:hover:after{
     width:100%;
     transition:800ms ease all;
 }
@@ -246,6 +246,8 @@ br {
 
 .btn {
     text-align: center;
+    width: 250px;
+    height: 60px;
 }
 
 #task-list {
@@ -260,4 +262,27 @@ br {
     position: absolute;
     top: 6%;
     right: 13%;
+}
+
+.scheduleBtn {
+    height:60px;
+    width: 250px;
+    border: none;
+    background: #1AAB8A;
+    color: #ffffff !important;
+    font-weight: 100;
+    padding: 20px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.scheduleBtn:hover {
+    color: #404040 !important;
+    font-weight: 400 !important;
+    letter-spacing: 3px;
+    background: none;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
 }
