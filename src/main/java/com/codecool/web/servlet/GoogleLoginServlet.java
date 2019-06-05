@@ -31,7 +31,7 @@ public class GoogleLoginServlet extends AbstractServlet {
             User gUser = gd.fetch(token);
             User user = loginService.loginUser(gUser.getEmail(), gUser.getPassword());
             req.getSession().setAttribute("user", user);
-            logger.info("Login succesful");
+            logger.info("Google sign-in succesful;"+user.getName());
             sendMessage(resp, HttpServletResponse.SC_OK, user);
         } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);

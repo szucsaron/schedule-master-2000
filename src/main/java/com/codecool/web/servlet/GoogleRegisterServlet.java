@@ -35,18 +35,18 @@ public class GoogleRegisterServlet extends AbstractServlet{
             String token = req.getParameter("token");
             User gUser = gd.fetch(token);
             userService.addUser(gUser.getName(), gUser.getPassword(), gUser.getEmail(), Role.REGULAR, 9);
-
+            logger.info("Google Registration;"+gUser.getName());
         } catch (SQLException ex) {
             if (SQL_ERROR_CODE_UNIQUE_VIOLATION.equals(ex.getSQLState())) {
                 sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, "User has been already registered");
-                logger.info("Already registered");
+                logger.error("Already registered email!");
             } else {
                 handleSqlError(resp, ex);
-                logger.error("error", ex);
+                logger.error("SQLError!", ex);
             }
         } catch (ServiceException ex) {
             sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
-            logger.error("error", ex);
+            logger.error("ServiceException!", ex);
         }
     }
 }
