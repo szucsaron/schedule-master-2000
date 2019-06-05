@@ -1,4 +1,5 @@
 let adminMenuTdEl;
+let logMenuTdEl;
 
 function onLoginResponse() {
     if (this.status === OK) {
@@ -8,17 +9,28 @@ function onLoginResponse() {
 
             adminMenuTdEl = document.createElement('td');
             let adminMenuEl = document.createElement('a');
+            
+            logMenuTdEl = document.createElement('td');
+            let logMenuEl = document.createElement('a');
 
-            let linkText = document.createTextNode("List Users");
+            let logLinkText = document.createTextNode('Logger');
+            logMenuEl.appendChild(logLinkText);
+            logMenuEl.href='javascript:void(0);';
+            logMenuEl.onclick=function() {onLoggerClicked()};
+            
+            logMenuTdEl.appendChild(logMenuEl);
+
+            let linkText = document.createTextNode('List Users');
             adminMenuEl.appendChild(linkText);
-            adminMenuEl.title="TITLE";
-            adminMenuEl.href="javascript:void(0);";
+            adminMenuEl.title='TITLE';
+            adminMenuEl.href='javascript:void(0);';
             adminMenuEl.onclick=function() {onAdminMenuClicked()}; 
 
             adminMenuTdEl.appendChild(adminMenuEl);
 
             logoutButtonEl = document.getElementById('logout-td');
             logoutButtonEl.before(adminMenuTdEl);
+            logoutButtonEl.before(logMenuTdEl);
         }
         onHomepageClicked();
     } else {
