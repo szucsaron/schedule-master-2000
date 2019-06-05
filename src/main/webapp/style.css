@@ -91,6 +91,12 @@ td, th {
     border-top:solid black 1px;
 }
 
+td {
+    text-align: center;
+    width: 250px;
+    height: 60px;
+}
+
 th {
     color: white;
     background-color: cadetblue;
@@ -165,6 +171,11 @@ input {
     border:2px solid #555;
 }
 
+#registration-button, #back-to-login-button {
+    width: 203px;
+    height: 30px;
+    border-radius:5px;
+}
 .taskButton {
     font-weight: bold;
     font-size: 1.2em;
@@ -181,7 +192,7 @@ br {
     line-height: 200%;
 }
 
-#task-schedules {
+/*#task-schedules {
     width: 30%;
     border: 2px solid;
     margin: 10 auto;
@@ -191,7 +202,7 @@ br {
     font-size: 1em;
     padding: 5px;
     font-weight: bold;
-}
+}*/
 
 #task-text, #task-title {
     width: 30%;
@@ -286,3 +297,45 @@ br {
     -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     transition: all 0.3s ease 0s;
 }
+
+.task-schedules-child {
+    float: left;
+    height:30px;
+    width: 125px;
+    border: none;
+    background: #1AAB8A;
+    color: #ffffff !important;
+    font-weight: 50;
+    padding: 10px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 50%;
+}
+
+.task-schedules-child:hover {
+    color: #404040 !important;
+    font-weight: 200 !important;
+    letter-spacing: 1.5px;
+    background: white;
+    -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+    transition: all 0.3s ease 0s;
+}
+
+#task-schedules {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.task-schedules-child {
+    -webkit-box-flex: 1 1 auto;
+    -moz-box-flex:  1 1 auto;
+    -webkit-flex:  1 1 auto;
+    -ms-flex:  1 1 auto;
+    flex:  1 1 auto;
+}
+

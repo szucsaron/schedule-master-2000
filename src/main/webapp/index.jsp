@@ -63,6 +63,7 @@
             <input type="password" name="password" placeholder="Password">
             <button class="normalBtn" id="login-button">Login</button>
             <button class="normalBtn" id="register-button">Register</button>
+            <br><br>
             <div class="g-signin2" data-onsuccess="onGoogleSignIn">
             </div>
         </form>
@@ -71,14 +72,17 @@
         <h1>Register</h1>
         <form id="register-form" onsubmit="return false;">
             <input type="text" name="email" placeholder="Email">
-            <br>
+            <br><br>
             <input type="password" name="password" placeholder="Password">
-            <br>
+            <br><br>
             <input type="password" name="repassword" placeholder="Re-enter password">
-            <br>
+            <br><br>
             <input type="text" name="name" placeholder="Name">
-            <br>
+            <br><br>
             <button class="normalBtn" id="registration-button">Register</button>
+            <br><br>
+            <button class="normalBtn" id="back-to-login-button">Back to Login</button>
+            <br><br>
         </form>
         <div class="g-signin2" data-onsuccess="onGoogleRegister"></div>
     </div>
@@ -116,7 +120,7 @@
             <br>
             <button class="normalBtn" onclick="onTaskUpdate();" id="update">Update</button>
             <h2>Schedules:</h2>
-                <span id="task-schedules"></span>
+                <div id="task-schedules"></div>
             <button class="normalBtn" id="task-back-to-schedule" onclick="onTaskBackToScheduleClicked();">Back to Schedule</button>
     </div>
     <div id="public-schedules" class="hidden content">

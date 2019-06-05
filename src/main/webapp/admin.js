@@ -28,8 +28,11 @@ function appendUsersTable(users) { // 2
 }
 
 function appendUsers(user) { // 3
+    const btnEl = document.createElement("button");
+    btnEl.textContent = user.name;
+    btnEl.setAttribute("class", "scheduleBtn");
     const aEl = document.createElement('a');
-    aEl.textContent = user.name;
+    aEl.appendChild(btnEl);
     aEl.href = 'javascript:void(0);';
     aEl.dataset.userId = user.id;
     aEl.addEventListener('click', onUserClicked);

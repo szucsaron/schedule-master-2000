@@ -89,8 +89,11 @@ function onTaskLoad(schedules) {
     taskTitleSpanEl.value = schedules[1];
     taskContentSpanEl.value = schedules[2];
     for(let i = 3; i < schedules.length-1; i+=2) {
+        const btnEl = document.createElement("button");
+        btnEl.textContent = schedules[i];
+        btnEl.setAttribute("class", "task-schedules-child");
         const scheduleLinkElement = document.createElement("a");
-        scheduleLinkElement.textContent = schedules[i];
+        scheduleLinkElement.appendChild(btnEl);
         scheduleLinkElement.dataset.scheduleId = schedules[i+1];
         scheduleLinkElement.addEventListener('click', onScheduleClicked);
         scheduleLinkElement.href = "javascript:void(0)";

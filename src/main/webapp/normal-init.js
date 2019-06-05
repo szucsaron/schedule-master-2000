@@ -17,6 +17,9 @@ function onLoad() {
     const registerButtonEl = document.getElementById('register-button');
     registerButtonEl.addEventListener('click', onRegisterButtonClicked);
 
+    const backToLoginButtonEl = document.getElementById('back-to-login-button');
+    backToLoginButtonEl.addEventListener('click', onBackToLoginButtonClicked);
+
     const registrationButtonEl = document.getElementById('registration-button');
     registrationButtonEl.addEventListener('click', onRegistrationButtonClicked);
 
