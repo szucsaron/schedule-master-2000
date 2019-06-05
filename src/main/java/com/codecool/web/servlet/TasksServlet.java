@@ -1,6 +1,5 @@
 package com.codecool.web.servlet;
 
-import com.codecool.web.dao.TaskDao;
 import com.codecool.web.dao.simple.SimpleTaskDao;
 import com.codecool.web.model.Task;
 import com.codecool.web.model.User;

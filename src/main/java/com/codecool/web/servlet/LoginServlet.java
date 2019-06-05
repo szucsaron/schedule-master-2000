@@ -32,7 +32,7 @@ public class LoginServlet extends AbstractServlet {
 
             User user = simpleLoginService.loginUser(email, password);
             req.getSession().setAttribute("user", user);
-            logger.info("Login succesful;"+user.getName());
+            logger.info("Succesful Login ;"+user.getName());
             sendMessage(resp, HttpServletResponse.SC_OK, user);
         } catch (SQLException ex) {
             if (ex.getMessage().equals("ERROR: invalid salt")){

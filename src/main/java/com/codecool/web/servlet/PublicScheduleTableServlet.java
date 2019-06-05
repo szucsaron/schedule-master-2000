@@ -31,7 +31,7 @@ public class PublicScheduleTableServlet extends AbstractServlet {
             ScheduleService scheduleService = new SimpleScheduleService(scheduleDao);
 
             List<Schedule> schedules = scheduleService.findAll(true);
-            logger.info("Table displayed");
+            logger.info("Homepage loaded");
             sendMessage(resp, SC_OK, schedules);
         } catch (SQLException | ServiceException ex) {
             handleSqlError(resp, ex);

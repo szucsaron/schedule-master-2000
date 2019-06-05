@@ -35,7 +35,7 @@ public class ScheduleTableServlet extends AbstractServlet{
             taskService.detachTaskFromSchedule(scheduleId, taskId);
             taskService.attachTaskToSchedule(scheduleId, taskId, day, hourStart, hourEnd);
 
-            logger.info("Table created");
+            logger.info("Schedule table created");
         } catch (SQLException ex) {
             handleSqlError(resp, ex);
             logger.error("error", ex);
