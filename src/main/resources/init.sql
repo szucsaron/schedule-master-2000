@@ -108,7 +108,7 @@ INSERT INTO users (email, password, name, role) VALUES
 ('janeklawovsky@codecool.com', '$2a$09$gwuETYP0flnIPAeDZ/X2BeSrz2bbo/Lv37VTe00Y2aoITflER/P3S', 'Jane Klawovsky', 0),  --3
 ('horvath@codecool.hu', '$2a$09$eqcuUZxN48NvDXamPiR33eQiphNLqBU8KQPkm.m9v3UclUEmUEQjm', 'Horváth Ödön', 0),  --4
 ('kucslubta@codecool.hu', '$2a$09$Xz6m5Z8Io6XWg9R1XZuP8.hGre0G8nwOmDZxFtT/hSKYZfhcCLEuC', 'Kucslubta Sándorné', 0),  --5
-('aron.szucs.miskolc@gmail.com', crypt('852573962', gen_salt('bf', 9)), 'Szűcs Áron', 0) --6
+('piroska@piroska.hu', crypt('pirike123', gen_salt('bf', 9)), 'Piroska', 0) --6
 ;
 
 INSERT INTO schedule (users_id, name, date, max_days, public) VALUES
@@ -161,6 +161,4 @@ INSERT INTO schedule_task(schedule_id, task_id, day, hour_start, hour_end) VALUE
 (10, 16, 5, 9, 18)
 ;
 
-
-SELECT "crypt" ('9', '852573962');
 

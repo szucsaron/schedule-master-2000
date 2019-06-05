@@ -15,6 +15,7 @@ function onSchedulesClicked() {
 }
 
 function onHomepageClicked(){
+    console.log('home page');
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', onPublicSchedulesResponse);
     xhr.addEventListener('error', onNetworkError);
