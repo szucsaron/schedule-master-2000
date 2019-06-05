@@ -6,7 +6,7 @@
         <immediateFlush>true</immediateFlush>
 
         <encoder>
-            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+            <pattern>%date;%level;[%thread];%logger{10};[%file:%line];%msg%n</pattern>
         </encoder>
     </appender>
 
