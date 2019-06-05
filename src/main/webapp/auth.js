@@ -10,3 +10,4 @@ xhr.onload = function() {
 }
 xhr.open('GET', 'protected/auth');
 xhr.send();
+

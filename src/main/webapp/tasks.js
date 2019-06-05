@@ -14,17 +14,22 @@ function appendTask(task) {
     /*const idTdEl = document.createElement('td');
     idTdEl.textContent = task.id;*/
 
+    const btnEl = document.createElement("button");
+    btnEl.textContent = task.title;
+    btnEl.setAttribute("class", "scheduleBtn");
     const aEl = document.createElement('a');
-    aEl.textContent = task.title;
+    aEl.appendChild(btnEl);
     aEl.href = 'javascript:void(0);';
     aEl.dataset.taskId = task.id;
     aEl.addEventListener('click', onTaskClicked);
 
     const titleTdEl = document.createElement('td');
     titleTdEl.appendChild(aEl);
+    titleTdEl.setAttribute("class", "btn");
 
     const contentTdEl = document.createElement('td');
     contentTdEl.textContent = task.content;
+    contentTdEl.setAttribute("class", "btn");
 
     const delTdEl = createCheckBoxTd('tasks-del', task.id);
     delTdEl.setAttribute("class", "btn");
@@ -84,8 +89,11 @@ function onTaskLoad(schedules) {
     taskTitleSpanEl.value = schedules[1];
     taskContentSpanEl.value = schedules[2];
     for(let i = 3; i < schedules.length-1; i+=2) {
+        const btnEl = document.createElement("button");
+        btnEl.textContent = schedules[i];
+        btnEl.setAttribute("class", "task-schedules-child");
         const scheduleLinkElement = document.createElement("a");
-        scheduleLinkElement.textContent = schedules[i];
+        scheduleLinkElement.appendChild(btnEl);
         scheduleLinkElement.dataset.scheduleId = schedules[i+1];
         scheduleLinkElement.addEventListener('click', onScheduleClicked);
         scheduleLinkElement.href = "javascript:void(0)";

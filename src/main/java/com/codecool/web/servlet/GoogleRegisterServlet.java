@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import static javax.servlet.http.HttpServletResponse.SC_OK;
+
 @WebServlet("/google_register")
 public class GoogleRegisterServlet extends AbstractServlet{
 
@@ -34,8 +36,11 @@ public class GoogleRegisterServlet extends AbstractServlet{
 
             String token = req.getParameter("token");
             User gUser = gd.fetch(token);
-            userService.addUser(gUser.getName(), gUser.getPassword(), gUser.getEmail(), Role.REGULAR, 9);
-            logger.info("Google Registration;"+gUser.getName());
+            User user = userService.addUser(gUser.getName(), gUser.getPassword(), gUser.getEmail(), Role.REGULAR, 9);
+            req.getSession().setAttribute("user", user);
+            logger.info("Google Registration;"+user.getName());
+
+            sendMessage(resp, SC_OK, user);
         } catch (SQLException ex) {
             if (SQL_ERROR_CODE_UNIQUE_VIOLATION.equals(ex.getSQLState())) {
                 sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, "User has been already registered");

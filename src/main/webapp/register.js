@@ -35,10 +35,17 @@ function onRegistrationButtonClicked() {
         xhr.addEventListener('error', onNetworkError);
         xhr.open('POST', 'register');
         xhr.send(params);
-
 }
 
 function onGoogleRegister(googleUser) {
         const token = id_token = googleUser.getAuthResponse().id_token;
-        alert(token);
+        const params = new URLSearchParams();
+        params.append('token', token);
+
+        const xhr = new XMLHttpRequest();
+        xhr.addEventListener('load', onLoginResponse);
+        xhr.addEventListener('error', onNetworkError);
+        xhr.open('POST', 'google_register');
+        xhr.send(params);
+
 }

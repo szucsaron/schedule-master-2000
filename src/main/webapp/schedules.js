@@ -117,8 +117,11 @@ function onUserSchedulesResponse() {
 }
 
 function appendSchedule(schedule) {
+    const btnEl = document.createElement("button");
+    btnEl.textContent = schedule.name;
+    btnEl.setAttribute("class", "scheduleBtn");
     const aEl = document.createElement('a');
-    aEl.textContent = schedule.name;
+    aEl.appendChild(btnEl);
     aEl.href = 'javascript:void(0);';
     aEl.dataset.scheduleId = schedule.id;
     aEl.setAttribute("id", "schedulename" + schedule.id)
@@ -127,6 +130,7 @@ function appendSchedule(schedule) {
 
     const nameTdEl = document.createElement('td');
     nameTdEl.appendChild(aEl);
+    nameTdEl.setAttribute("class", "btn");
     nameTdEl.setAttribute("contenteditable", true);
     nameTdEl.setAttribute("id", "schedulenameplus" + schedule.id)
     const contentTdEl = document.createElement('td');
@@ -134,12 +138,14 @@ function appendSchedule(schedule) {
     const startingTdEl = document.createElement('td');
     let startingDate = new Date(convertDate(schedule.startingDate));
     startingTdEl.textContent = getDateStr(startingDate);
+    startingTdEl.setAttribute("class", "btn");
     startingTdEl.setAttribute("contenteditable", true);
     startingTdEl.setAttribute("id", "schedulestart" + schedule.id)
     const scheduleFinish = startingDate.addDays(schedule.durationInDays);
 
     const finishingTdEl = document.createElement('td');
     finishingTdEl.textContent = getDateStr(scheduleFinish);
+    finishingTdEl.setAttribute("class", "btn");
     finishingTdEl.setAttribute("contenteditable", true);
     finishingTdEl.setAttribute("id", "schedulefinish" + schedule.id);
 
@@ -162,12 +168,14 @@ function appendSchedule(schedule) {
 function generateShareDt(schedule) {
     const shareEl = document.createElement('td');
     const shareBtEl = document.createElement('button');
+    shareBtEl.setAttribute("class", "normalBtn");
     shareBtEl.dataset.scheduleId = schedule.id;
     shareEl.appendChild(shareBtEl);
     if (schedule.public) {
         shareBtEl.textContent = 'Unshare';
         shareBtEl.dataset.isPublic = 'true';
         const getLinkBtEl = document.createElement('button');
+        getLinkBtEl.setAttribute("class", "normalBtn");
         getLinkBtEl.textContent = 'Get Link';
         getLinkBtEl.dataset.scheduleId = schedule.id;
         getLinkBtEl.addEventListener('click', onGetSharedScheduleLinkClicked);
@@ -181,28 +189,36 @@ function generateShareDt(schedule) {
 }
 
 function appendPublicSchedule(schedule) { // 3
+    const btnEl = document.createElement("button");
+    btnEl.textContent = schedule.name;
+    btnEl.setAttribute("class", "scheduleBtn");
     const aEl = document.createElement('a');
-    aEl.textContent = schedule.name;
     aEl.href = 'javascript:void(0);';
     aEl.dataset.scheduleId = schedule.id;
 //    aEl.setAttribute('href', 'share?schedule_id=' + schedule.id)
     aEl.addEventListener('click', onPublicScheduleClicked);
+    aEl.appendChild(btnEl);
 
 
     const nameTdEl = document.createElement('td');
     nameTdEl.appendChild(aEl);
+    nameTdEl.setAttribute("class", "btn");
     const contentTdEl = document.createElement('td');
     contentTdEl.textContent = schedule.content;
     const startingTdEl = document.createElement('td');
     let startingDate = new Date(convertDate(schedule.startingDate));
     startingTdEl.textContent = getDateStr(startingDate);
+    startingTdEl.setAttribute("class", "btn");
     const scheduleFinish = startingDate.addDays(schedule.durationInDays);
 
     const userNameTdEl = document.createElement('td');
     userNameTdEl.textContent = schedule.creatorsName;
+    userNameTdEl.setAttribute("class", "btn");
+
 
     const finishingTdEl = document.createElement('td');
     finishingTdEl.textContent = getDateStr(scheduleFinish);
+    finishingTdEl.setAttribute("class", "btn");
     const trEl = document.createElement('tr');
 
     trEl.appendChild(nameTdEl);
