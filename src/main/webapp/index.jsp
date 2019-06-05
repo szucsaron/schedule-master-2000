@@ -149,6 +149,22 @@
             </tbody>
         </table>
     </div>
+    <div id="logs-content" class="hidden content">
+        <h1>User Activity</h1>
+        <table id="logs-table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>location</th>
+                <th>Message</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
     <div id="schedules-content" class="hidden content">
         <h1>Your schedules</h1>
         <form id="schedules-delete-form" onsubmit="return false">
