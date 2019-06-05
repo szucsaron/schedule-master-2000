@@ -36,7 +36,7 @@ public class RegisterServlet extends AbstractServlet{
 
             if(password.equals(repassword)) {
                 userService.addUser(name, password, email, Role.REGULAR,9);
-                logger.info("User created");
+                logger.info("User created;"+name);
             } else {
                 sendMessage(resp, HttpServletResponse.SC_BAD_REQUEST, "Passwords do not match");
                 logger.info("Passwords do not match");

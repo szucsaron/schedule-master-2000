@@ -32,19 +32,21 @@ public class LoginServlet extends AbstractServlet {
 
             User user = simpleLoginService.loginUser(email, password);
             req.getSession().setAttribute("user", user);
-            logger.info("Login succesful");
+            logger.info("Login succesful;"+user.getName());
             sendMessage(resp, HttpServletResponse.SC_OK, user);
         } catch (SQLException ex) {
             if (ex.getMessage().equals("ERROR: invalid salt")){
                 sendMessage(resp, HttpServletResponse.SC_UNAUTHORIZED, "Bad login: Invalid password");
+                logger.error("Bad login: Invalid password", ex);
             }
             else {
                 handleSqlError(resp, ex);
+                logger.error("SQL EXCEPTION", ex);
             }
-            logger.error("error", ex);
+
         } catch (ServiceException ex) {
             sendMessage(resp, HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
-            logger.error("error", ex);
+            logger.error("Bad login;"+req.getParameter("email"), ex);
         }
     }
 
