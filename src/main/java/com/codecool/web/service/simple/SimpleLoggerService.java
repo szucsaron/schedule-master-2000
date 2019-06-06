@@ -20,8 +20,8 @@ public final class SimpleLoggerService implements LoggerService {
     }
 
     @Override
-    public List<Log> getLogContent() throws FileNotFoundException, ParseException {
-        return loggerDao.getLogContent();
+    public List<Log> getLogContent(String path) throws FileNotFoundException, ParseException {
+        return loggerDao.getLogContent(path);
     }
 }
 
