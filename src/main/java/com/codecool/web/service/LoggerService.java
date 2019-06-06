@@ -7,5 +7,5 @@ import java.text.ParseException;
 import java.util.List;
 
 public interface LoggerService {
-    List<Log> getLogContent() throws FileNotFoundException, ParseException;
+    List<Log> getLogContent(String path) throws FileNotFoundException, ParseException;
 }
