@@ -50,7 +50,6 @@ public class SimpleLoggerDao extends AbstractDao implements LoggerDao {
 
     private Date dateParser(String stringDate) throws ParseException {
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-d HH:mm:ss");
-        Date date = formatter.parse(stringDate);
-        return date;
+        return formatter.parse(stringDate);
     }
 }
