@@ -31,7 +31,8 @@ public class LoggerServlet extends AbstractServlet {
             LoggerDao loggerDao = new SimpleLoggerDao(connection);
             LoggerService loggerService = new SimpleLoggerService(loggerDao);
 
-            List<Log> s = loggerService.getLogContent();
+            String path = req.getServletContext().getRealPath("/");
+            List<Log> s = loggerService.getLogContent(path);
 
             logger.info("Checking Log");
             sendMessage(resp, SC_OK, s);
