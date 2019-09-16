@@ -25,7 +25,7 @@ mvn clean package tomcat7:redeploy
 #### Running the webapp
 After deploying the webapp application will run in the browser under http://localhost:8080/schedule-master-2000/ url.
 
-## Meta
+## Developers
 - szucsaron
 - zuborati1987
 - imgergopapp
